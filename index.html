@@ -7,30 +7,30 @@
 <meta name="description" content="Self-hosted bot factory for the identity-less POPOPX messenger: no-code auto-reply rules, message routing with tickets, four plugins, developer Open API and a private key plus SQLite ledger that never leaves your server.">
 <meta name="theme-color" content="#04060c">
 <meta name="author" content="POPOPX">
-<link rel="canonical" href="https://popopx.chat/">
-<link rel="alternate" hreflang="en" href="https://popopx.chat/">
-<link rel="alternate" hreflang="zh-Hans" href="https://popopx.chat/?lang=zh-Hans">
-<link rel="alternate" hreflang="zh-Hant" href="https://popopx.chat/?lang=zh-Hant">
-<link rel="alternate" hreflang="ja" href="https://popopx.chat/?lang=ja">
-<link rel="alternate" hreflang="bg" href="https://popopx.chat/?lang=bg">
-<link rel="alternate" hreflang="cs" href="https://popopx.chat/?lang=cs">
-<link rel="alternate" hreflang="de" href="https://popopx.chat/?lang=de">
-<link rel="alternate" hreflang="es" href="https://popopx.chat/?lang=es">
-<link rel="alternate" hreflang="fi" href="https://popopx.chat/?lang=fi">
-<link rel="alternate" hreflang="fr" href="https://popopx.chat/?lang=fr">
-<link rel="alternate" hreflang="hu" href="https://popopx.chat/?lang=hu">
-<link rel="alternate" hreflang="it" href="https://popopx.chat/?lang=it">
-<link rel="alternate" hreflang="nl" href="https://popopx.chat/?lang=nl">
-<link rel="alternate" hreflang="pl" href="https://popopx.chat/?lang=pl">
-<link rel="alternate" hreflang="ru" href="https://popopx.chat/?lang=ru">
-<link rel="alternate" hreflang="th" href="https://popopx.chat/?lang=th">
-<link rel="alternate" hreflang="tr" href="https://popopx.chat/?lang=tr">
-<link rel="alternate" hreflang="uk" href="https://popopx.chat/?lang=uk">
-<link rel="alternate" hreflang="x-default" href="https://popopx.chat/">
+<link rel="canonical" href="https://bot.popopx.chat/">
+<link rel="alternate" hreflang="en" href="https://bot.popopx.chat/">
+<link rel="alternate" hreflang="zh-Hans" href="https://bot.popopx.chat/?lang=zh-Hans">
+<link rel="alternate" hreflang="zh-Hant" href="https://bot.popopx.chat/?lang=zh-Hant">
+<link rel="alternate" hreflang="ja" href="https://bot.popopx.chat/?lang=ja">
+<link rel="alternate" hreflang="bg" href="https://bot.popopx.chat/?lang=bg">
+<link rel="alternate" hreflang="cs" href="https://bot.popopx.chat/?lang=cs">
+<link rel="alternate" hreflang="de" href="https://bot.popopx.chat/?lang=de">
+<link rel="alternate" hreflang="es" href="https://bot.popopx.chat/?lang=es">
+<link rel="alternate" hreflang="fi" href="https://bot.popopx.chat/?lang=fi">
+<link rel="alternate" hreflang="fr" href="https://bot.popopx.chat/?lang=fr">
+<link rel="alternate" hreflang="hu" href="https://bot.popopx.chat/?lang=hu">
+<link rel="alternate" hreflang="it" href="https://bot.popopx.chat/?lang=it">
+<link rel="alternate" hreflang="nl" href="https://bot.popopx.chat/?lang=nl">
+<link rel="alternate" hreflang="pl" href="https://bot.popopx.chat/?lang=pl">
+<link rel="alternate" hreflang="ru" href="https://bot.popopx.chat/?lang=ru">
+<link rel="alternate" hreflang="th" href="https://bot.popopx.chat/?lang=th">
+<link rel="alternate" hreflang="tr" href="https://bot.popopx.chat/?lang=tr">
+<link rel="alternate" hreflang="uk" href="https://bot.popopx.chat/?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://bot.popopx.chat/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="POPOPX Bot Studio">
 <meta property="og:locale" content="en">
-<meta property="og:url" content="https://popopx.chat/">
+<meta property="og:url" content="https://bot.popopx.chat/">
 <meta property="og:title" content="POPOPX Bot Studio" data-i18n-meta="site_title">
 <meta property="og:description" content="Run your own POPOPX bots on a server you control" data-i18n-meta="site_tagline">
 <meta name="twitter:card" content="summary">
@@ -40,7 +40,7 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"POPOPX Bot Studio","applicationCategory":"DeveloperApplication","operatingSystem":"Linux, macOS","url":"https://popopx.chat/","license":"https://spdx.org/licenses/AGPL-3.0-only.html","isAccessibleForFree":true,"codeRepository":"https://github.com/popopx-chat/popopx-bot-studio","sameAs":["https://github.com/popopx-chat/popopx-bot-studio"]}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"POPOPX Bot Studio","applicationCategory":"DeveloperApplication","operatingSystem":"Linux, macOS","url":"https://bot.popopx.chat/","license":"https://spdx.org/licenses/AGPL-3.0-only.html","isAccessibleForFree":true,"codeRepository":"https://github.com/popopx-chat/popopx-bot-studio","sameAs":["https://github.com/popopx-chat/popopx-bot-studio"]}
 </script>
 <script>document.documentElement.classList.add("js");</script>
 </head>
@@ -134,7 +134,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
         <p class="ok">✓ ledger &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var/studio/studio.db</p>
         <p class="ok">✓ sandbox &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 bots · 3 cli-data dirs</p>
         <p class="ok">✓ plugins &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto_reply msg_router llm_bridge webhook_relay</p>
-        <p class="dim">12 checks · 0 failures · 0 outbound telemetry</p>
+        <p class="dim">15 groups · 1,884 assertions · 0 failures · 0 outbound telemetry</p>
         <p><span class="pr">$</span> POST /bot&lt;token&gt;/sendMessage <span class="ok">200</span><span class="caret"></span></p>
       </div>
       <p class="console-cap" data-i18n="hero_console_caption">What the engine prints on boot: every invariant it refuses to break.</p>
@@ -339,7 +339,7 @@ BOT_WS_PORT_BASE=5230 BOT_WS_PORT_MAX=5299 \
 python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
       </div>
       <ul class="pane-n" role="list">
-        <li data-i18n="tut_dev_n1">The engine ships an offline self-test of 12 assertion groups; it needs no network and no real contacts.</li>
+        <li data-i18n="tut_dev_n1">The engine ships an offline self-test of 1,884 assertions in 15 groups; it needs no network and no real contacts.</li>
         <li data-i18n="tut_dev_n2">Without STUDIO_ADMIN_TOKEN every admin route answers 401, so an unconfigured checkout cannot be driven by accident.</li>
       </ul>
     </section>
@@ -451,7 +451,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
     </details>
     <details>
       <summary data-i18n="faq_q3">How do I move a running bot to another server?</summary>
-      <p data-i18n="faq_a3">Export a bundle from the cold-backup screen: the bot is stopped, its cli-data directory, keys and settings are packed, and the bot starts again. Copy the archive to the new host, restore it, and the permanent contact address stays the same because identity lives in those files, not in a vendor account.</p>
+      <p data-i18n="faq_a3">Export a bundle from the cold-backup screen: the bot is stopped, its cli-data directory, keys and settings are packed, and the bot starts again. Copy the archive to the new host, restore it, and the permanent contact address stays the same because identity lives in those files, not in a vendor account. Restoring is lossless and idempotent: a user already inside cli-data is detected and reused instead of recreated, so the original permanent contact link survives every restart.</p>
     </details>
     <details>
       <summary data-i18n="faq_q4">How is this different from a commercial service account?</summary>

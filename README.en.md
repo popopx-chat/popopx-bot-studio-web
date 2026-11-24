@@ -3,9 +3,9 @@
 A zero-build static site: `index.html` + `assets/css/style.css` + `assets/js/i18n.js` + `assets/js/app.js`,
 with the full 18-language copy. No framework, no bundler, no CDN, no webfont request, no analytics.
 
-- Live domain: <https://popopx.chat> (this repository is that site's document root)
+- Portal domain: <https://bot.popopx.chat> (this repository is that host's document root); the apex `popopx.chat` belongs to the main site and is no longer claimed here
 - Engine: <https://github.com/popopx-chat/popopx-bot-studio> (AGPL-3.0-only)
-- Endpoint badge in the header: `bot.popopx.chat`
+- Header domain badge: `bot.popopx.chat`
 - Licence: the `LICENSE` file at the repository root, AGPL-3.0-only, same as the engine
 
 ## Sections
@@ -28,9 +28,9 @@ Detection order: **URL parameter `?lang=…` → `localStorage` → `navigator.l
 The header dropdown switches without a reload and writes the locale back into the address bar with
 `history.replaceState` (`en` is the baseline and carries no parameter).
 
-SEO: one URL with 18 `hreflang` alternates plus `x-default`, `canonical` on `https://popopx.chat/`,
+SEO: one URL with 18 `hreflang` alternates plus `x-default`, `canonical` on `https://bot.popopx.chat/`,
 Open Graph and Twitter tags updated per locale, `sitemap.xml` carrying every language as `xhtml:link`,
-`CNAME` set to `popopx.chat`.
+`CNAME` set to `bot.popopx.chat`.
 
 ## Preview locally
 
@@ -47,8 +47,8 @@ open http://127.0.0.1:8080/?lang=de
 
 | Source | Keys | Role |
 | --- | --- | --- |
-| `tools/shared-catalog.json` | 28 | Keys shared with the engine catalogs `_SITE` / `_ADMIN`, copied byte for byte so the site and the console never diverge in terminology |
-| `tools/site-strings.json` | 110 | Website-only strings; its `en` node is derived from the default text inside `index.html` |
+| `tools/shared-catalog.json` | 27 | Keys shared with the engine catalogs `_SITE` / `_ADMIN`, copied byte for byte so the site and the console never diverge in terminology |
+| `tools/site-strings.json` | 112 | Website-only strings; its `en` node is derived from the default text inside `index.html` |
 
 ```bash
 python3 tools/sync_i18n.py            # regenerate assets/js/i18n.js
@@ -72,26 +72,27 @@ There is no build step: serve the repository root. `index.html` sits at the top,
 ### GitHub Pages
 
 1. Repository Settings → Pages → Source: **Deploy from a branch**, branch `main`, directory `/ (root)`.
-2. The `CNAME` file already contains `popopx.chat`, so Pages binds the custom domain automatically.
-3. Turn on **Enforce HTTPS**. The apex `popopx.chat` needs an ALIAS/ANAME record (with Cloudflare a proxied
-   CNAME works); point `bot.popopx.chat` at the Studio service itself, not at Pages.
+2. The `CNAME` file already contains `bot.popopx.chat`, so Pages binds the custom domain automatically.
+3. Turn on **Enforce HTTPS**. `bot.popopx.chat` needs a single CNAME to Pages (no ALIAS/ANAME); the apex
+   `popopx.chat` stays with the main site and is neither bound nor claimed here. The Studio console listens on
+   loopback only, so the hostname in front of it is the operator's own decision.
 
 ### Cloudflare Pages
 
 Direct Upload or Git integration both work: leave the build command empty and the output directory empty
-(the repository root is the site root). Add `popopx.chat` as a domain; the `CNAME` file is ignored here.
+(the repository root is the site root). Add `bot.popopx.chat` as a domain; the `CNAME` file is ignored here.
 
 ### Vercel
 
 Choose **Other** as the framework preset, keep the build command and output directory at their defaults,
-and add `popopx.chat` under Domains.
+and add `bot.popopx.chat` under Domains.
 
 ### Nginx
 
 ```nginx
 server {
   listen 443 ssl http2;
-  server_name popopx.chat;
+  server_name bot.popopx.chat;
 
   root /srv/popopx-bot-studio-web;
   index index.html;
@@ -116,7 +117,7 @@ server {
 ### Caddy
 
 ```caddyfile
-popopx.chat {
+bot.popopx.chat {
   root * /srv/popopx-bot-studio-web
   encode gzip zstd
   file_server
@@ -130,7 +131,7 @@ popopx.chat {
 ```
 
 Upload `CNAME`, `robots.txt`, `sitemap.xml` and `LICENSE` with the site: the `Sitemap:` line in `robots.txt`
-is the absolute `https://popopx.chat/sitemap.xml`.
+is the absolute `https://bot.popopx.chat/sitemap.xml`.
 
 ## What the gate checks
 

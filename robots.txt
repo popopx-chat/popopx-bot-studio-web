@@ -1,7 +1,7 @@
-# POPOPX Bot Studio — https://popopx.chat
+# POPOPX Bot Studio — https://bot.popopx.chat
 # Everything here is static and crawler-friendly; there is nothing to hide and no endpoint to probe.
 
 User-agent: *
 Allow: /
 
-Sitemap: https://popopx.chat/sitemap.xml
+Sitemap: https://bot.popopx.chat/sitemap.xml

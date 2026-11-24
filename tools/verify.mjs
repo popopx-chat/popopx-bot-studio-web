@@ -282,8 +282,8 @@ gate("palette matches the brief", {
 
 const head = html.slice(0, html.indexOf("</head>"));
 gate("canonical + og + twitter", {
-  status: /rel="canonical" href="https:\/\/popopx\.chat\/"/.test(head) && head.includes('property="og:url"') && head.includes('name="twitter:card"') ? "PASS" : "FAIL",
-  detail: "canonical https://popopx.chat/, og:url, twitter:card",
+  status: /rel="canonical" href="https:\/\/bot\.popopx\.chat\/"/.test(head) && head.includes('property="og:url"') && head.includes('name="twitter:card"') ? "PASS" : "FAIL",
+  detail: "canonical https://bot.popopx.chat/, og:url, twitter:card",
 });
 const hreflangs = [...head.matchAll(/hreflang="([^"]+)"/g)].map((m) => m[1]);
 const missingLang = EXPECTED.filter((c) => !hreflangs.includes(c));
@@ -295,7 +295,7 @@ gate("hreflang covers 18 locales + x-default", {
 if (exists("CNAME")) {
   const cname = read("CNAME").trim();
   gate("CNAME points at the live domain", {
-    status: /^popopx\.chat$/.test(cname) ? "PASS" : "FAIL",
+    status: /^bot\.popopx\.chat$/.test(cname) ? "PASS" : "FAIL",
     detail: cname,
   });
 } else gate("CNAME points at the live domain", { status: "FAIL", detail: "no CNAME file" });
@@ -303,7 +303,7 @@ if (exists("CNAME")) {
 if (exists("robots.txt")) {
   const robots = read("robots.txt");
   gate("robots.txt allows crawling and names the sitemap", {
-    status: /allow\s*:\s*\//i.test(robots) && /sitemap\s*:\s*https:\/\/popopx\.chat\/sitemap\.xml/i.test(robots) ? "PASS" : "FAIL",
+    status: /allow\s*:\s*\//i.test(robots) && /sitemap\s*:\s*https:\/\/bot\.popopx\.chat\/sitemap\.xml/i.test(robots) ? "PASS" : "FAIL",
     detail: robots.replace(/\n/g, " · ").slice(0, 120),
   });
 } else gate("robots.txt allows crawling and names the sitemap", { status: "FAIL", detail: "no robots.txt" });
@@ -311,10 +311,10 @@ if (exists("robots.txt")) {
 if (exists("sitemap.xml")) {
   const sitemap = read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  const badUrl = urls.find((u) => !/^https:\/\/(popopx\.chat|bot\.popopx\.chat)(\/|\?|$)/.test(u));
+  const badUrl = urls.find((u) => !/^https:\/\/bot\.popopx\.chat(\/|\?|$)/.test(u));
   gate("sitemap.xml is well-formed and in-domain", {
     status: sitemap.trim().startsWith("<?xml") && sitemap.trim().endsWith("</urlset>") && urls.length >= 1 && !badUrl ? "PASS" : "FAIL",
-    detail: badUrl ? `off-domain ${badUrl}` : `${urls.length} urls`,
+    detail: badUrl ? `off-domain ${badUrl}` : `${urls.length} urls on bot.popopx.chat`,
   });
 } else gate("sitemap.xml is well-formed and in-domain", { status: "FAIL", detail: "no sitemap.xml" });
 

@@ -3,28 +3,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://popopx.chat/</loc>
+    <loc>https://bot.popopx.chat/</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://popopx.chat/?lang=zh-Hans"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://popopx.chat/?lang=zh-Hant"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://popopx.chat/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="bg" href="https://popopx.chat/?lang=bg"/>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://popopx.chat/?lang=cs"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://popopx.chat/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://popopx.chat/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fi" href="https://popopx.chat/?lang=fi"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://popopx.chat/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://popopx.chat/?lang=hu"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://popopx.chat/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://popopx.chat/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://popopx.chat/?lang=pl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://popopx.chat/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://popopx.chat/?lang=th"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://popopx.chat/?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://popopx.chat/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://popopx.chat/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://popopx.chat/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://bot.popopx.chat/?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://bot.popopx.chat/?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://bot.popopx.chat/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://bot.popopx.chat/?lang=bg"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://bot.popopx.chat/?lang=cs"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bot.popopx.chat/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://bot.popopx.chat/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://bot.popopx.chat/?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bot.popopx.chat/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://bot.popopx.chat/?lang=hu"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://bot.popopx.chat/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://bot.popopx.chat/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://bot.popopx.chat/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://bot.popopx.chat/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://bot.popopx.chat/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bot.popopx.chat/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://bot.popopx.chat/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bot.popopx.chat/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bot.popopx.chat/"/>
   </url>
 </urlset>

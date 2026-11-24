@@ -3,9 +3,9 @@
 零构建静态站点：`index.html` + `assets/css/style.css` + `assets/js/i18n.js` + `assets/js/app.js`，
 一整套 18 语种文案，无框架、无打包器、无 CDN、无 Web 字体请求、无统计脚本。
 
-- 正式域名：<https://popopx.chat>（本仓库即该域名的站点根目录）
+- 门户域名：<https://bot.popopx.chat>（本仓库即该域名的站点根目录）；顶级域 `popopx.chat` 归主站，本站不再声明它
 - 引擎仓库：<https://github.com/popopx-chat/popopx-bot-studio>（AGPL-3.0-only）
-- Bot 服务地址徽章：`bot.popopx.chat`
+- 顶部域名门牌：`bot.popopx.chat`
 - 许可证：本仓库根目录的 `LICENSE`（AGPL-3.0-only），与引擎一致
 
 ## 板块
@@ -27,8 +27,8 @@
 检测优先级：**URL 参数 `?lang=…` → `localStorage` → `navigator.languages` → `en`**，
 右上角下拉切换无刷新，切换后用 `history.replaceState` 把语种写回地址栏（`en` 为基准，不带参数）。
 
-SEO：单一 URL + 18 条 `hreflang` 备用链接 + `x-default`，`canonical` 指向 `https://popopx.chat/`，
-Open Graph / Twitter 标签随语种更新，`sitemap.xml` 内联全部语种的 `xhtml:link`，`CNAME` 为 `popopx.chat`。
+SEO：单一 URL + 18 条 `hreflang` 备用链接 + `x-default`，`canonical` 指向 `https://bot.popopx.chat/`，
+Open Graph / Twitter 标签随语种更新，`sitemap.xml` 内联全部语种的 `xhtml:link`，`CNAME` 为 `bot.popopx.chat`。
 
 ## 本地预览
 
@@ -45,8 +45,8 @@ open http://127.0.0.1:8080/?lang=zh-Hans
 
 | 来源 | 键数 | 说明 |
 | --- | --- | --- |
-| `tools/shared-catalog.json` | 28 | 与引擎 `_SITE` / `_ADMIN` 共用的键，逐字节拷贝，保证官网与控制台用词一致 |
-| `tools/site-strings.json` | 110 | 官网专有文案；其中 `en` 节点由 `index.html` 的标签内文本派生 |
+| `tools/shared-catalog.json` | 27 | 与引擎 `_SITE` / `_ADMIN` 共用的键，逐字节拷贝，保证官网与控制台用词一致 |
+| `tools/site-strings.json` | 112 | 官网专有文案；其中 `en` 节点由 `index.html` 的标签内文本派生 |
 
 ```bash
 python3 tools/sync_i18n.py            # 重新生成 assets/js/i18n.js
@@ -69,26 +69,26 @@ node tools/verify.mjs                 # 全量自检门禁
 ### GitHub Pages
 
 1. 仓库 Settings → Pages → Source 选 **Deploy from a branch**，分支 `main`、目录 `/ (root)`。
-2. 根目录的 `CNAME` 已写 `popopx.chat`，Pages 会自动绑定该自定义域名。
-3. 启用 **Enforce HTTPS**。顶级域 `popopx.chat` 需 ALIAS/ANAME 记录（Cloudflare 用 CNAME + 橙云代理即可），
-   `bot.popopx.chat` 那条 A/CNAME 记录留给 Studio 服务本身，不要指向 Pages。
+2. 根目录的 `CNAME` 已写 `bot.popopx.chat`，Pages 会自动绑定该自定义域名。
+3. 启用 **Enforce HTTPS**。子域名 `bot.popopx.chat` 只需一条指向 Pages 的 CNAME（不必 ALIAS/ANAME）；
+   顶级域 `popopx.chat` 留给主站，本站既不绑定也不声明。Studio 控制台只听 127.0.0.1，摆在哪个域名由部署者自己定。
 
 ### Cloudflare Pages
 
 Direct Upload 或 Git 集成都可以：构建命令留空、输出目录留空（仓库根即站点根）。
-域名加 `popopx.chat`；`CNAME` 文件对 Cloudflare 无意义，可忽略。
+域名加 `bot.popopx.chat`；`CNAME` 文件对 Cloudflare 无意义，可忽略。
 
 ### Vercel
 
 Framework preset 选 **Other**，Build Command 与 Output Directory 都留默认/留空即可直接发布静态根目录；
-Domains 加 `popopx.chat`。
+Domains 加 `bot.popopx.chat`。
 
 ### Nginx
 
 ```nginx
 server {
   listen 443 ssl http2;
-  server_name popopx.chat;
+  server_name bot.popopx.chat;
 
   root /srv/popopx-bot-studio-web;
   index index.html;
@@ -113,7 +113,7 @@ server {
 ### Caddy
 
 ```caddyfile
-popopx.chat {
+bot.popopx.chat {
   root * /srv/popopx-bot-studio-web
   encode gzip zstd
   file_server
@@ -127,7 +127,7 @@ popopx.chat {
 ```
 
 Nginx/Caddy 部署时，别忘了把 `CNAME`、`robots.txt`、`sitemap.xml`、`LICENSE` 一并上传：
-`robots.txt` 里的 `Sitemap:` 行写的是绝对地址 `https://popopx.chat/sitemap.xml`。
+`robots.txt` 里的 `Sitemap:` 行写的是绝对地址 `https://bot.popopx.chat/sitemap.xml`。
 
 ## 自检门禁
 
