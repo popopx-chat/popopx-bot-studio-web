@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POPOPX Bot Studio — Run your own POPOPX bots on a server you control</title>
+<meta name="description" content="Self-hosted bot factory for the identity-less POPOPX messenger: no-code auto-reply rules, message routing with tickets, four plugins, developer Open API and a private key plus SQLite ledger that never leaves your server.">
+<meta name="theme-color" content="#04060c">
+<meta name="author" content="POPOPX">
+<link rel="canonical" href="https://popopx.chat/">
+<link rel="alternate" hreflang="en" href="https://popopx.chat/">
+<link rel="alternate" hreflang="zh-Hans" href="https://popopx.chat/?lang=zh-Hans">
+<link rel="alternate" hreflang="zh-Hant" href="https://popopx.chat/?lang=zh-Hant">
+<link rel="alternate" hreflang="ja" href="https://popopx.chat/?lang=ja">
+<link rel="alternate" hreflang="bg" href="https://popopx.chat/?lang=bg">
+<link rel="alternate" hreflang="cs" href="https://popopx.chat/?lang=cs">
+<link rel="alternate" hreflang="de" href="https://popopx.chat/?lang=de">
+<link rel="alternate" hreflang="es" href="https://popopx.chat/?lang=es">
+<link rel="alternate" hreflang="fi" href="https://popopx.chat/?lang=fi">
+<link rel="alternate" hreflang="fr" href="https://popopx.chat/?lang=fr">
+<link rel="alternate" hreflang="hu" href="https://popopx.chat/?lang=hu">
+<link rel="alternate" hreflang="it" href="https://popopx.chat/?lang=it">
+<link rel="alternate" hreflang="nl" href="https://popopx.chat/?lang=nl">
+<link rel="alternate" hreflang="pl" href="https://popopx.chat/?lang=pl">
+<link rel="alternate" hreflang="ru" href="https://popopx.chat/?lang=ru">
+<link rel="alternate" hreflang="th" href="https://popopx.chat/?lang=th">
+<link rel="alternate" hreflang="tr" href="https://popopx.chat/?lang=tr">
+<link rel="alternate" hreflang="uk" href="https://popopx.chat/?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://popopx.chat/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="POPOPX Bot Studio">
+<meta property="og:locale" content="en">
+<meta property="og:url" content="https://popopx.chat/">
+<meta property="og:title" content="POPOPX Bot Studio" data-i18n-meta="site_title">
+<meta property="og:description" content="Run your own POPOPX bots on a server you control" data-i18n-meta="site_tagline">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POPOPX Bot Studio" data-i18n-meta="site_title">
+<meta name="twitter:description" content="Run your own POPOPX bots on a server you control" data-i18n-meta="site_tagline">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"POPOPX Bot Studio","applicationCategory":"DeveloperApplication","operatingSystem":"Linux, macOS","url":"https://popopx.chat/","license":"https://spdx.org/licenses/AGPL-3.0-only.html","isAccessibleForFree":true,"codeRepository":"https://github.com/popopx-chat/popopx-bot-studio","sameAs":["https://github.com/popopx-chat/popopx-bot-studio"]}
+</script>
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<a class="skip" href="#home">Skip to content</a>
+
+<header class="site-head" id="top">
+  <div class="head-inner">
+    <a class="brand" href="#home" aria-label="POPOPX Bot Studio">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="4" y="8" width="24" height="17" rx="4"></rect>
+        <path d="M16 4v4M11 15h2M19 15h2M12 20h8"></path>
+        <circle cx="16" cy="3" r="1.6"></circle>
+      </svg>
+      <span class="brand-text">
+        <strong>POPOPX</strong><em>Bot Studio</em>
+      </span>
+    </a>
+
+    <a class="endpoint" href="https://bot.popopx.chat" rel="noopener">
+      <span class="dot" aria-hidden="true"></span>bot.popopx.chat
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#security" data-i18n="nav_security">Security</a>
+      <a href="#tutorial" data-i18n="nav_install">Install</a>
+      <a href="#api" data-i18n="nav_api">Open API</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    </nav>
+
+    <div class="head-actions">
+      <label class="lang">
+        <span class="visually-hidden" data-i18n="language">Language</span>
+        <select id="lang-select" data-i18n-aria-label="ui_lang_hint" aria-label="Switch language"></select>
+      </label>
+      <a class="ghost-btn" href="https://github.com/popopx-chat/popopx-bot-studio" rel="noopener noreferrer">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .5a7.5 7.5 0 0 0-2.4 14.6c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.1-.9-1.1-.7-.5 0-.5 0-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.4.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.3 7.3 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.5.8 1.2.8 2.1 0 3.1-1.8 3.8-3.6 4 .3.3.6.8.6 1.6v2.3c0 .2.1.5.5.4A7.5 7.5 0 0 0 8 .5Z"/></svg>
+        <span data-i18n="cta_github">Source on GitHub</span>
+      </a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" data-i18n-aria-label="ui_menu" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">AGPL-3.0-only · <span data-i18n="nav_admin">Open console</span></p>
+      <h1 data-i18n="hero_title">A bot factory for the identity-less messenger</h1>
+      <p class="lead" data-i18n="hero_sub">Create a bot, get its permanent address, then let rules answer, forward enquiries to your support group and open a ticket per customer. Everything runs on loopback, nothing is bundled.</p>
+
+      <ul class="tags" role="list">
+        <li data-i18n="hero_tag_1">Zero metadata</li>
+        <li data-i18n="hero_tag_2">100% self-hosted</li>
+        <li data-i18n="hero_tag_3">One-command deploy</li>
+        <li data-i18n="hero_tag_4">24/7 bot plus human agents</li>
+        <li data-i18n="hero_tag_5">No-code rules and plugins</li>
+      </ul>
+
+      <div class="cta-row">
+        <a class="solid-btn" href="#tutorial" data-i18n="cta_start">Create your first bot</a>
+        <a class="line-btn" href="https://github.com/popopx-chat/popopx-bot-studio" rel="noopener noreferrer" data-i18n="cta_github">Source on GitHub</a>
+      </div>
+
+      <div class="cmd" data-copy-source>
+        <div class="cmd-bar">
+          <span class="cmd-label" data-i18n="hero_cmd_caption">Install on Ubuntu 22.04</span>
+          <button class="copy" type="button" data-copy aria-label="Copy" data-i18n-label="action_copy" data-i18n-aria-label="ui_code_aria">
+            <span class="copy-text" data-i18n="action_copy">Copy</span>
+          </button>
+        </div>
+        <pre class="cmd-body"><code>git clone https://github.com/popopx-chat/popopx-bot-studio.git
+cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
+      </div>
+      <p class="cmd-hint" data-i18n="hero_cmd_hint">The installer only reads the system until you run it without --check; popopx-cli is fetched at runtime, never committed.</p>
+    </div>
+
+    <aside class="console" aria-hidden="true">
+      <div class="console-bar">
+        <span class="console-title">studio · 127.0.0.1:8090</span>
+        <span class="console-ports">ws 5230–5299</span>
+      </div>
+      <div class="console-body">
+        <p><span class="pr">popopx-bot-studio</span> --self-test</p>
+        <p class="ok">✓ loopback_only &nbsp;127.0.0.1:8090</p>
+        <p class="ok">✓ file_mode &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0600 studio.key</p>
+        <p class="ok">✓ ledger &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var/studio/studio.db</p>
+        <p class="ok">✓ sandbox &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 bots · 3 cli-data dirs</p>
+        <p class="ok">✓ plugins &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto_reply msg_router llm_bridge webhook_relay</p>
+        <p class="dim">12 checks · 0 failures · 0 outbound telemetry</p>
+        <p><span class="pr">$</span> POST /bot&lt;token&gt;/sendMessage <span class="ok">200</span><span class="caret"></span></p>
+      </div>
+      <p class="console-cap" data-i18n="hero_console_caption">What the engine prints on boot: every invariant it refuses to break.</p>
+    </aside>
+  </div>
+
+  <dl class="specs">
+    <div><dt data-i18n="stat_locales">Languages</dt><dd>18 <span data-i18n="stat_locales_note">built in</span></dd></div>
+    <div><dt data-i18n="stat_plugins">Plugins</dt><dd>4 <span data-i18n="stat_plugins_note">on one bus</span></dd></div>
+    <div><dt data-i18n="stat_loopback">Listening</dt><dd>127.0.0.1 <span data-i18n="stat_loopback_note">only</span></dd></div>
+    <div><dt data-i18n="stat_ledger">Ledger</dt><dd>SQLite <span data-i18n="stat_ledger_note">0600 on disk</span></dd></div>
+  </dl>
+</section>
+
+<section class="features" id="features">
+  <div class="sec-head">
+    <p class="marker">01 / FEATURES</p>
+    <h2 data-i18n="app_tagline">Self-hosted bot factory, auto-reply and message routing</h2>
+    <p class="sec-sub" data-i18n="features_sub">BotFather-grade control over many isolated bots, with the reply, routing and ticket flow you would otherwise script by hand.</p>
+  </div>
+
+  <div class="cards">
+    <article class="card span2">
+      <h3 data-i18n="cap_sandbox_t">Multi-bot sandbox factory</h3>
+      <p data-i18n="cap_sandbox_d">Every bot gets its own popopx-cli process, its own cli-data directory, its own control port and its own SQLite files, started and stopped from one screen.</p>
+      <ul class="chips" role="list">
+        <li>run-cli.sh</li><li>cli.pid</li><li>cli-data/</li><li>ports 5230+</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3 data-i18n="feat_1_t">Permanent address</h3>
+      <p data-i18n="feat_1_d">Each bot gets its own CLI data directory and permanent contact link, so reconnecting users always reach the same bot.</p>
+    </article>
+    <article class="card">
+      <h3 data-i18n="feat_2_t">No-code rules</h3>
+      <p data-i18n="feat_2_d">Match a keyword, exact phrase or regular expression and reply with a template. Cooldown keeps a chatty user from being spammed.</p>
+    </article>
+    <article class="card span2">
+      <h3 data-i18n="feat_3_t">Routing and tickets</h3>
+      <p data-i18n="feat_3_d">Forward enquiries into a support group with a #T ticket id; an operator answers with the ticket id and the reply goes back to the customer.</p>
+      <ul class="chips" role="list">
+        <li><span data-i18n="nav_routing">Routing</span></li>
+        <li>#T-0001 → <span data-i18n="nav_rules">Auto-reply</span></li>
+        <li>24/7 <span data-i18n="cap_agent">agent desk</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3 data-i18n="cap_sov_t">Private key and local sovereignty</h3>
+      <p data-i18n="cap_sov_d">The identity key, the ledger and every message log live in files you own with mode 0600. There is no cloud account to lose and no vendor holding a copy.</p>
+    </article>
+    <article class="card">
+      <h3 data-i18n="cap_plg_t">Extensible plugin bus</h3>
+      <p data-i18n="cap_plg_d">Inbound messages pass plugins first, then rules, then routing. A plugin can reply, forward or stay silent without touching the engine.</p>
+    </article>
+  </div>
+
+  <div class="plugins">
+    <p class="plugins-title" data-i18n="nav_plugins">Plugins</p>
+    <ol class="plugin-list" role="list">
+      <li>
+        <code>auto_reply</code>
+        <strong data-i18n="plg_auto_t">Layered Q&amp;A and command menus</strong>
+        <span data-i18n="plg_auto_d">Answers from a keyword table, offers a numbered menu and falls back to a human handoff.</span>
+      </li>
+      <li>
+        <code>msg_router</code>
+        <strong data-i18n="plg_router_t">Cross-chat and cross-group routing</strong>
+        <span data-i18n="plg_router_d">Aggregates alerts, mirrors a direct message into a group and keeps the ticket id attached.</span>
+      </li>
+      <li>
+        <code>llm_bridge</code>
+        <strong data-i18n="plg_llm_t">OpenAI-compatible assistant</strong>
+        <span data-i18n="plg_llm_d">Point it at any compatible base URL, set the model, and the bridge asks only when a rule did not match.</span>
+      </li>
+      <li>
+        <code>webhook_relay</code>
+        <strong data-i18n="plg_hook_t">Inbound alerts and outbound callbacks</strong>
+        <span data-i18n="plg_hook_d">Turns an external monitor webhook into a bot message, and a customer reply into your own webhook call.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="security" id="security">
+  <div class="sec-head">
+    <p class="marker">02 / SECURITY</p>
+    <h2 data-i18n="sec_title">What stays on your machine</h2>
+    <p class="sec-sub" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="matrix">
+      <caption class="visually-hidden" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</caption>
+      <thead>
+        <tr>
+          <th scope="col" data-i18n="sec_col_dim">Dimension</th>
+          <th scope="col" data-i18n="sec_col_us">POPOPX Bot Studio</th>
+          <th scope="col" data-i18n="sec_col_them">Hosted platform bot</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" data-i18n="sec_r1_d">Identity key</th>
+          <td class="us" data-i18n="sec_r1_us">Local file, mode 0600</td>
+          <td class="them" data-i18n="sec_r1_them">Held by the provider</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r2_d">Message ledger</th>
+          <td class="us" data-i18n="sec_r2_us">SQLite in var/studio</td>
+          <td class="them" data-i18n="sec_r2_them">Provider database</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r3_d">Encryption</th>
+          <td class="us" data-i18n="sec_r3_us">End to end per contact</td>
+          <td class="them" data-i18n="sec_r3_them">Transport only</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r4_d">Isolation</th>
+          <td class="us" data-i18n="sec_r4_us">One process and one data dir per bot</td>
+          <td class="them" data-i18n="sec_r4_them">Shared tenant space</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r5_d">Account risk</th>
+          <td class="us" data-i18n="sec_r5_us">Nothing to ban: no account</td>
+          <td class="them" data-i18n="sec_r5_them">Ban or rate limit at will</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r6_d">Metadata</th>
+          <td class="us" data-i18n="sec_r6_us">No phone number, no user id</td>
+          <td class="them" data-i18n="sec_r6_them">Contact graph and usage stats</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footnote" data-i18n="sec_note">The engine refuses to start on a non-loopback address unless STUDIO_ALLOW_LAN=1 is set on purpose.</p>
+</section>
+
+<section class="tutorial" id="tutorial">
+  <div class="sec-head">
+    <p class="marker">03 / DEPLOY</p>
+    <h2 data-i18n="tut_title">Install and first run</h2>
+    <p class="sec-sub" data-i18n="tut_sub">Four paths, the same engine: a production Linux box, a Mac you keep running, a development checkout, or the three clicks inside the console.</p>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Installation paths" data-i18n-aria-label="ui_tabs_aria">
+    <button class="tab is-on" role="tab" type="button" id="tab-ubuntu" aria-controls="pane-ubuntu" aria-selected="true" data-tab="ubuntu" data-i18n="tab_ubuntu">Ubuntu 22.04</button>
+    <button class="tab" role="tab" type="button" id="tab-macos" aria-controls="pane-macos" aria-selected="false" tabindex="-1" data-tab="macos" data-i18n="tab_macos">macOS</button>
+    <button class="tab" role="tab" type="button" id="tab-dev" aria-controls="pane-dev" aria-selected="false" tabindex="-1" data-tab="dev" data-i18n="tab_dev">Local development</button>
+    <button class="tab" role="tab" type="button" id="tab-quick" aria-controls="pane-quick" aria-selected="false" tabindex="-1" data-tab="quick" data-i18n="tab_quick">First bot in 3 steps</button>
+  </div>
+
+  <div class="panes">
+    <section class="pane is-on" id="pane-ubuntu" role="tabpanel" aria-labelledby="tab-ubuntu" tabindex="0">
+      <p class="pane-i" data-i18n="tut_ubuntu_i">Installs Python 3.11, creates a system user, writes a systemd unit and pulls popopx-cli for your architecture.</p>
+      <div class="code" data-copy-source>
+        <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
+        <pre><code>sudo apt update &amp;&amp; sudo apt install -y git python3.11-venv
+git clone https://github.com/popopx-chat/popopx-bot-studio.git
+cd popopx-bot-studio
+
+./install_ubuntu22.sh --dry-run          # plan only, nothing written
+sudo ./install_ubuntu22.sh --mode native
+
+systemctl status popopx-bot-studio
+sudo -u popopx-studio cat /etc/popopx-bot-studio/.env</code></pre>
+      </div>
+      <ul class="pane-n" role="list">
+        <li data-i18n="tut_ubuntu_n1">Open the console through a reverse proxy on your own host: the engine binds 127.0.0.1:8090 and never 0.0.0.0.</li>
+        <li data-i18n="tut_ubuntu_n2">Flags: --check validates the host, --mode native installs in place, --dry-run prints the plan, --uninstall removes the service and keeps your data.</li>
+      </ul>
+    </section>
+
+    <section class="pane" id="pane-macos" role="tabpanel" aria-labelledby="tab-macos" tabindex="0" hidden>
+      <p class="pane-i" data-i18n="tut_macos_i">Registers a launchd agent so the studio comes back after a reboot, using the same installer flags as Linux.</p>
+      <div class="code" data-copy-source>
+        <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
+        <pre><code>git clone https://github.com/popopx-chat/popopx-bot-studio.git
+cd popopx-bot-studio
+
+./install_macos.sh --check               # report what would change
+./install_macos.sh                       # launchd agent + venv
+./install_macos.sh --lan                 # bind a LAN address on purpose
+
+launchctl list | grep popopx
+open http://127.0.0.1:8090</code></pre>
+      </div>
+      <ul class="pane-n" role="list">
+        <li data-i18n="tut_macos_n1">Every bot is launched through a wrapper script so launchd cannot split the arguments it passes to popopx-cli.</li>
+        <li data-i18n="tut_macos_n2">Backups and the SQLite ledger stay under var/studio, so one archive of that folder is a complete restore point.</li>
+      </ul>
+    </section>
+
+    <section class="pane" id="pane-dev" role="tabpanel" aria-labelledby="tab-dev" tabindex="0" hidden>
+      <p class="pane-i" data-i18n="tut_dev_i">No system service, no sudo: a virtualenv on your laptop with the console on loopback port 8090.</p>
+      <div class="code" data-copy-source>
+        <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
+        <pre><code>./start_macos.sh                         # venv + 127.0.0.1:8090
+
+STUDIO_ADMIN_TOKEN=dev-token \
+STUDIO_DATA_DIR=$PWD/var/studio \
+BOT_WS_PORT_BASE=5230 BOT_WS_PORT_MAX=5299 \
+python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
+      </div>
+      <ul class="pane-n" role="list">
+        <li data-i18n="tut_dev_n1">The engine ships an offline self-test of 12 assertion groups; it needs no network and no real contacts.</li>
+        <li data-i18n="tut_dev_n2">Without STUDIO_ADMIN_TOKEN every admin route answers 401, so an unconfigured checkout cannot be driven by accident.</li>
+      </ul>
+    </section>
+
+    <section class="pane" id="pane-quick" role="tabpanel" aria-labelledby="tab-quick" tabindex="0" hidden>
+      <p class="pane-i" data-i18n="tut_quick_i">Three moves in the console, then the Open API is yours.</p>
+      <ol class="steps" role="list">
+        <li><span class="step-n">1</span><p data-i18n="step_1">Install popopx-cli from the official releases (checksum verified) and start the studio.</p></li>
+        <li><span class="step-n">2</span><p data-i18n="step_2">Create a bot in the console, pick its SMP servers and read the permanent address or QR code.</p></li>
+        <li><span class="step-n">3</span><p data-i18n="step_3">Describe your support flow: add reply rules and a routing rule that targets the group.</p></li>
+        <li><span class="step-n">4</span><p data-i18n="step_4">Call the Open API with the bot token, or let a plugin take over the conversation.</p></li>
+      </ol>
+      <ul class="pane-n" role="list">
+        <li data-i18n="tut_quick_n1">The bot token is minted locally and stored only in the SQLite ledger; rotate it by re-creating the credential in the console.</li>
+      </ul>
+    </section>
+  </div>
+</section>
+
+<section class="api" id="api">
+  <div class="sec-head">
+    <p class="marker">04 / OPEN API</p>
+    <h2 data-i18n="api_title">A Telegram-shaped API on an isolated network</h2>
+    <p class="sec-sub" data-i18n="api_sub">Call sendMessage with the bot token, register a webhook, or poll getUpdates. The admin console and the API share one engine and one loopback port.</p>
+  </div>
+
+  <div class="api-grid">
+    <figure class="topo">
+      <svg viewBox="0 0 620 320" role="img" aria-label="Network topology diagram" data-i18n-aria-label="api_topo_aria">
+        <g class="topo-box">
+          <rect x="8" y="8" width="604" height="60" rx="6"></rect>
+          <text x="24" y="32">Browser Admin Studio</text>
+          <text x="24" y="52" class="sub">HTTPS · X-Studio-Token</text>
+        </g>
+        <path class="link" d="M302 68v26"></path>
+        <g class="topo-box">
+          <rect x="8" y="94" width="604" height="104" rx="6"></rect>
+          <text x="24" y="118">POPOPX Bot Studio Engine</text>
+          <text x="24" y="136" class="sub">Python 3.11 · FastAPI · 127.0.0.1:8090</text>
+          <g class="cell"><rect x="24" y="150" width="176" height="34" rx="4"></rect><text x="36" y="171">Multi-Bot Mgr</text></g>
+          <g class="cell"><rect x="212" y="150" width="176" height="34" rx="4"></rect><text x="224" y="171">Rule &amp; Router</text></g>
+          <g class="cell"><rect x="400" y="150" width="196" height="34" rx="4"></rect><text x="412" y="171">Open API &amp; Hook</text></g>
+        </g>
+        <path class="link" d="M140 198v24M466 198v24"></path>
+        <g class="topo-box">
+          <rect x="8" y="222" width="288" height="88" rx="6"></rect>
+          <text x="24" y="246">Plugin Bus</text>
+          <text x="24" y="266" class="sub">auto_reply · msg_router</text>
+          <text x="24" y="286" class="sub">llm_bridge · webhook_relay</text>
+        </g>
+        <g class="topo-box iso">
+          <rect x="312" y="222" width="284" height="88" rx="6"></rect>
+          <text x="328" y="246">Isolated popopx-cli</text>
+          <text x="328" y="266" class="sub">ws://127.0.0.1:5230..5299</text>
+          <text x="328" y="286" class="sub">cli-data · own SQLite · SMP</text>
+        </g>
+      </svg>
+      <figcaption data-i18n="api_topo_cap">Strict loopback: nothing between the engine and the bot sandbox leaves the machine.</figcaption>
+    </figure>
+
+    <div class="eps">
+      <article class="ep">
+        <h3 data-i18n="api_send_t">Send a message</h3>
+        <p data-i18n="api_send_d">Reply to any contact or group the bot already reaches.</p>
+        <div class="code" data-copy-source>
+          <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
+          <pre><code>curl -X POST http://127.0.0.1:8090/bot$BOT_TOKEN/sendMessage \
+  -H "content-type: application/json" \
+  -d '{"chat_ref":"&lt;contact&gt;","text":"Deploy finished."}'</code></pre>
+        </div>
+      </article>
+      <article class="ep">
+        <h3 data-i18n="api_hook_t">Register a webhook</h3>
+        <p data-i18n="api_hook_d">Push inbound events to your own endpoint instead of polling.</p>
+        <div class="code" data-copy-source>
+          <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
+          <pre><code>curl -X POST http://127.0.0.1:8090/bot$BOT_TOKEN/setWebhook \
+  -d '{"url":"https://intranet.local/hooks/popopx"}'</code></pre>
+        </div>
+      </article>
+      <article class="ep">
+        <h3 data-i18n="api_upd_t">Poll for updates</h3>
+        <p data-i18n="api_upd_d">Read the ring buffer behind the gateway, newest last.</p>
+        <div class="code" data-copy-source>
+          <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
+          <pre><code>curl "http://127.0.0.1:8090/bot$BOT_TOKEN/getUpdates?limit=50"</code></pre>
+        </div>
+      </article>
+      <p class="api-note" data-i18n="api_token_note">Tokens and admin credentials are read from .env on your host; the site never sends anything anywhere.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="sec-head">
+    <p class="marker">05 / FAQ</p>
+    <h2 data-i18n="faq_title">Questions before the first install</h2>
+    <p class="sec-sub" data-i18n="faq_sub">Licence, agents, migration and the difference to a commercial service account.</p>
+  </div>
+
+  <div class="qs">
+    <details>
+      <summary data-i18n="faq_q1">Can I use this commercially under AGPL-3.0-only?</summary>
+      <p data-i18n="faq_a1">Yes. AGPL-3.0 obliges you to share the source of the studio itself when you offer a modified version over a network, including changes to the engine and the plugins. Your bots, rules, reply texts and message data are your content and are not affected. The licence text is in the repository root.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq_q2">How do several human agents work the same queue?</summary>
+      <p data-i18n="faq_a2">Routing forwards an enquiry into a support group with a #T ticket id and the bot keeps the original chat reference. Any agent replies with that ticket id, and the engine sends the answer back to the customer only. Every hand is written to the audit log with the actor and the timestamp.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq_q3">How do I move a running bot to another server?</summary>
+      <p data-i18n="faq_a3">Export a bundle from the cold-backup screen: the bot is stopped, its cli-data directory, keys and settings are packed, and the bot starts again. Copy the archive to the new host, restore it, and the permanent contact address stays the same because identity lives in those files, not in a vendor account.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq_q4">How is this different from a commercial service account?</summary>
+      <p data-i18n="faq_a4">A service account is a rented identity: the provider issues the token, keeps the message graph, sets the rate limits and can end the account. The studio issues the token itself, keeps the ledger on your disk and has no account to close. The trade is that you own the uptime, the backups and the updates.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq_q5">Why does it only listen on 127.0.0.1?</summary>
+      <p data-i18n="faq_a5">The console and the Open API carry an admin token, so an exposed port is the most likely way in. The engine validates the bind address at start-up and refuses a non-loopback host unless you set STUDIO_ALLOW_LAN=1 on purpose. Put Caddy or nginx in front, keep the port closed and add TLS plus your own authentication there.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq_q6">Does the download of popopx-cli leak anything?</summary>
+      <p data-i18n="faq_a6">No binary is committed to the repository, because the AGPL licence and the download both point at the official releases. The installer fetches the archive for your operating system and architecture, verifies the SHA-256 checksum, then unpacks it into the data directory. Nothing about your bots is part of that request.</p>
+    </details>
+  </div>
+  <p class="faq-cta"><span data-i18n="faq_cta">Something wrong or missing?</span> <a href="https://github.com/popopx-chat/popopx-bot-studio/issues" rel="noopener noreferrer">popopx-bot-studio · issues</a></p>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-grid">
+    <p class="foot-brand"><strong>POPOPX Bot Studio</strong><span data-i18n="site_footer">POPOPX Bot Studio · AGPL-3.0-only · self-hosted, no telemetry</span></p>
+    <ul role="list">
+      <li><a href="https://github.com/popopx-chat/popopx-bot-studio" rel="noopener noreferrer" data-i18n="foot_engine">Engine source</a></li>
+      <li><a href="https://github.com/popopx-chat/popopx-bot-studio-web" rel="noopener noreferrer" data-i18n="foot_site">This website</a></li>
+      <li><a href="LICENSE" data-i18n="foot_license">Licence</a></li>
+      <li><a href="https://popopx.chat" rel="noopener noreferrer">popopx.chat</a></li>
+    </ul>
+    <p class="foot-note" data-i18n="foot_host">A static site with no build step, no CDN, no webfont request and no analytics: hosting it is a directory copy.</p>
+  </div>
+  <p class="foot-bar" data-i18n="footer">AGPL-3.0-only · no bundled binaries · loopback only</p>
+</footer>
+
+<noscript>
+  <p class="noscript" data-i18n="ui_noscript">Language switching needs JavaScript. The page you see is the English baseline; append ?lang=zh-Hans to the URL for the Chinese edition.</p>
+</noscript>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
