@@ -97,18 +97,23 @@ server {
   root /srv/popopx-bot-studio-web;
   index index.html;
 
-  # one inline script only: it flags <html class="js"> before the locale renders
-  content-security-policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'";
-  X-Content-Type-Options "nosniff";
-  Referrer-Policy "strict-origin-when-cross-origin";
-  Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()";
+  # nginx does not inherit add_header downward: a location that sets any add_header of its own drops every
+  # server-level one, so the security headers are declared inside each location. One inline script only.
 
   location ~* ^/assets/ {
-    add_header Cache-Control "public, max-age=31536000, immutable";
+    add_header Cache-Control "public, max-age=31536000, immutable" always;
+    add_header Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()" always;
     try_files $uri =404;
   }
   location / {
-    add_header Cache-Control "public, max-age=300, must-revalidate";
+    add_header Cache-Control "public, max-age=300, must-revalidate" always;
+    add_header Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()" always;
     try_files $uri $uri/ =404;
   }
 }

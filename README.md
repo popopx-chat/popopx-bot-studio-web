@@ -93,18 +93,23 @@ server {
   root /srv/popopx-bot-studio-web;
   index index.html;
 
-  # 本站只有一个内联脚本（给 <html> 打 .js 标记，防止语言渲染前的闪烁）
-  content-security-policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'";
-  X-Content-Type-Options "nosniff";
-  Referrer-Policy "strict-origin-when-cross-origin";
-  Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()";
+  # nginx 的 add_header 不向下继承：location 内只要自己写了 add_header，server 级的就全部失效，
+  # 因此安全头必须在每个 location 里各自声明。本站只有一个内联脚本（给 <html> 打 .js 标记，防闪烁）。
 
   location ~* ^/assets/ {
-    add_header Cache-Control "public, max-age=31536000, immutable";
+    add_header Cache-Control "public, max-age=31536000, immutable" always;
+    add_header Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()" always;
     try_files $uri =404;
   }
   location / {
-    add_header Cache-Control "public, max-age=300, must-revalidate";
+    add_header Cache-Control "public, max-age=300, must-revalidate" always;
+    add_header Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()" always;
     try_files $uri $uri/ =404;
   }
 }
