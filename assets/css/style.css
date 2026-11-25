@@ -20,12 +20,14 @@
   --font-body: "Optima", "Avenir Next", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans Thai", "Noto Sans", sans-serif;
   --gut: clamp(18px, 4vw, 64px);
   --maxw: 1240px;
+  /* app.js overwrites this with the measured header height */
+  --head-h: 104px;
   --r: 3px;
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--head-h) + 14px); }
 
 body {
   margin: 0;
@@ -342,7 +344,7 @@ main > section:first-child { border-top: 0; }
   background: rgba(0, 240, 255, 0.035);
 }
 .console-title { color: var(--cyan); }
-.console-body { padding: 16px 14px 18px; font-family: var(--font-display); font-size: 12.5px; line-height: 1.85; }
+.console-body { padding: 16px 14px 18px; font-family: var(--font-display); font-size: 11.5px; line-height: 1.85; }
 .console-body p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .console-body .pr { color: var(--emerald); }
 .console-body .ok { color: #7fd8b8; }
@@ -534,7 +536,7 @@ details p { padding: 0 18px 18px; color: var(--ink-dim); font-size: 14.5px; max-
 .site-foot { border-top: 1px solid var(--line-strong); background: rgba(3, 5, 10, 0.85); padding: 44px var(--gut) 0; }
 .foot-grid {
   max-width: var(--maxw); margin: 0 auto;
-  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.4fr);
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.75fr) minmax(0, 1.25fr) minmax(0, 1.1fr);
   gap: 30px; padding-bottom: 30px;
 }
 .foot-brand { display: grid; gap: 8px; }
@@ -567,6 +569,167 @@ details p { padding: 0 18px 18px; color: var(--ink-dim); font-size: 14.5px; max-
 .js .console { opacity: 0; animation: rise 0.8s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
 @keyframes rise { to { opacity: 1; transform: none; } }
 
+/* ---------- status badges ----------
+   The dashed border on 规划中 is the same visual claim as the dashed edges in the
+   ecosystem figure: no code behind it yet. Colour alone never carries the meaning. */
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-faint);
+  background: rgba(7, 11, 22, 0.7);
+}
+.badge.is-released { color: #7fe3bd; border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.09); }
+.badge.is-beta { color: #ffd081; border-color: rgba(255, 176, 32, 0.5); background: rgba(255, 176, 32, 0.08); }
+.badge.is-planned { color: var(--ink-faint); border-style: dashed; border-color: rgba(120, 168, 200, 0.45); background: transparent; }
+
+.card .badge { margin: 0 0 12px; }
+.card[data-status="planned"] { border-style: dashed; }
+
+.legend {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 clamp(30px, 4vh, 44px);
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--cyan);
+  border-radius: var(--r);
+  background: rgba(8, 13, 24, 0.62);
+}
+.legend-title { color: var(--ink-dim); font-size: 14px; max-width: 96ch; }
+.legend-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+
+.sub-title {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+/* ---------- workflow rail ---------- */
+.rail { margin: 0 0 clamp(40px, 6vh, 64px); }
+.rail-list {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--line);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.rail-step {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+  padding: 20px 20px 20px 18px;
+  background: linear-gradient(120deg, rgba(13, 21, 38, 0.9), rgba(6, 10, 20, 0.82));
+  transition: background 0.25s ease;
+}
+.rail-step:hover { background: rgba(15, 25, 44, 0.95); }
+.rail-n {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+.rail-step[data-status="released"] .rail-n { border-color: rgba(16, 185, 129, 0.6); color: #7fe3bd; }
+.rail-step[data-status="beta"] .rail-n { border-color: rgba(255, 176, 32, 0.55); color: #ffd081; }
+.rail-step[data-status="planned"] .rail-n { border-style: dashed; }
+.rail-body h3 { margin-bottom: 6px; color: #eaf4ff; }
+.rail-body p { color: var(--ink-dim); font-size: 14.5px; max-width: 78ch; }
+.rail-step > .badge { margin-top: 4px; }
+
+/* ---------- ecosystem ---------- */
+.eco { margin-top: clamp(40px, 6vh, 64px); }
+.eco-sub { margin: -6px 0 20px; color: var(--ink-dim); font-size: 15px; max-width: 74ch; }
+.eco .topo { max-width: 860px; }
+.eco-note {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px dashed rgba(255, 176, 32, 0.4);
+  border-radius: var(--r);
+  background: rgba(255, 176, 32, 0.05);
+  color: #e3cfa6;
+  font-size: 13.5px;
+  max-width: 92ch;
+}
+.topo-box.peer rect { fill: transparent; stroke: rgba(120, 168, 200, 0.4); stroke-dasharray: 4 4; }
+.topo-box.peer text { fill: #a8bbd0; }
+.topo-box.peer .sub { fill: var(--ink-faint); }
+.link.solid { stroke: var(--emerald); stroke-dasharray: 0; animation: none; }
+.link.planned { stroke: rgba(255, 176, 32, 0.5); stroke-dasharray: 2 6; animation: none; }
+.topo svg .tag { fill: #d9b877; font-family: var(--font-display); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* ---------- roadmap ---------- */
+.rm-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+/* ---------- header ecosystem strip ---------- */
+.eco-bar {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gut) 11px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+.eco-bar-title {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.eco-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.eco-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.eco-chip svg { width: 9px; height: 9px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+.eco-chip:hover { color: var(--cyan); border-color: var(--cyan); }
+
+/* ---------- footer ecosystem ---------- */
+.foot-eco { display: grid; gap: 10px; align-content: start; }
+.foot-eco-title {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.eco-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.eco-list a {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  color: var(--cyan);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.28);
+}
+.eco-list a:hover { color: var(--emerald); border-color: var(--emerald); }
+.eco-list span { display: block; margin-top: 4px; font-size: 13px; color: var(--ink-faint); max-width: 40ch; }
+
+.console-ports { opacity: 0.85; }
+
 /* ---------- responsive ---------- */
 @media (max-width: 1080px) {
   .head-inner { grid-template-columns: auto auto 1fr auto; }
@@ -575,6 +738,9 @@ details p { padding: 0 18px 18px; color: var(--ink-dim); font-size: 14.5px; max-
   .api-grid { grid-template-columns: minmax(0, 1fr); }
   .card { grid-column: span 3; }
   .card.span2 { grid-column: span 6; }
+  .foot-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .rail-step { grid-template-columns: 40px minmax(0, 1fr); }
+  .rail-step > .badge { grid-column: 2; margin-top: 12px; }
 }
 
 /* Above the cap the row cannot grow any more (max-width is 1240px), so the nav
@@ -595,6 +761,13 @@ details p { padding: 0 18px 18px; color: var(--ink-dim); font-size: 14.5px; max-
   .head-actions { gap: 8px; }
   .ghost-btn span { display: none; }
   .ghost-btn { padding: 8px 10px; }
+}
+
+/* The longest boot-console line measures 415px of text. The 1.15fr/0.85fr split
+   only hands the panel 377px between 1081 and ~1240px, so the columns even out in
+   that band; below 1081 the panel is already full width, above it 448px fits. */
+@media (min-width: 1081px) and (max-width: 1340px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); }
 }
 
 @media (max-width: 960px) {
@@ -622,6 +795,35 @@ details p { padding: 0 18px 18px; color: var(--ink-dim); font-size: 14.5px; max-
   .foot-grid { grid-template-columns: minmax(0, 1fr); }
   .ghost-btn span { display: none; }
   .ghost-btn { padding: 8px 10px; }
+  .eco .topo { max-width: none; }
+}
+
+/* Desktop fallback for the long locales. app.js measures the row and yields in two
+   steps: first the chrome around the nav (domain chip, GitHub caption) plus tighter
+   tracking, and only if that is still not enough does the hamburger take the nav.
+   Kept out of the 960px block above so a phone without JavaScript gets the plain menu. */
+@media (min-width: 961px) {
+  .site-head.nav-tight .endpoint { display: none; }
+  .site-head.nav-tight .ghost-btn { padding: 8px 10px; }
+  .site-head.nav-tight .ghost-btn span { display: none; }
+  .site-head.nav-tight .primary-nav { font-size: 11.5px; gap: 12px; letter-spacing: 0.02em; }
+  .site-head.nav-compact .primary-nav { display: none; }
+  .site-head.nav-compact .menu-btn {
+    display: grid; gap: 5px; place-content: center;
+    width: 38px; height: 34px;
+    background: transparent; border: 1px solid var(--line-strong); border-radius: var(--r); cursor: pointer;
+  }
+  .site-head.nav-compact .menu-btn span { display: block; width: 16px; height: 1px; background: var(--cyan); transition: transform 0.25s ease; }
+  .site-head.nav-compact .menu-btn[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
+  .site-head.nav-compact .menu-btn[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+  .site-head.nav-compact.is-open .primary-nav {
+    display: grid; position: absolute; left: 0; right: 0; top: 100%;
+    padding: 14px var(--gut) 20px;
+    background: rgba(4, 6, 12, 0.97);
+    border-bottom: 1px solid var(--line-strong);
+    justify-content: start; gap: 4px;
+  }
+  .site-head.nav-compact.is-open .primary-nav a { padding: 11px 0; border-bottom: 1px solid var(--line); }
 }
 
 @media (max-width: 560px) {
@@ -631,6 +833,17 @@ details p { padding: 0 18px 18px; color: var(--ink-dim); font-size: 14.5px; max-
   .specs { grid-template-columns: minmax(0, 1fr); }
   .cmd-bar { padding-left: 11px; }
   .tab { flex: 1 1 auto; padding: 11px 10px; font-size: 11px; }
+  .eco-bar { gap: 5px 12px; padding-bottom: 9px; }
+  .eco-chips { flex-wrap: nowrap; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .eco-chips::-webkit-scrollbar { display: none; }
+  .eco-chip { flex: 0 0 auto; padding: 3px 7px; font-size: 10px; }
+  /* The boot panel is decoration (aria-hidden) and its lines are aligned with
+     non-breaking spaces, so on a phone they used to ellipsize mid-claim. */
+  .console-body { line-height: 1.7; }
+  .console-body p { white-space: normal; overflow: visible; text-overflow: clip; }
+  .rail-step { grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding: 16px 14px; }
+  .legend { padding: 13px 14px; }
+  .eco-note { font-size: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

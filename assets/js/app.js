@@ -61,10 +61,11 @@
   }
 
   function applyTitle(locale) {
-    var title = entry(locale, "site_title");
-    var tagline = entry(locale, "site_tagline");
+    /* site_title is the brand string and identical in all 18 locales, so the only
+       translatable half of <title> is the tagline; English keeps the static markup. */
+    var tagline = entry(locale, "meta_tagline");
     var base = P.dict[FALLBACK].site_title;
-    if (title && title !== base && tagline) { doc.title = title + " — " + tagline; }
+    if (tagline && locale !== FALLBACK) { doc.title = base + " — " + tagline; }
   }
 
   function render(locale) {
@@ -103,6 +104,20 @@
 
     doc.documentElement.setAttribute("lang", locale);
     applyTitle(locale);
+    fitHead();
+  }
+
+  /* Seven nowrap labels beside the brand and the language control do not fit in
+     every locale — Polish alone measures 878px of labels — so the hamburger takes
+     the nav wherever the row would overflow. Measured, not guessed at breakpoints. */
+  function fitHead() {
+    var head = doc.querySelector(".site-head");
+    var inner = doc.querySelector(".head-inner");
+    if (!head || !inner) { return; }
+    head.classList.remove("nav-tight", "nav-compact");
+    if (inner.scrollWidth > inner.clientWidth + 1) { head.classList.add("nav-tight"); }
+    if (inner.scrollWidth > inner.clientWidth + 1) { head.classList.add("nav-compact"); }
+    doc.documentElement.style.setProperty("--head-h", Math.round(head.offsetHeight) + "px");
   }
 
   function syncUrl(locale) {
@@ -180,9 +195,9 @@
       });
     }
 
-    if (location.hash) {
-      var target = doc.querySelector('[role=tab][data-tab="' + location.hash.slice(6) + '"]');
-      if (target) { show(target); }
+    if (location.hash.indexOf("#tab-") === 0) {
+      var target = doc.getElementById(location.hash.slice(1));
+      if (target && target.getAttribute("role") === "tab") { show(target); }
     }
   }
 
@@ -258,10 +273,16 @@
         head.classList.remove("is-open");
       }
     });
+    var raf = 0;
+    window.addEventListener("resize", function () {
+      if (raf) { return; }
+      raf = window.requestAnimationFrame(function () { raf = 0; fitHead(); });
+    });
+    fitHead();
   }
 
   function initReveal() {
-    var targets = [].slice.call(doc.querySelectorAll(".card, .plugin-list li, .matrix tr, .steps li, .ep, details, .specs > div, .topo, .cmd, .footnote"));
+    var targets = [].slice.call(doc.querySelectorAll(".card, .rail-step, .plugin-list li, .matrix tr, .steps li, .ep, details, .specs > div, .topo, .cmd, .footnote, .eco-note"));
     if (!("IntersectionObserver" in window)) { return; }
     var io = new IntersectionObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) {

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>POPOPX Bot Studio — Run your own POPOPX bots on a server you control</title>
-<meta name="description" content="Self-hosted bot factory for the identity-less POPOPX messenger: no-code auto-reply rules, message routing with tickets, four plugins, developer Open API and a private key plus SQLite ledger that never leaves your server.">
+<title>POPOPX Bot Studio — Build AI Agents. Connect Tools. Get Work Done.</title>
+<meta name="description" content="Self-hosted agent workbench for the identity-less POPOPX messenger: configure the role, rules and system prompt of each bot, attach any OpenAI-compatible model endpoint, connect tools through signed webhooks and a Telegram-shaped Open API, and keep the keys and the ledger on your own loopback server." data-i18n-meta="meta_description">
 <meta name="theme-color" content="#04060c">
 <meta name="author" content="POPOPX">
 <link rel="canonical" href="https://bot.popopx.chat/">
@@ -28,14 +28,14 @@
 <link rel="alternate" hreflang="uk" href="https://bot.popopx.chat/?lang=uk">
 <link rel="alternate" hreflang="x-default" href="https://bot.popopx.chat/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="POPOPX Bot Studio">
+<meta property="og:site_name" content="POPOPX Bot Studio" data-i18n-meta="site_title">
 <meta property="og:locale" content="en">
 <meta property="og:url" content="https://bot.popopx.chat/">
 <meta property="og:title" content="POPOPX Bot Studio" data-i18n-meta="site_title">
-<meta property="og:description" content="Run your own POPOPX bots on a server you control" data-i18n-meta="site_tagline">
+<meta property="og:description" content="Build AI Agents. Connect Tools. Get Work Done." data-i18n-meta="meta_tagline">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="POPOPX Bot Studio" data-i18n-meta="site_title">
-<meta name="twitter:description" content="Run your own POPOPX bots on a server you control" data-i18n-meta="site_tagline">
+<meta name="twitter:description" content="Build AI Agents. Connect Tools. Get Work Done." data-i18n-meta="meta_tagline">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -65,11 +65,13 @@
     </a>
 
     <nav class="primary-nav" aria-label="Primary">
-      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#home" data-i18n="nav_overview">Overview</a>
+      <a href="#features" data-i18n="nav_capabilities">Capabilities</a>
+      <a href="#use-cases" data-i18n="nav_use_cases">Use cases</a>
+      <a href="#integrations" data-i18n="nav_integrations">Integrations</a>
+      <a href="#tutorial" data-i18n="nav_docs">Docs</a>
       <a href="#security" data-i18n="nav_security">Security</a>
-      <a href="#tutorial" data-i18n="nav_install">Install</a>
-      <a href="#api" data-i18n="nav_api">Open API</a>
-      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#roadmap" data-i18n="nav_roadmap">Roadmap</a>
     </nav>
 
     <div class="head-actions">
@@ -86,6 +88,15 @@
       </button>
     </div>
   </div>
+
+  <div class="eco-bar">
+    <p class="eco-bar-title" data-i18n="foot_eco">Ecosystem portals</p>
+    <nav class="eco-chips" aria-label="POPOPX ecosystem portals" data-i18n-aria-label="ui_eco_aria">
+      <a class="eco-chip" href="https://popopx.chat" target="_blank" rel="noopener noreferrer"><span>popopx.chat</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3h6v6M9 3 3 9"></path></svg></a>
+      <a class="eco-chip" href="https://mp.popopx.chat" target="_blank" rel="noopener noreferrer"><span>mp.popopx.chat</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3h6v6M9 3 3 9"></path></svg></a>
+      <a class="eco-chip" href="https://node.popopx.chat" target="_blank" rel="noopener noreferrer"><span>node.popopx.chat</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3h6v6M9 3 3 9"></path></svg></a>
+    </nav>
+  </div>
 </header>
 
 <main>
@@ -93,8 +104,8 @@
   <div class="hero-grid">
     <div class="hero-copy">
       <p class="eyebrow">AGPL-3.0-only · <span data-i18n="nav_admin">Open console</span></p>
-      <h1 data-i18n="hero_title">A bot factory for the identity-less messenger</h1>
-      <p class="lead" data-i18n="hero_sub">Create a bot, get its permanent address, then let rules answer, forward enquiries to your support group and open a ticket per customer. Everything runs on loopback, nothing is bundled.</p>
+      <h1 data-i18n="hero_headline">Build AI Agents. Connect Tools. Get Work Done.</h1>
+      <p class="lead" data-i18n="hero_lead">Give every agent its role, its rules and its system prompt in a console that only listens on 127.0.0.1. Attach any OpenAI-compatible model endpoint, connect tools through signed webhooks and a Telegram-shaped HTTP API, then hand out a permanent POPOPX address and put it back into the chat.</p>
 
       <ul class="tags" role="list">
         <li data-i18n="hero_tag_1">Zero metadata</li>
@@ -105,7 +116,7 @@
       </ul>
 
       <div class="cta-row">
-        <a class="solid-btn" href="#tutorial" data-i18n="cta_start">Create your first bot</a>
+        <a class="solid-btn" href="#tutorial" data-i18n="cta_docs">Docs and quick start</a>
         <a class="line-btn" href="https://github.com/popopx-chat/popopx-bot-studio" rel="noopener noreferrer" data-i18n="cta_github">Source on GitHub</a>
       </div>
 
@@ -130,11 +141,12 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
       <div class="console-body">
         <p><span class="pr">popopx-bot-studio</span> --self-test</p>
         <p class="ok">✓ loopback_only &nbsp;127.0.0.1:8090</p>
-        <p class="ok">✓ file_mode &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0600 studio.key</p>
+        <p class="ok">✓ data_dir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0700 var/studio</p>
         <p class="ok">✓ ledger &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var/studio/studio.db</p>
+        <p class="ok">✓ bundle &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AES-GCM · scrypt</p>
         <p class="ok">✓ sandbox &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 bots · 3 cli-data dirs</p>
-        <p class="ok">✓ plugins &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto_reply msg_router llm_bridge webhook_relay</p>
-        <p class="dim">15 groups · 1,884 assertions · 0 failures · 0 outbound telemetry</p>
+        <p class="ok">✓ plugins &nbsp;&nbsp;&nbsp;&nbsp;auto_reply msg_router llm_bridge webhook_relay</p>
+        <p class="dim">15 groups · 1,884 assertions · 0 failures · 0 telemetry</p>
         <p><span class="pr">$</span> POST /bot&lt;token&gt;/sendMessage <span class="ok">200</span><span class="caret"></span></p>
       </div>
       <p class="console-cap" data-i18n="hero_console_caption">What the engine prints on boot: every invariant it refuses to break.</p>
@@ -151,28 +163,102 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
 
 <section class="features" id="features">
   <div class="sec-head">
-    <p class="marker">01 / FEATURES</p>
-    <h2 data-i18n="app_tagline">Self-hosted bot factory, auto-reply and message routing</h2>
-    <p class="sec-sub" data-i18n="features_sub">BotFather-grade control over many isolated bots, with the reply, routing and ticket flow you would otherwise script by hand.</p>
+    <p class="marker">01 / CAPABILITIES</p>
+    <h2 data-i18n="cap_headline">An agent workbench, checked against the engine source</h2>
+    <p class="sec-sub" data-i18n="capabilities_sub">The five blocks people ask about first, each labelled with what is actually built behind the name today. Every claim here was read against the engine repository before it was published.</p>
+  </div>
+
+  <div class="legend">
+    <p class="legend-title" data-i18n="status_legend">Released means the named capability works end to end today. In beta means the headline works but half the name is missing. Planned means there is no code behind it yet.</p>
+    <ul class="legend-list" role="list">
+      <li><span class="badge is-released" data-i18n="st_released">Released</span></li>
+      <li><span class="badge is-beta" data-i18n="st_beta">In beta</span></li>
+      <li><span class="badge is-planned" data-i18n="st_planned">Planned</span></li>
+    </ul>
+  </div>
+
+  <div class="rail">
+    <p class="sub-title" data-i18n="wf_headline">The loop, step by step</p>
+    <ol class="rail-list" role="list">
+      <li class="rail-step" data-status="released">
+        <span class="rail-n" aria-hidden="true">1</span>
+        <div class="rail-body">
+          <h3 data-i18n="wf_1_t">Create the agent</h3>
+          <p data-i18n="wf_1_d">A new bot gets its own row, its own token, its own popopx-cli process, its own cli-data directory and its own control port on 5230 and up.</p>
+          <span class="badge is-released" data-i18n="st_released">Released</span>
+        </div>
+      </li>
+      <li class="rail-step" data-status="beta">
+        <span class="rail-n" aria-hidden="true">2</span>
+        <div class="rail-body">
+          <h3 data-i18n="wf_2_t">Configure model and rules</h3>
+          <p data-i18n="wf_2_d">Reply rules, routing rules and one system prompt per bot. The model is any OpenAI-compatible chat endpoint, and the default is a local Ollama on loopback. There is no provider registry yet.</p>
+          <span class="badge is-beta" data-i18n="st_beta">In beta</span>
+        </div>
+      </li>
+      <li class="rail-step" data-status="beta">
+        <span class="rail-n" aria-hidden="true">3</span>
+        <div class="rail-body">
+          <h3 data-i18n="wf_3_t">Connect controlled tools</h3>
+          <p data-i18n="wf_3_d">An inbound webhook turns an external alert into a bot message; the relay turns a reply back into a signed call to your own endpoint. What is not here is the model deciding to call a tool by itself.</p>
+          <span class="badge is-beta" data-i18n="st_beta">In beta</span>
+        </div>
+      </li>
+      <li class="rail-step" data-status="released">
+        <span class="rail-n" aria-hidden="true">4</span>
+        <div class="rail-body">
+          <h3 data-i18n="wf_4_t">Test in the sandbox</h3>
+          <p data-i18n="wf_4_d">Preview a rule or a routing plan against a test chat before it is saved, run each bot in its own isolated process, and keep the offline self-test as the gate.</p>
+          <span class="badge is-released" data-i18n="st_released">Released</span>
+        </div>
+      </li>
+      <li class="rail-step" data-status="released">
+        <span class="rail-n" aria-hidden="true">5</span>
+        <div class="rail-body">
+          <h3 data-i18n="wf_5_t">Publish and connect to Chat</h3>
+          <p data-i18n="wf_5_d">Provisioning hands back the permanent contact address and a QR code you can put anywhere. There is no separate publish button and no staged rollout: the address exists once the bot exists.</p>
+          <span class="badge is-released" data-i18n="st_released">Released</span>
+        </div>
+      </li>
+    </ol>
   </div>
 
   <div class="cards">
-    <article class="card span2">
+    <article class="card cap-card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="capv_t">Agent definition and version management</h3>
+      <p data-i18n="capv_d">Defining an agent is released: one record per bot with its own sandbox, token and data directory, plus a cold-backup bundle that carries it to another host. Version management is not: there is no revision history, no publish state and no rollback.</p>
+    </article>
+    <article class="card cap-card" data-status="beta">
+      <span class="badge is-beta" data-i18n="st_beta">In beta</span>
+      <h3 data-i18n="capm_t">Multiple model providers</h3>
+      <p data-i18n="capm_d">One OpenAI-compatible call is released, and any vendor that speaks that shape works, including a model you host yourself. What is missing is a registry of providers: today it is one base URL, one model name and one key per bot.</p>
+    </article>
+    <article class="card cap-card" data-status="beta">
+      <span class="badge is-beta" data-i18n="st_beta">In beta</span>
+      <h3 data-i18n="capp_t">System prompt and role orchestration</h3>
+      <p data-i18n="capp_d">Each bot has one editable system prompt, injected as the system message of every model call. Multi-role orchestration, one persona per channel or per stage of a conversation, is not implemented.</p>
+    </article>
+    <article class="card cap-card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="capt_t">Tool calling with permission isolation</h3>
+      <p data-i18n="capt_d">Not implemented. The engine has no tool-calling path and no enforced permission model: the scope a plugin declares is metadata, and the dispatcher orders plugins by priority alone.</p>
+    </article>
+    <article class="card cap-card" data-status="beta">
+      <span class="badge is-beta" data-i18n="st_beta">In beta</span>
+      <h3 data-i18n="capr_t">Run logs and replay monitoring</h3>
+      <p data-i18n="capr_d">The message ledger, the per-bot log view and the live updates ring are released and readable in the console. Replay, stepping a conversation back through a run, is not.</p>
+    </article>
+    <article class="card cap-card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
       <h3 data-i18n="cap_sandbox_t">Multi-bot sandbox factory</h3>
       <p data-i18n="cap_sandbox_d">Every bot gets its own popopx-cli process, its own cli-data directory, its own control port and its own SQLite files, started and stopped from one screen.</p>
       <ul class="chips" role="list">
         <li>run-cli.sh</li><li>cli.pid</li><li>cli-data/</li><li>ports 5230+</li>
       </ul>
     </article>
-    <article class="card">
-      <h3 data-i18n="feat_1_t">Permanent address</h3>
-      <p data-i18n="feat_1_d">Each bot gets its own CLI data directory and permanent contact link, so reconnecting users always reach the same bot.</p>
-    </article>
-    <article class="card">
-      <h3 data-i18n="feat_2_t">No-code rules</h3>
-      <p data-i18n="feat_2_d">Match a keyword, exact phrase or regular expression and reply with a template. Cooldown keeps a chatty user from being spammed.</p>
-    </article>
-    <article class="card span2">
+    <article class="card span2" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
       <h3 data-i18n="feat_3_t">Routing and tickets</h3>
       <p data-i18n="feat_3_d">Forward enquiries into a support group with a #T ticket id; an operator answers with the ticket id and the reply goes back to the customer.</p>
       <ul class="chips" role="list">
@@ -181,15 +267,144 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
         <li>24/7 <span data-i18n="cap_agent">agent desk</span></li>
       </ul>
     </article>
-    <article class="card">
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="feat_1_t">Permanent address</h3>
+      <p data-i18n="feat_1_d">Each bot gets its own CLI data directory and permanent contact link, so reconnecting users always reach the same bot.</p>
+    </article>
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="feat_2_t">No-code rules</h3>
+      <p data-i18n="feat_2_d">Match a keyword, exact phrase or regular expression and reply with a template. Cooldown keeps a chatty user from being spammed.</p>
+    </article>
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
       <h3 data-i18n="cap_sov_t">Private key and local sovereignty</h3>
       <p data-i18n="cap_sov_d">The identity key, the ledger and every message log live in files you own with mode 0600. There is no cloud account to lose and no vendor holding a copy.</p>
     </article>
-    <article class="card">
-      <h3 data-i18n="cap_plg_t">Extensible plugin bus</h3>
-      <p data-i18n="cap_plg_d">Inbound messages pass plugins first, then rules, then routing. A plugin can reply, forward or stay silent without touching the engine.</p>
+  </div>
+</section>
+
+<section class="use-cases" id="use-cases">
+  <div class="sec-head">
+    <p class="marker">02 / USE CASES</p>
+    <h2 data-i18n="uc_headline">Four flows that already run</h2>
+    <p class="sec-sub" data-i18n="uc_sub">Each of these is the engine's own behaviour on the day you install it, not a plan: what you can build in the console before the first restart.</p>
+  </div>
+
+  <div class="cards">
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="uc_1_t">Support desk with tickets</h3>
+      <p data-i18n="uc_1_d">Rules answer the common questions, anything unmatched is forwarded into a support group under a #T ticket, and an operator's reply goes back to that one customer.</p>
+    </article>
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="uc_2_t">Alert relay for on-call</h3>
+      <p data-i18n="uc_2_d">A monitoring webhook arrives as a bot message in the right group; the human answer leaves again as a signed callback to your own endpoint, with the ticket id attached.</p>
+    </article>
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="uc_3_t">Internal automation</h3>
+      <p data-i18n="uc_3_d">Any script on the same host calls sendMessage with the bot token over loopback, or polls getUpdates, so deploys, queues and cron jobs arrive in chat instead of in a log file.</p>
+    </article>
+    <article class="card span2" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="uc_4_t">A contact address that never changes</h3>
+      <p data-i18n="uc_4_d">The permanent address and its QR code come from key material on your own disk, so moving the data directory to another machine keeps the same reachable identity, and no provider can take the account away.</p>
     </article>
   </div>
+</section>
+
+<section class="integrations" id="integrations">
+  <div class="sec-head">
+    <p class="marker">03 / INTEGRATIONS</p>
+    <h2 data-i18n="int_headline">What plugs in, and how</h2>
+    <p class="sec-sub" data-i18n="int_sub">Five surfaces the engine exposes today, the plugins that sit on them, and the one integration everybody asks for that is still missing.</p>
+  </div>
+
+  <div class="cards">
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="int_1_t">OpenAI-compatible model endpoint</h3>
+      <p data-i18n="int_1_d">POST to {base_url}/chat/completions with a Bearer key. Any vendor that speaks the OpenAI shape works; the default is Ollama on 127.0.0.1:11434, and a per-bot switch refuses anything but loopback.</p>
+    </article>
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="int_2_t">Signed webhooks in and out</h3>
+      <p data-i18n="int_2_d">Inbound alerts become messages; outbound callbacks carry an HMAC-SHA256 signature with an auto-generated secret. Targets are restricted to https or to loopback http.</p>
+    </article>
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="int_3_t">Telegram-shaped Open API</h3>
+      <p data-i18n="int_3_d">getMe, sendMessage, setWebhook and getUpdates on the same loopback port as the console, addressed by bot token.</p>
+    </article>
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="int_4_t">Plugin bus</h3>
+      <p data-i18n="int_4_d">Four built-in plugins on one priority chain, with room for your own module that replies, forwards or stays silent.</p>
+    </article>
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="int_5_t">Model-initiated tool calling</h3>
+      <p data-i18n="int_5_d">Not implemented: nothing lets the model call a tool by itself. Today a tool runs because a rule, a plugin or your own code invokes it.</p>
+    </article>
+  </div>
+
+  <div class="eco" id="ecosystem">
+    <p class="sub-title" data-i18n="eco_headline">The POPOPX ecosystem</p>
+    <p class="eco-sub" data-i18n="eco_sub">Four portals on four subdomains of one domain, each a product of its own. This page is the one for the agent workbench.</p>
+    <figure class="topo">
+      <svg viewBox="0 0 620 372" role="img" aria-label="POPOPX ecosystem diagram" data-i18n-aria-label="eco_aria">
+        <g class="topo-box peer">
+          <rect x="8" y="8" width="196" height="58" rx="6"></rect>
+          <text x="22" y="30">POPOPX Chat</text>
+          <text x="22" y="50" class="sub">popopx.chat · client</text>
+        </g>
+        <g class="topo-box peer">
+          <rect x="212" y="8" width="196" height="58" rx="6"></rect>
+          <text x="226" y="30">Service Suite</text>
+          <text x="226" y="50" class="sub">mp.popopx.chat</text>
+        </g>
+        <g class="topo-box peer">
+          <rect x="416" y="8" width="196" height="58" rx="6"></rect>
+          <text x="430" y="30">Mac Node</text>
+          <text x="430" y="50" class="sub">node.popopx.chat</text>
+        </g>
+        <path class="link planned" d="M106 66v44M310 66v44M514 66v44"></path>
+        <text x="352" y="90" class="tag">not implemented</text>
+        <g class="topo-box">
+          <rect x="8" y="110" width="604" height="84" rx="6"></rect>
+          <text x="24" y="134">POPOPX Bot Studio · this product</text>
+          <text x="24" y="152" class="sub">Python 3.11 · FastAPI · 127.0.0.1:8090</text>
+          <g class="cell"><rect x="24" y="164" width="182" height="22" rx="4"></rect><text x="34" y="179">Agent &amp; rules</text></g>
+          <g class="cell"><rect x="218" y="164" width="182" height="22" rx="4"></rect><text x="228" y="179">Router &amp; tickets</text></g>
+          <g class="cell"><rect x="412" y="164" width="184" height="22" rx="4"></rect><text x="422" y="179">Open API &amp; hooks</text></g>
+        </g>
+        <path class="link solid" d="M150 194v26M466 194v26"></path>
+        <g class="topo-box iso">
+          <rect x="8" y="220" width="296" height="76" rx="6"></rect>
+          <text x="24" y="244">Isolated popopx-cli</text>
+          <text x="24" y="264" class="sub">ws://127.0.0.1:5230..5299</text>
+          <text x="24" y="284" class="sub">cli-data 0700 · own SQLite</text>
+        </g>
+        <g class="topo-box iso">
+          <rect x="312" y="220" width="284" height="76" rx="6"></rect>
+          <text x="328" y="244">Model endpoint</text>
+          <text x="328" y="264" class="sub">OpenAI-compatible · default Ollama</text>
+          <text x="328" y="284" class="sub">127.0.0.1:11434/v1</text>
+        </g>
+        <path class="link solid" d="M156 296v26"></path>
+        <g class="topo-box iso">
+          <rect x="8" y="322" width="604" height="42" rx="6"></rect>
+          <text x="24" y="348">SMP servers · smp1–8.popopx.im · permanent bot address</text>
+        </g>
+      </svg>
+      <figcaption data-i18n="eco_cap">Solid lines are the only path wired in code today: the engine drives a local popopx-cli over loopback and reaches SMP with it.</figcaption>
+    </figure>
+  </div>
+
+  <p class="eco-note" data-i18n="eco_note">The four portals share one domain and link to each other, and this page loads nothing from the other three. The dashed edges above, taking a task from POPOPX Chat, calling Service Suite, or dispatching compute to Mac Node, are not implemented in this repository yet. Mac Node does publish a loopback job API; Bot Studio does not call it.</p>
 
   <div class="plugins">
     <p class="plugins-title" data-i18n="nav_plugins">Plugins</p>
@@ -218,72 +433,18 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
   </div>
 </section>
 
-<section class="security" id="security">
-  <div class="sec-head">
-    <p class="marker">02 / SECURITY</p>
-    <h2 data-i18n="sec_title">What stays on your machine</h2>
-    <p class="sec-sub" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</p>
-  </div>
-
-  <div class="table-wrap">
-    <table class="matrix">
-      <caption class="visually-hidden" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</caption>
-      <thead>
-        <tr>
-          <th scope="col" data-i18n="sec_col_dim">Dimension</th>
-          <th scope="col" data-i18n="sec_col_us">POPOPX Bot Studio</th>
-          <th scope="col" data-i18n="sec_col_them">Hosted platform bot</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row" data-i18n="sec_r1_d">Identity key</th>
-          <td class="us" data-i18n="sec_r1_us">Local file, mode 0600</td>
-          <td class="them" data-i18n="sec_r1_them">Held by the provider</td>
-        </tr>
-        <tr>
-          <th scope="row" data-i18n="sec_r2_d">Message ledger</th>
-          <td class="us" data-i18n="sec_r2_us">SQLite in var/studio</td>
-          <td class="them" data-i18n="sec_r2_them">Provider database</td>
-        </tr>
-        <tr>
-          <th scope="row" data-i18n="sec_r3_d">Encryption</th>
-          <td class="us" data-i18n="sec_r3_us">End to end per contact</td>
-          <td class="them" data-i18n="sec_r3_them">Transport only</td>
-        </tr>
-        <tr>
-          <th scope="row" data-i18n="sec_r4_d">Isolation</th>
-          <td class="us" data-i18n="sec_r4_us">One process and one data dir per bot</td>
-          <td class="them" data-i18n="sec_r4_them">Shared tenant space</td>
-        </tr>
-        <tr>
-          <th scope="row" data-i18n="sec_r5_d">Account risk</th>
-          <td class="us" data-i18n="sec_r5_us">Nothing to ban: no account</td>
-          <td class="them" data-i18n="sec_r5_them">Ban or rate limit at will</td>
-        </tr>
-        <tr>
-          <th scope="row" data-i18n="sec_r6_d">Metadata</th>
-          <td class="us" data-i18n="sec_r6_us">No phone number, no user id</td>
-          <td class="them" data-i18n="sec_r6_them">Contact graph and usage stats</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="footnote" data-i18n="sec_note">The engine refuses to start on a non-loopback address unless STUDIO_ALLOW_LAN=1 is set on purpose.</p>
-</section>
-
 <section class="tutorial" id="tutorial">
   <div class="sec-head">
-    <p class="marker">03 / DEPLOY</p>
+    <p class="marker">04 / DOCS</p>
     <h2 data-i18n="tut_title">Install and first run</h2>
     <p class="sec-sub" data-i18n="tut_sub">Four paths, the same engine: a production Linux box, a Mac you keep running, a development checkout, or the three clicks inside the console.</p>
   </div>
 
   <div class="tabs" role="tablist" aria-label="Installation paths" data-i18n-aria-label="ui_tabs_aria">
-    <button class="tab is-on" role="tab" type="button" id="tab-ubuntu" aria-controls="pane-ubuntu" aria-selected="true" data-tab="ubuntu" data-i18n="tab_ubuntu">Ubuntu 22.04</button>
-    <button class="tab" role="tab" type="button" id="tab-macos" aria-controls="pane-macos" aria-selected="false" tabindex="-1" data-tab="macos" data-i18n="tab_macos">macOS</button>
-    <button class="tab" role="tab" type="button" id="tab-dev" aria-controls="pane-dev" aria-selected="false" tabindex="-1" data-tab="dev" data-i18n="tab_dev">Local development</button>
-    <button class="tab" role="tab" type="button" id="tab-quick" aria-controls="pane-quick" aria-selected="false" tabindex="-1" data-tab="quick" data-i18n="tab_quick">First bot in 3 steps</button>
+    <button class="tab is-on" role="tab" type="button" id="tab-ubuntu" aria-controls="pane-ubuntu" aria-selected="true" data-i18n="tab_ubuntu">Ubuntu 22.04</button>
+    <button class="tab" role="tab" type="button" id="tab-macos" aria-controls="pane-macos" aria-selected="false" tabindex="-1" data-i18n="tab_macos">macOS</button>
+    <button class="tab" role="tab" type="button" id="tab-dev" aria-controls="pane-dev" aria-selected="false" tabindex="-1" data-i18n="tab_dev">Local development</button>
+    <button class="tab" role="tab" type="button" id="tab-quick" aria-controls="pane-quick" aria-selected="false" tabindex="-1" data-i18n="tab_quick">First bot in 3 steps</button>
   </div>
 
   <div class="panes">
@@ -361,7 +522,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="api" id="api">
   <div class="sec-head">
-    <p class="marker">04 / OPEN API</p>
+    <p class="marker">05 / OPEN API</p>
     <h2 data-i18n="api_title">A Telegram-shaped API on an isolated network</h2>
     <p class="sec-sub" data-i18n="api_sub">Call sendMessage with the bot token, register a webhook, or poll getUpdates. The admin console and the API share one engine and one loopback port.</p>
   </div>
@@ -433,9 +594,87 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
   </div>
 </section>
 
+<section class="security" id="security">
+  <div class="sec-head">
+    <p class="marker">06 / SECURITY</p>
+    <h2 data-i18n="sec_title">What stays on your machine</h2>
+    <p class="sec-sub" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="matrix">
+      <caption class="visually-hidden" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</caption>
+      <thead>
+        <tr>
+          <th scope="col" data-i18n="sec_col_dim">Dimension</th>
+          <th scope="col" data-i18n="sec_col_us">POPOPX Bot Studio</th>
+          <th scope="col" data-i18n="sec_col_them">Hosted platform bot</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" data-i18n="sec_r1_d">Identity key</th>
+          <td class="us" data-i18n="sec_r1_us">Local file, mode 0600</td>
+          <td class="them" data-i18n="sec_r1_them">Held by the provider</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r2_d">Message ledger</th>
+          <td class="us" data-i18n="sec_r2_us">SQLite in var/studio</td>
+          <td class="them" data-i18n="sec_r2_them">Provider database</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r3_d">Encryption</th>
+          <td class="us" data-i18n="sec_r3_us">End to end per contact</td>
+          <td class="them" data-i18n="sec_r3_them">Transport only</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r4_d">Isolation</th>
+          <td class="us" data-i18n="sec_r4_us">One process and one data dir per bot</td>
+          <td class="them" data-i18n="sec_r4_them">Shared tenant space</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r5_d">Account risk</th>
+          <td class="us" data-i18n="sec_r5_us">Nothing to ban: no account</td>
+          <td class="them" data-i18n="sec_r5_them">Ban or rate limit at will</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="sec_r6_d">Metadata</th>
+          <td class="us" data-i18n="sec_r6_us">No phone number, no user id</td>
+          <td class="them" data-i18n="sec_r6_them">Contact graph and usage stats</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footnote" data-i18n="sec_note">The engine refuses to start on a non-loopback address unless STUDIO_ALLOW_LAN=1 is set on purpose.</p>
+
+  <p class="sub-title" data-i18n="sg_headline">The permission boundary, item by item</p>
+  <div class="cards">
+    <article class="card" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="sg_1_t">Where the keys live</h3>
+      <p data-i18n="sg_1_d">STUDIO_ADMIN_TOKEN is read from the environment or .env and compared in constant time. Bot tokens and the model API key stay in the SQLite ledger on your disk and are masked in every API response. At rest the ledger is not encrypted: the 0600 file mode, the 0700 data directory and the loopback bind are what protect it. Only cold-backup bundles are encrypted, with AES-GCM under a key derived by scrypt.</p>
+    </article>
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="sg_2_t">Capability tokens</h3>
+      <p data-i18n="sg_2_d">Not implemented. A plugin declares a scope field today, but the dispatcher never checks it and orders plugins by priority alone: there is no grant, no expiry and no per-tool permission decision.</p>
+    </article>
+    <article class="card" data-status="beta">
+      <span class="badge is-beta" data-i18n="st_beta">In beta</span>
+      <h3 data-i18n="sg_3_t">Audit trail</h3>
+      <p data-i18n="sg_3_d">Messages, rule hits, plugin errors and webhook changes are written to the ledger and readable in the console. Admin actions do not yet have their own audit table, and there is no export format for an auditor.</p>
+    </article>
+    <article class="card span2" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="sg_4_t">Revoking access</h3>
+      <p data-i18n="sg_4_d">Today you revoke by editing .env and restarting, or by clearing a bot's webhook target in the console. A self-service revoke or rotate endpoint, and the grant list that would go with it, are not implemented.</p>
+    </article>
+  </div>
+</section>
+
 <section class="faq" id="faq">
   <div class="sec-head">
-    <p class="marker">05 / FAQ</p>
+    <p class="marker">07 / FAQ</p>
     <h2 data-i18n="faq_title">Questions before the first install</h2>
     <p class="sec-sub" data-i18n="faq_sub">Licence, agents, migration and the difference to a commercial service account.</p>
   </div>
@@ -468,6 +707,56 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
   </div>
   <p class="faq-cta"><span data-i18n="faq_cta">Something wrong or missing?</span> <a href="https://github.com/popopx-chat/popopx-bot-studio/issues" rel="noopener noreferrer">popopx-bot-studio · issues</a></p>
 </section>
+
+<section class="roadmap" id="roadmap">
+  <div class="sec-head">
+    <p class="marker">08 / ROADMAP</p>
+    <h2 data-i18n="rm_headline">What is not built yet</h2>
+    <p class="sec-sub" data-i18n="rm_sub">The gaps this page had to mark as planned, written down in one place so nothing is implied by a picture.</p>
+  </div>
+
+  <div class="cards">
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="rm_1_t">Tool calling with per-tool scopes</h3>
+      <p data-i18n="rm_1_d">The model would call declared tools, with a scope check enforced in the dispatcher instead of the priority-only ordering that exists now.</p>
+    </article>
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="rm_2_t">Capability tokens and revocation</h3>
+      <p data-i18n="rm_2_d">Short-lived grants per bot and per tool, with an explicit revoke endpoint that replaces editing .env by hand and restarting.</p>
+    </article>
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="rm_3_t">Agent versions and rollback</h3>
+      <p data-i18n="rm_3_d">A revision history for the agent definition, a publish state separate from the runtime state, and rollback to a named revision. Today only the cold-backup bundle moves between hosts.</p>
+    </article>
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="rm_4_t">Model provider registry</h3>
+      <p data-i18n="rm_4_d">Named vendors with their own keys, quotas and health checks behind the OpenAI-compatible call, instead of one base URL per bot.</p>
+    </article>
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="rm_5_t">Replay and admin audit</h3>
+      <p data-i18n="rm_5_d">A persisted event stream you can scrub back through, and a table of who changed what in the console.</p>
+    </article>
+    <article class="card" data-status="planned">
+      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+      <h3 data-i18n="rm_6_t">Ecosystem call paths</h3>
+      <p data-i18n="rm_6_d">Handing a task from POPOPX Chat to an agent, calling Service Suite, or dispatching local compute to a Mac Node: the receiving halves exist on those sides, the calling half does not exist here.</p>
+    </article>
+  </div>
+
+  <p class="footnote" data-i18n="rm_note">This list is measured against the engine source, not promised on a calendar: none of it has a date. The engine reports version 1.0.0 but has no published tag or Release yet, so installation stays clone-and-run, and every status badge on this page reflects the code at the commit the source repository points at.</p>
+
+  <div class="rm-links">
+    <a class="line-btn" href="https://github.com/popopx-chat/popopx-bot-studio" rel="noopener noreferrer" data-i18n="cta_github">Source on GitHub</a>
+    <a class="line-btn" href="https://github.com/popopx-chat/popopx-bot-studio/issues" rel="noopener noreferrer" data-i18n="rm_issues">Open an issue</a>
+    <a class="line-btn" href="https://github.com/popopx-chat/popopx-bot-studio-web" rel="noopener noreferrer" data-i18n="foot_site">This website</a>
+  </div>
+  <p class="footnote"><span data-i18n="rm_cta">Want a different order, or a gap we missed?</span> <a href="https://github.com/popopx-chat/popopx-bot-studio/issues" rel="noopener noreferrer">popopx-bot-studio · issues</a></p>
+</section>
 </main>
 
 <footer class="site-foot">
@@ -477,8 +766,15 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
       <li><a href="https://github.com/popopx-chat/popopx-bot-studio" rel="noopener noreferrer" data-i18n="foot_engine">Engine source</a></li>
       <li><a href="https://github.com/popopx-chat/popopx-bot-studio-web" rel="noopener noreferrer" data-i18n="foot_site">This website</a></li>
       <li><a href="LICENSE" data-i18n="foot_license">Licence</a></li>
-      <li><a href="https://popopx.chat" rel="noopener noreferrer">popopx.chat</a></li>
     </ul>
+    <div class="foot-eco">
+      <p class="foot-eco-title" data-i18n="foot_eco">Ecosystem portals</p>
+      <ul class="eco-list" role="list">
+        <li><a href="https://popopx.chat" target="_blank" rel="noopener noreferrer">popopx.chat</a><span data-i18n="blurb_chat">The POPOPX Chat portal: the identity-less messenger itself.</span></li>
+        <li><a href="https://mp.popopx.chat" target="_blank" rel="noopener noreferrer">mp.popopx.chat</a><span data-i18n="blurb_suite">The service-suite portal: service accounts and zero-knowledge channels, on your own server.</span></li>
+        <li><a href="https://node.popopx.chat" target="_blank" rel="noopener noreferrer">node.popopx.chat</a><span data-i18n="blurb_node">The Mac Node portal: the edge-services engine running beside the client.</span></li>
+      </ul>
+    </div>
     <p class="foot-note" data-i18n="foot_host">A static site with no build step, no CDN, no webfont request and no analytics: hosting it is a directory copy.</p>
   </div>
   <p class="foot-bar" data-i18n="footer">AGPL-3.0-only · no bundled binaries · loopback only</p>

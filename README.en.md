@@ -1,4 +1,4 @@
-# POPOPX Bot Studio — official website and developer tutorial portal
+# POPOPX Bot Studio — product portal and developer tutorial site
 
 A zero-build static site: `index.html` + `assets/css/style.css` + `assets/js/i18n.js` + `assets/js/app.js`,
 with the full 18-language copy. No framework, no bundler, no CDN, no webfont request, no analytics.
@@ -6,18 +6,38 @@ with the full 18-language copy. No framework, no bundler, no CDN, no webfont req
 - Portal domain: <https://bot.popopx.chat> (this repository is that host's document root); the apex `popopx.chat` belongs to the main site and is no longer claimed here
 - Engine: <https://github.com/popopx-chat/popopx-bot-studio> (AGPL-3.0-only)
 - Header domain badge: `bot.popopx.chat`
+- Ecosystem entries: a header eco-bar and a footer eco list, three links each — the main site <https://popopx.chat>,
+  Service Suite <https://mp.popopx.chat>, Mac Node <https://node.popopx.chat>. All carry
+  `target="_blank" rel="noopener noreferrer"`: the page **links to** the sibling portals and **loads nothing** from them
 - Licence: the `LICENSE` file at the repository root, AGPL-3.0-only, same as the engine
 
 ## Sections
 
 | Anchor | Content |
 | --- | --- |
-| `#home` | Hero: zero metadata, 100% self-hosted, one-command cross-platform deploy, 24/7 bot plus human agents, no-code rules and plugins; copy-to-clipboard install command, two CTAs and the engine boot checklist |
-| `#features` | Capability matrix: BotFather-grade multi-bot sandbox factory, permanent address, no-code rules, routing and tickets, local key sovereignty, plugin bus (`auto_reply` / `msg_router` / `llm_bridge` / `webhook_relay`) |
-| `#security` | Comparison matrix: identity key, SQLite ledger, end-to-end encryption, process isolation, ban risk, metadata |
-| `#tutorial` | Interactive install and tutorial centre (tabs): Ubuntu 22.04 systemd, macOS launchd, local development, first bot in 3 steps |
+| `#home` | Overview: agent-workbench hero — zero metadata, 100% self-hosted, one-command cross-platform deploy, 24/7 bot plus human agents, no-code rules and plugin tags; copy-to-clipboard install command, two CTAs, the engine boot checklist and the spec strip |
+| `#features` | Core capabilities: status legend, the five-step loop (create → configure → connect tools → sandbox test → ship into Chat), five headline capability cards, plus the BotFather-grade multi-bot sandbox factory, permanent address, no-code rules, routing and tickets, local key sovereignty, plugin bus (`auto_reply` / `msg_router` / `llm_bridge` / `webhook_relay`) |
+| `#use-cases` | Use cases: ticket desk, on-call alert relay, same-machine script automation, an address that never changes — all four backed by code |
+| `#integrations` | Tool integration: OpenAI-compatible model endpoint, signed webhook in and out, Telegram-shaped Open API, plugin bus, model-driven tool calling (planned); `#ecosystem` topology figure plus the four-portal navigation |
+| `#tutorial` | Docs and quick start (tabs): Ubuntu 22.04 systemd, macOS launchd, local development, first bot in 3 steps |
 | `#api` | Developer Open API and topology diagram: isolated network plus copyable `POST /bot<token>/sendMessage`, `/setWebhook`, `GET /getUpdates` |
+| `#security` | Security boundaries: comparison matrix (identity key, SQLite ledger, E2EE, process isolation, ban risk, metadata) plus four panels on key storage, capability tokens, call audit and revocation |
 | `#faq` | FAQ: AGPL-3.0 compliance, multi-agent support, migration and cold backup, difference to a commercial service account, port safety, popopx-cli download |
+| `#roadmap` | GitHub and roadmap: the gap list measured from the engine source (no dates promised) plus repository and issue entry points |
+
+## Status badges are the only source of truth
+
+Every capability block in the page carries a `data-status`, and only three values are allowed. The badge must be there too:
+
+| Badge | Criterion |
+| --- | --- |
+| `released` | Everything the heading promises is implemented and reachable |
+| `beta` | The main part works, but the other half of the heading has no code yet |
+| `planned` | Zero code; it appears in the roadmap and the copy says outright that it is not implemented |
+
+Tool Calling, capability tokens, agent versioning and rollback, run-log replay, and the ecosystem call chain
+(Chat → Studio → Service Suite / Mac Node) have no code in the engine repository today, so all of them are
+`planned`; `#roadmap` is that list. Re-measure the source before editing any capability copy.
 
 ## 18 languages
 
@@ -27,6 +47,11 @@ with the full 18-language copy. No framework, no bundler, no CDN, no webfont req
 Detection order: **URL parameter `?lang=…` → `localStorage` → `navigator.languages` → `en`**.
 The header dropdown switches without a reload and writes the locale back into the address bar with
 `history.replaceState` (`en` is the baseline and carries no parameter).
+After a switch the header yields in two measured steps (`fitHead()` in `app.js`): first the domain chip and the
+GitHub caption, and only if the row still overflows does the hamburger take the seven nav items. The same function
+publishes the measured header height as `--head-h`, so `scroll-padding-top` keeps anchor targets below the header.
+Measured across 18 locales at 1440/1280/1180/1024 — 72 cases, 0 overflow; only `pl` at 1180 and `fi fr hu it pl`
+at 1024 fall back to the hamburger.
 
 SEO: one URL with 18 `hreflang` alternates plus `x-default`, `canonical` on `https://bot.popopx.chat/`,
 Open Graph and Twitter tags updated per locale, `sitemap.xml` carrying every language as `xhtml:link`,
@@ -48,13 +73,14 @@ open http://127.0.0.1:8080/?lang=de
 | Source | Keys | Role |
 | --- | --- | --- |
 | `tools/shared-catalog.json` | 27 | Keys shared with the engine catalogs `_SITE` / `_ADMIN`, copied byte for byte so the site and the console never diverge in terminology |
-| `tools/site-strings.json` | 112 | Website-only strings; its `en` node is derived from the default text inside `index.html` |
+| `tools/site-strings.json` | 203 | Website-only strings; its `en` node is derived from the default text inside `index.html` |
 
 ```bash
 python3 tools/sync_i18n.py            # regenerate assets/js/i18n.js
 python3 tools/sync_i18n.py --check    # is the artifact stale? (for CI)
 python3 tools/sync_i18n.py --snapshot # refresh the shared snapshot from the sibling engine checkout
 node tools/verify.mjs                 # full self-check gate
+node tools/scan-compliance.mjs        # compliance scan (verify.mjs calls it too)
 ```
 
 English is the single source of truth: the text hard-coded in `index.html` must stay byte-equal to the `en`
@@ -146,6 +172,19 @@ no sentence left in English (technical tokens excepted), each locale really uses
 ids are unique, anchors resolve, `node --check` passes, CSS braces and custom properties resolve,
 canonical/hreflang/OG are present, CNAME/robots/sitemap are in shape, the AGPL `LICENSE` is still at the root,
 and `i18n.js` has not drifted from its two JSON sources.
+
+The information-architecture and compliance layer asserts four more things: the nav covers exactly the seven
+section anchors, every capability block carries a `data-status` with a matching badge style, absolute links only
+point at the four `popopx.chat` subdomains or `github.com`, and each sibling-portal link is `target="_blank"` with
+`rel="noopener noreferrer"` — three in the header, three in the footer. It then runs `tools/scan-compliance.mjs`.
+
+`tools/scan-compliance.mjs` scans only the bytes a visitor actually downloads (`index.html`, `assets/`,
+`robots.txt`, `sitemap.xml`, `CNAME`): zero third-party analytics tokens, zero externally loadable resources
+(`<script src>` / `<link href>` / `<img src>` / CSS `url()` / `fetch()`), zero private-key or plaintext credential
+shapes (PEM headers, `AKIA…`, `ghp_`, `xox…`, `AIza…`, `sk-*`, `TOKEN = "<40+ chars>"`), zero leaked local paths and
+zero restricted category words. `--self-test` feeds a set of fixtures that *must* be caught and a set that *must*
+pass (the loopback `curl` example, the GitHub navigation link, the Chinese wording for a reverse proxy and the
+launchd agent) through the same rules — so a green "0" cannot mean "the rule matched nothing".
 
 ## Licence
 

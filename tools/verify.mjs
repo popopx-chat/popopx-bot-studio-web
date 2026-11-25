@@ -328,6 +328,67 @@ if (exists("LICENSE")) {
   });
 } else gate("AGPL-3.0-only licence kept at the root", { status: "FAIL", detail: "LICENSE missing" });
 
+/* --------------------------------------------------------- portal structure */
+
+const SECTIONS = ["home", "features", "use-cases", "integrations", "tutorial", "security", "roadmap"];
+const navBlock = /<nav class="primary-nav"[^>]*>([\s\S]*?)<\/nav>/.exec(html);
+const navHrefs = navBlock ? [...navBlock[1].matchAll(/href="#([a-z-]+)"/g)].map((m) => m[1]) : [];
+gate("navigation covers the seven portal sections", {
+  status: navHrefs.length === SECTIONS.length && navHrefs.every((s, i) => s === SECTIONS[i]) ? "PASS" : "FAIL",
+  detail: navHrefs.join(" → ") || "no primary-nav block",
+});
+
+const badged = [...html.matchAll(/<(?:article|li)[^>]*class="[^"]*(?:card|rail-step)[^"]*"[^>]*>/g)].map((m) => m[0]);
+const unlabelled = badged.filter((tag) => !/data-status="(released|beta|planned)"/.test(tag));
+const seenStatuses = [...new Set(badged.map((tag) => (/data-status="([a-z]+)"/.exec(tag) || [])[1]).filter(Boolean))];
+const badgeless = seenStatuses.filter((s) => !html.includes(`class="badge is-${s}"`));
+gate("every capability block carries a release status", {
+  status: badged.length && !unlabelled.length && !badgeless.length ? "PASS" : "FAIL",
+  detail: unlabelled.length ? `${unlabelled.length} unlabelled blocks`
+    : badgeless.length ? `no badge style for ${badgeless}`
+      : `${badged.length} blocks, statuses: ${seenStatuses.join("/")}`,
+});
+
+const HOSTS_OK = new Set(["bot.popopx.chat", "popopx.chat", "mp.popopx.chat", "node.popopx.chat", "github.com"]);
+const absolute = [...html.matchAll(/href="https?:\/\/([^"/]+)/g)].map((m) => m[1]);
+const stray = [...new Set(absolute)].filter((h) => !HOSTS_OK.has(h));
+gate("every absolute link points at an allowlisted host", {
+  status: stray.length ? "FAIL" : "PASS",
+  detail: stray.length ? stray.join(",") : `${new Set(absolute).size} hosts: ${[...new Set(absolute)].sort().join(", ")}`,
+});
+
+/* Sibling-portal links are the only outbound navigation the brief asks for, and
+   they must not leak the referrer or take over the tab. bot.popopx.chat is this
+   site, so the address chip is out of scope. */
+const sibling = [...html.matchAll(/<a\b([^>]*href="https:\/\/(?:[a-z]+\.)?popopx\.chat\/?"[^>]*)>/gi)]
+  .filter((m) => !/\/\/bot\.popopx\.chat/.test(m[1]));
+const sloppy = sibling.filter((m) => !/target="_blank"/.test(m[1]) || !/noopener/.test(m[1]) || !/noreferrer/.test(m[1]));
+const inHead = /class="eco-chips"[\s\S]*?<\/nav>/.exec(html);
+const inFoot = /class="eco-list"[\s\S]*?<\/ul>/.exec(html);
+const headLinks = inHead ? (inHead[0].match(/href="https:\/\/[a-z.]*popopx\.chat/g) || []).length : 0;
+const footLinks = inFoot ? (inFoot[0].match(/href="https:\/\/[a-z.]*popopx\.chat/g) || []).length : 0;
+gate("header and footer both link out to the three ecosystem portals", {
+  status: headLinks === 3 && footLinks === 3 && sibling.length === 6 && !sloppy.length ? "PASS" : "FAIL",
+  detail: sloppy.length ? `missing rel/target on: ${sloppy.map((m) => m[1].slice(0, 60)).join(" | ")}`
+    : `${headLinks} header + ${footLinks} footer sibling links, all noopener/noreferrer/target`,
+});
+
+/* ------------------------------------------------------------- compliance */
+
+function runNode(args) {
+  try { return { ok: true, out: execFileSync(process.execPath, args, { cwd: ROOT, stdio: "pipe" }).toString().trim().split("\n").pop() }; }
+  catch (error) { return { ok: false, out: (String(error.stdout || "") + String(error.stderr || "")).trim().split("\n").slice(-2).join(" ") }; }
+}
+
+const controls = runNode([path.join(ROOT, "tools/scan-compliance.mjs"), "--self-test"]);
+gate("compliance scanner catches its own dirty fixtures", {
+  status: controls.ok ? "PASS" : "FAIL", detail: controls.out,
+});
+const shipped = runNode([path.join(ROOT, "tools/scan-compliance.mjs")]);
+gate("shipped artefacts pass the compliance scan", {
+  status: shipped.ok ? "PASS" : "FAIL", detail: shipped.out,
+});
+
 /* --------------------------------------------------------------------- docs */
 
 for (const file of ["README.md", "README.en.md"]) {
