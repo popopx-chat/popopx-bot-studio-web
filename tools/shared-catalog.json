@@ -11,7 +11,6 @@
     "feat_2_t": "SITE",
     "feat_3_d": "SITE",
     "feat_3_t": "SITE",
-    "footer": "ADMIN",
     "hero_sub": "SITE",
     "hero_title": "SITE",
     "language": "ADMIN",
@@ -31,6 +30,7 @@
   },
   "keys": {
     "action_copy": {
+      "ar": "نسخ",
       "bg": "Копирай",
       "cs": "Kopírovat",
       "de": "Kopieren",
@@ -41,8 +41,10 @@
       "hu": "Másolás",
       "it": "Copia",
       "ja": "コピー",
+      "ko": "복사",
       "nl": "Kopiëren",
       "pl": "Kopiuj",
+      "pt-BR": "Copiar",
       "ru": "Копировать",
       "th": "คัดลอก",
       "tr": "Kopyala",
@@ -51,6 +53,7 @@
       "zh-Hant": "複製"
     },
     "app_tagline": {
+      "ar": "مصنع بوتات مستضاف ذاتيًا مع ردود تلقائية وتوجيه للرسائل",
       "bg": "Самохостна бот фабрика, автоотговори и маршрутизиране на съобщения",
       "cs": "Self-hosted bot factory, automatické odpovědi a směrování zpráv",
       "de": "Selbst gehostete Bot-Fabrik, Auto-Antworten und Nachrichten-Routing",
@@ -61,8 +64,10 @@
       "hu": "Saját kiszolgálású botgyár, automatikus válaszok és üzenetátirányítás",
       "it": "Fabbrica di bot self-hosted, risposte automatiche e instradamento dei messaggi",
       "ja": "セルフホストのボット工場・自動応答・メッセージルーティング",
+      "ko": "자체 호스팅 봇 팩토리, 자동 응답 및 메시지 라우팅",
       "nl": "Zelf gehoste botfabriek, automatische antwoorden en berichtroutering",
       "pl": "Własna fabryka botów, automatyczne odpowiedzi i przekazywanie wiadomości",
+      "pt-BR": "Fábrica de bots auto-hospedada, respostas automáticas e roteamento de mensagens",
       "ru": "Самостоятельно размещаемая фабрика ботов, автоответы и маршрутизация сообщений",
       "th": "โรงงานบอทบนเครื่องของคุณ ตอบกลับอัตโนมัติ และการส่งต่อข้อความ",
       "tr": "Kendi sunucunda çalışan bot fabrikası, otomatik yanıtlar ve mesaj yönlendirme",
@@ -71,6 +76,7 @@
       "zh-Hant": "自託管 Bot 工廠、零程式碼自動回覆與訊息路由"
     },
     "cta_github": {
+      "ar": "المصدر على GitHub",
       "bg": "Кодът в GitHub",
       "cs": "Zdrojový kód na GitHubu",
       "de": "Quellcode auf GitHub",
@@ -81,8 +87,10 @@
       "hu": "Forráskód a GitHubon",
       "it": "Codice su GitHub",
       "ja": "GitHub のソース",
+      "ko": "GitHub 소스",
       "nl": "Broncode op GitHub",
       "pl": "Kod na GitHubie",
+      "pt-BR": "Código no GitHub",
       "ru": "Исходный код на GitHub",
       "th": "ซอร์สโค้ดบน GitHub",
       "tr": "GitHub'daki kaynak kod",
@@ -91,6 +99,7 @@
       "zh-Hant": "GitHub 原始碼"
     },
     "cta_start": {
+      "ar": "أنشئ أول بوت لك",
       "bg": "Създай първия бот",
       "cs": "Vytvořit prvního bota",
       "de": "Ersten Bot anlegen",
@@ -101,8 +110,10 @@
       "hu": "Első bot létrehozása",
       "it": "Crea il tuo primo bot",
       "ja": "最初のボットを作る",
+      "ko": "첫 봇 만들기",
       "nl": "Maak je eerste bot",
       "pl": "Utwórz pierwszego bota",
+      "pt-BR": "Crie seu primeiro bot",
       "ru": "Создать первого бота",
       "th": "สร้างบอทตัวแรก",
       "tr": "İlk botunuzu oluşturun",
@@ -111,6 +122,7 @@
       "zh-Hant": "建立第一個 Bot"
     },
     "feat_1_d": {
+      "ar": "لكل بوت دليل بيانات CLI خاص به ورابط اتصال دائم، لذا يصل المستخدم العائد دائمًا إلى البوت نفسه.",
       "bg": "Всеки бот има своя cli-data директория и постоянна контактна връзка, така че потребителите винаги достигат до същия бот.",
       "cs": "Každý bot má vlastní adresář cli-data a trvalý kontaktní odkaz, takže vracející se uživatelé vždy osloví téhož bota.",
       "de": "Jeder Bot hat ein eigenes cli-data-Verzeichnis und einen dauerhaften Kontaktlink, Wiederkommer landen immer beim selben Bot.",
@@ -121,8 +133,10 @@
       "hu": "Minden bognak saját cli-data könyvtára és állandó elérési linkje van, így a visszatérő felhasználók mindig ugyanahhoz a bothoz érnek.",
       "it": "Ogni bot ha la propria directory cli-data e il proprio link di contatto permanente: chi torna raggiunge sempre lo stesso bot.",
       "ja": "ボットごとに cli-data ディレクトリと永久連絡先リンクを持つので、再接続したユーザーは同じボットにたどり着きます。",
+      "ko": "각 봇은 전용 CLI 데이터 디렉터리와 영구 연락처 링크를 가지므로 다시 연결하는 사용자는 항상 같은 봇에 도달합니다.",
       "nl": "Elke bot heeft een eigen cli-data-map en een vast contactlink, terugkerende gebruikers komen altijd bij dezelfde bot uit.",
       "pl": "Każdy bot ma własny katalog cli-data i stałe łącze kontaktowe, więc wracający użytkownicy trafiają zawsze do tego samego bota.",
+      "pt-BR": "Cada bot tem seu próprio diretório de dados da CLI e link de contato permanente, então quem reconecta sempre chega ao mesmo bot.",
       "ru": "У каждого бота свой каталог cli-data и постоянная контактная ссылка: вернувшиеся пользователи всегда попадают к тому же боту.",
       "th": "บอทแต่ละตัวมีไดเรกทอรี cli-data และลิงก์ผู้ติดต่อถาวรของตัวเอง ผู้ใช้ที่กลับมาจึงเจอบอทตัวเดิม",
       "tr": "Her botun kendi cli-data dizini ve kalıcı bağlantısı vardır; dönen kullanıcı hep aynı bota ulaşır.",
@@ -131,6 +145,7 @@
       "zh-Hant": "每個 Bot 都有獨立的 cli-data 目錄與永久聯絡人連結，舊用戶重新連線時找到的仍是同一個 Bot。"
     },
     "feat_1_t": {
+      "ar": "عنوان دائم",
       "bg": "Постоянен адрес",
       "cs": "Trvalá adresa",
       "de": "Dauerhafte Adresse",
@@ -141,8 +156,10 @@
       "hu": "Állandó cím",
       "it": "Indirizzo permanente",
       "ja": "永久アドレス",
+      "ko": "영구 주소",
       "nl": "Vast adres",
       "pl": "Stały adres",
+      "pt-BR": "Endereço permanente",
       "ru": "Постоянный адрес",
       "th": "ที่อยู่ถาวร",
       "tr": "Kalıcı adres",
@@ -151,6 +168,7 @@
       "zh-Hant": "永久聯絡位址"
     },
     "feat_2_d": {
+      "ar": "طابق كلمة مفتاحية أو عبارة دقيقة أو تعبيرًا نمطيًا وردّ بقالب. وتمنع فترة التهدئة إغراق المستخدم كثير الكلام بالرسائل.",
       "bg": "Съвпадение по ключова дума, точен текст или регулярен израз и отговор по шаблон. Изчакването предпазва от спам.",
       "cs": "Shoda podle klíčového slova, přesné fráze nebo regulárního výrazu a odpověď ze šablony. Prodleva chrání před spamem.",
       "de": "Schlüsselwort, exakte Phrase oder regulärer Ausdruck als Auslöser, Antwort aus der Vorlage. Die Abklingzeit verhindert Spam.",
@@ -161,8 +179,10 @@
       "hu": "Egyezés kulcsszóra, teljes kifejezésre vagy reguláris kifejezésre, válasz sablonból. A hűlési idő megóv attól, hogy a gyakran író felhasználót válaszokkal halmozzuk el.",
       "it": "Corrispondenza per parola chiave, frase esatta o espressione regolare e risposta da modello. Il periodo di attesa evita di tartassare l’utente.",
       "ja": "キーワード・完全一致・正規表現で判定し、テンプレートで返信。クールダウンで連投を防ぎます。",
+      "ko": "키워드, 정확한 문구 또는 정규식과 일치시키고 템플릿으로 답장하세요. 쿨다운이 잦은 사용자의 스팸을 막아 줍니다.",
       "nl": "Overeenkomst op trefwoord, hele zin of reguliere expressie, met een antwoord uit een sjabloon. De afkoelperiode voorkomt gezeur.",
       "pl": "Dopasowanie po słowie kluczowym, całym zdaniu lub wyrażeniu regularnym, odpowiedź z szablonu. Przerwa chroni przed zalewaniem odpowiedzią.",
+      "pt-BR": "Combine uma palavra-chave, frase exata ou expressão regular e responda com um modelo. O intervalo mínimo evita spam para quem escreve muito.",
       "ru": "Совпадение по ключевому слову, точной фразе или регулярному выражению, ответ по шаблону. Пауза защищает от навязчивых повторов.",
       "th": "จับคู่คีย์เวิร์ด ข้อความทั้งประโยค หรือรูปแบบ regex แล้วตอบกลับจากแบบข้อความ ระยะเวลาพักช่วยกันส่งข้อความซ้ำ",
       "tr": "Anahtar sözcük, tam ifade veya düzenli ifadeyle eşleştirme, şablondan yanıt. Bekleme süresi tekrar spam'ini engeller.",
@@ -171,6 +191,7 @@
       "zh-Hant": "依關鍵字、整句或正則比對，用範本回覆；冷卻時間可避免同一用戶被反覆打擾。"
     },
     "feat_2_t": {
+      "ar": "قواعد بلا برمجة",
       "bg": "Правила без код",
       "cs": "Pravidla bez kódu",
       "de": "Regeln ohne Code",
@@ -181,8 +202,10 @@
       "hu": "Szabályok kód nélkül",
       "it": "Regole senza codice",
       "ja": "コード不要のルール",
+      "ko": "노코드 규칙",
       "nl": "Regels zonder code",
       "pl": "Reguły bez kodu",
+      "pt-BR": "Regras sem código",
       "ru": "Правила без кода",
       "th": "กติกาโดยไม่ต้องเขียนโค้ด",
       "tr": "Kodsuz kurallar",
@@ -191,6 +214,7 @@
       "zh-Hant": "零程式碼規則"
     },
     "feat_3_d": {
+      "ar": "انقل الاستفسارات إلى مجموعة دعم مع معرّف تذكرة #T؛ يرد المشغّل بمعرّف التذكرة فيعود الرد إلى العميل.",
       "bg": "Препратете запитване в поддръжковата група с билет #T; операторът отговаря с номера на билета и отговорът стига до клиента.",
       "cs": "Přepošlete dotaz do podpůrné skupiny s ticketem #T; operátor odpoví ticketem a odpověď se vrátí zákazníkovi.",
       "de": "Anfragen mit Ticket #T in die Support-Gruppe leiten; antwortet der Operator mit der Ticketnummer, geht die Antwort zurück zum Kunden.",
@@ -201,8 +225,10 @@
       "hu": "Továbbítsd az ügyet #T jeggyel az ügyfélszolgálati csoportba; a munkatárs a jegyszámmal válaszol, a válasz pedig visszamegy az ügyfélhez.",
       "it": "Inoltra la richiesta al gruppo di supporto con un ticket #T; l’operatore risponde con quel numero e la risposta torna al cliente.",
       "ja": "問い合わせを #T チケット番号付きでサポートグループへ転送し、担当者が番号で回答すると顧客へ届けられます。",
+      "ko": "문의를 #T 티켓 id와 함께 지원 그룹으로 전달하세요. 운영자가 티켓 id로 답하면 그 답장이 고객에게 돌아갑니다.",
       "nl": "Stuur de aanvraag met een #T-ticket naar de supportgroep; een medewerker antwoordt met dat nummer en de reply gaat terug naar de klant.",
       "pl": "Przekaż zapytanie do grupy wsparcia z identyfikatorem #T; konsultant odpowiada tym numerem, a odpowiedź wraca do klienta.",
+      "pt-BR": "Encaminhe dúvidas para um grupo de suporte com um id de ticket #T; um operador responde com o id do ticket e a resposta volta ao cliente.",
       "ru": "Перешлите обращение в группу поддержки с тикетом #T; оператор отвечает по номеру тикета, и ответ возвращается клиенту.",
       "th": "ส่งต่อคำถามเข้าสู่กลุ่มผู้ให้บริการพร้อมเลขตั๋ว #T เมื่อผู้ให้บริการตอบด้วยเลขต๋วน คำตอบจะถูกส่งกลับหาผู้ใช้",
       "tr": "Talebi #T kayıt numarasıyla destek grubuna iletin; görevli kayıt numarasıyla cevaplayınca yanıt müşteriye döner.",
@@ -211,6 +237,7 @@
       "zh-Hant": "把諮詢帶 #T 工單號轉進客服群，客服回覆工單號即可把答案送回原客戶。"
     },
     "feat_3_t": {
+      "ar": "التوجيه والتذاكر",
       "bg": "Маршрути и билети",
       "cs": "Směrování a tikety",
       "de": "Routing und Tickets",
@@ -221,8 +248,10 @@
       "hu": "Átirányítás és jegyek",
       "it": "Instradamento e ticket",
       "ja": "ルーティングとチケット",
+      "ko": "라우팅과 티켓",
       "nl": "Routeren en tickets",
       "pl": "Przekazywanie i zgłoszenia",
+      "pt-BR": "Roteamento e tickets",
       "ru": "Маршруты и тикеты",
       "th": "การส่งต่อและตั๋ว",
       "tr": "Yönlendirme ve kayıtlar",
@@ -230,27 +259,8 @@
       "zh-Hans": "路由与工单",
       "zh-Hant": "路由與工單"
     },
-    "footer": {
-      "bg": "AGPL-3.0-only · без включени файлове · само loopback",
-      "cs": "AGPL-3.0-only · žádné binární soubory navíc · pouze loopback",
-      "de": "AGPL-3.0-only · keine Binärdateien im Repo · nur loopback",
-      "en": "AGPL-3.0-only · no bundled binaries · loopback only",
-      "es": "AGPL-3.0-only · sin binarios incluidos · solo loopback",
-      "fi": "AGPL-3.0-only · ei binäärejä mukana · vain loopback",
-      "fr": "AGPL-3.0-only · aucun binaire fourni · écouté uniquement en loopback",
-      "hu": "AGPL-3.0-only · nincs csomagolt bináris · csak loopback",
-      "it": "AGPL-3.0-only · nessun binario incluso · solo loopback",
-      "ja": "AGPL-3.0-only · バイナリ同梱なし · ループバックのみ",
-      "nl": "AGPL-3.0-only · geen bundled binaire bestanden · alleen loopback",
-      "pl": "AGPL-3.0-only · brak załączonych binariów · tylko loopback",
-      "ru": "AGPL-3.0-only · без бинарников в репозитории · только loopback",
-      "th": "AGPL-3.0-only · ไม่มีไบนารีแนบมา · ผูกเฉพาะ loopback",
-      "tr": "AGPL-3.0-only · ikili dosya içermez · yalnızca loopback",
-      "uk": "AGPL-3.0-only · без вбудованих бінарників · лише loopback",
-      "zh-Hans": "AGPL-3.0-only · 零二进制捆绑 · 仅监听回环",
-      "zh-Hant": "AGPL-3.0-only · 零二進位捆綁 · 僅監聽迴廊"
-    },
     "hero_sub": {
+      "ar": "أنشئ بوتًا واحصل على عنوانه الدائم، ثم دع القواعد ترد وتنقل الاستفسارات إلى مجموعة الدعم وتفتح تذكرة لكل عميل. كل شيء يعمل عبر الواجهة المحلية، ولا شيء مرفق.",
       "bg": "Създайте бот, вземете му постоянния адрес, после нека правилата отговарят, препращат запитванията към вашата група за поддръжка и отварят билет за всеки клиент. Всичко работи на loopback, нищо не е включено в хостинга.",
       "cs": "Vytvořte bota, získejte jeho trvalou adresu a nechte pravidla odpovídat, přeposílat dotazy do vaší podpůrné skupiny a otevírat tikety. Vše běží na loopback, nic není přibaleno.",
       "de": "Bot anlegen, dauerhafte Adresse abholen, dann Regeln antworten lassen, Anfragen in die Support-Gruppe weiterleiten und pro Kunde ein Ticket öffnen. Alles lauscht auf loopback, nichts ist gebündelt.",
@@ -261,8 +271,10 @@
       "hu": "Hozz létre botot, vedd át az állandó címét, majd engedd, hogy a szabályok válaszoljanak, az ügyek az ügyfélszolgálati csoportba kerüljenek, és minden ügyfélhez egy jegy tartozzon. Minden csak loopbacken figyel, semmi sincs a csomagban.",
       "it": "Crea un bot, prendi il suo indirizzo permanente, lascia che le regole rispondano, inoltrino le richieste al tuo gruppo di supporto e aprano un ticket per cliente. Tutto ascolta solo su loopback, nulla è incluso.",
       "ja": "ボットを作成して永久アドレスを取得し、ルールで自動応答、問い合わせはサポートグループへ転送して顧客ごとにチケットを発行。すべてループバックのみで待ち受け、バンドルはゼロです。",
+      "ko": "봇을 만들고 영구 주소를 받은 뒤, 규칙이 답장하고 문의를 지원 그룹으로 전달하며 고객별 티켓을 열게 하세요. 모든 것은 루프백에서 실행되고 저장소에는 바이너리가 없습니다.",
       "nl": "Maak een bot, haal zijn vaste adres op en laat regels antwoorden, aanvragen doorsturen naar je supportgroep en per klant een ticket openen. Alles luistert alleen op loopback; er is niets meegepakt.",
       "pl": "Utwórz bota, weź jego stały adres, niech reguły odpowiadają, przekazują zapytania do grupy wsparcia i otwierają zgłoszenie dla każdego klienta. Wszystko nasłuchuje tylko na loopback, nic nie jest dorzucone.",
+      "pt-BR": "Crie um bot, receba seu endereço permanente e deixe as regras responderem, encaminharem dúvidas para o grupo de suporte e abrirem um ticket por cliente. Tudo roda em loopback, nada é incluído.",
       "ru": "Создайте бота, получите его постоянный адрес, пусть правила отвечают, перенаправляют обращения в вашу группу поддержки и открывают тикет на каждого клиента. Всё слушает только loopback, ничего не вшито.",
       "th": "สร้างบอท รับที่อยู่ถาวร แล้วให้กติกาตอบกลับ ส่งต่อคำถามเข้าสู่กลุ่มผู้ให้บริการ และเปิดตั๋วแยกตามผู้ใช้ ทุกอย่างผูกเฉพาะ loopback ไม่มีไบนารีแนบมา",
       "tr": "Bir bot oluşturun, kalıcı adresini alın; bırakın kurallar cevaplasın, talepleri destek grubuna yönlessin ve her müşteri için bir kayıt açsın. Her şey yalnızca loopback üzerinde dinler, hiçbir şey paketlenmemiştir.",
@@ -271,6 +283,7 @@
       "zh-Hant": "建立 Bot、取得它的永久聯絡位址，再用規則自動回覆、把諮詢轉進客服群並為每位客戶開一張工單。全部只監聽迴廊位址，倉庫內零二進位捆綁。"
     },
     "hero_title": {
+      "ar": "مصنع بوتات لمراسلة بلا هوية",
       "bg": "Бот фабрика за месинджър без самоличности",
       "cs": "Bot factory pro messenger bez identity",
       "de": "Die Bot-Fabrik für den Messenger ohne Identität",
@@ -281,8 +294,10 @@
       "hu": "Botgyár a személyiség nélküli üzenetküldőhöz",
       "it": "La fabbrica di bot per un messenger senza identità",
       "ja": "ID を持たないメッセンジャーのためのボット工場",
+      "ko": "신원 없는 메신저를 위한 봇 팩토리",
       "nl": "De botfabriek voor een messenger zonder identiteit",
       "pl": "Fabryka botów dla komunikatora bez tożsamości",
+      "pt-BR": "Uma fábrica de bots para o mensageiro sem identidade",
       "ru": "Фабрика ботов для мессенджера без личности",
       "th": "โรงงานบอทสำหรับแอปสนทนาที่ไม่ต้องเปิดเผยตัวตน",
       "tr": "Kimliği olmayan mesajlaşma için bot fabrikası",
@@ -291,6 +306,7 @@
       "zh-Hant": "為無身分即時通訊打造的 Bot 工廠"
     },
     "language": {
+      "ar": "اللغة",
       "bg": "Език",
       "cs": "Jazyk",
       "de": "Sprache",
@@ -301,8 +317,10 @@
       "hu": "Nyelv",
       "it": "Lingua",
       "ja": "言語",
+      "ko": "언어",
       "nl": "Taal",
       "pl": "Język",
+      "pt-BR": "Idioma",
       "ru": "Язык",
       "th": "ภาษา",
       "tr": "Dil",
@@ -311,6 +329,7 @@
       "zh-Hant": "語言"
     },
     "nav_admin": {
+      "ar": "فتح وحدة التحكم",
       "bg": "Към конзолата",
       "cs": "Otevřít konzoli",
       "de": "Konsole öffnen",
@@ -321,8 +340,10 @@
       "hu": "Konzol megnyitása",
       "it": "Apri la console",
       "ja": "コンソールを開く",
+      "ko": "콘솔 열기",
       "nl": "Console openen",
       "pl": "Otwórz konsolę",
+      "pt-BR": "Abrir console",
       "ru": "Открыть консоль",
       "th": "เปิดเครื่องมือ",
       "tr": "Konsolu aç",
@@ -331,6 +352,7 @@
       "zh-Hant": "進入控制台"
     },
     "nav_api": {
+      "ar": "API المفتوحة",
       "bg": "Open API",
       "cs": "Open API",
       "de": "Open API",
@@ -341,8 +363,10 @@
       "hu": "Open API",
       "it": "Open API",
       "ja": "Open API",
+      "ko": "오픈 API",
       "nl": "Open API",
       "pl": "Open API",
+      "pt-BR": "API aberta",
       "ru": "Open API",
       "th": "Open API",
       "tr": "Open API",
@@ -351,6 +375,7 @@
       "zh-Hant": "開放 API"
     },
     "nav_features": {
+      "ar": "المزايا",
       "bg": "Функции",
       "cs": "Funkce",
       "de": "Funktionen",
@@ -361,8 +386,10 @@
       "hu": "Lehetőségek",
       "it": "Funzionalità",
       "ja": "機能",
+      "ko": "기능",
       "nl": "Functies",
       "pl": "Możliwości",
+      "pt-BR": "Recursos",
       "ru": "Возможности",
       "th": "ความสามารถ",
       "tr": "Özellikler",
@@ -371,6 +398,7 @@
       "zh-Hant": "功能"
     },
     "nav_plugins": {
+      "ar": "الإضافات",
       "bg": "Приставки",
       "cs": "Zásuvné moduly",
       "de": "Erweiterungen",
@@ -381,8 +409,10 @@
       "hu": "Bővítmények",
       "it": "Estensioni",
       "ja": "プラグイン",
+      "ko": "플러그인",
       "nl": "Plug-ins",
       "pl": "Wtyczki",
+      "pt-BR": "Plugins",
       "ru": "Плагины",
       "th": "ส่วนเสริม",
       "tr": "Eklentiler",
@@ -391,6 +421,7 @@
       "zh-Hant": "外掛程式"
     },
     "nav_routing": {
+      "ar": "التوجيه",
       "bg": "Маршрути",
       "cs": "Směrování",
       "de": "Routing",
@@ -401,8 +432,10 @@
       "hu": "Átirányítás",
       "it": "Instradamento",
       "ja": "ルーティング",
+      "ko": "라우팅",
       "nl": "Routering",
       "pl": "Przekazywanie",
+      "pt-BR": "Roteamento",
       "ru": "Маршрутизация",
       "th": "การส่งต่อข้อความ",
       "tr": "Yönlendirme",
@@ -411,6 +444,7 @@
       "zh-Hant": "訊息路由"
     },
     "nav_rules": {
+      "ar": "الرد التلقائي",
       "bg": "Автоотговори",
       "cs": "Automatické odpovědi",
       "de": "Auto-Antworten",
@@ -421,8 +455,10 @@
       "hu": "Automatikus válaszok",
       "it": "Risposte automatiche",
       "ja": "自動応答",
+      "ko": "자동 응답",
       "nl": "Automatische antwoorden",
       "pl": "Automatyczne odpowiedzi",
+      "pt-BR": "Respostas automáticas",
       "ru": "Автоответы",
       "th": "ตอบกลับอัตโนมัติ",
       "tr": "Otomatik yanıtlar",
@@ -431,6 +467,7 @@
       "zh-Hant": "自動回覆"
     },
     "site_footer": {
+      "ar": "POPOPX Bot Studio · AGPL-3.0-only · مستضاف ذاتيًا، بلا قياس عن بُعد",
       "bg": "POPOPX Bot Studio · AGPL-3.0-only · самохостнато, без телеметрия",
       "cs": "POPOPX Bot Studio · AGPL-3.0-only · self-hosted, bez telemetrie",
       "de": "POPOPX Bot Studio · AGPL-3.0-only · selbst gehostet, ohne Telemetrie",
@@ -441,8 +478,10 @@
       "hu": "POPOPX Bot Studio · AGPL-3.0-only · saját kiszolgálón, telemetria nélkül",
       "it": "POPOPX Bot Studio · AGPL-3.0-only · self-hosted, senza telemetria",
       "ja": "POPOPX Bot Studio · AGPL-3.0-only · セルフホスト・テレメトリなし",
+      "ko": "POPOPX Bot Studio · AGPL-3.0-only · 자체 호스팅, 텔레메트리 없음",
       "nl": "POPOPX Bot Studio · AGPL-3.0-only · zelf gehost, geen telemetrie",
       "pl": "POPOPX Bot Studio · AGPL-3.0-only · we własnej infrastrukturze, bez telemetrii",
+      "pt-BR": "POPOPX Bot Studio · AGPL-3.0-only · auto-hospedado, sem telemetria",
       "ru": "POPOPX Bot Studio · AGPL-3.0-only · на своём сервере, без телеметрии",
       "th": "POPOPX Bot Studio · AGPL-3.0-only · โฮสต์เอง ไม่มีเทเลเมตรี",
       "tr": "POPOPX Bot Studio · AGPL-3.0-only · kendi sunucunuzda, ölçümleme yok",
@@ -451,6 +490,7 @@
       "zh-Hant": "POPOPX Bot Studio · AGPL-3.0-only · 自託管、無遙測"
     },
     "site_tagline": {
+      "ar": "شغّل بوتات POPOPX الخاصة بك على خادم تتحكم به",
       "bg": "Стартирайте собствен POPOPX бот на свой сървър",
       "cs": "Provozujte vlastní boty POPOPX na serveru, který patří vám",
       "de": "Eigene POPOPX-Bots auf einem Server, der dir gehört",
@@ -461,8 +501,10 @@
       "hu": "Futtasd a saját POPOPX botjaid olyan szerveren, ami a tiéd",
       "it": "Esegui i tuoi bot POPOPX su un server che controlli tu",
       "ja": "自分のサーバーで POPOPX ボットを運用する",
+      "ko": "직접 제어하는 서버에서 POPOPX 봇을 운영하세요",
       "nl": "Draai je eigen POPOPX-bots op een server die jij beheert",
       "pl": "Uruchom własne boty POPOPX na serwerze, który do ciebie należy",
+      "pt-BR": "Rode seus próprios bots POPOPX em um servidor que você controla",
       "ru": "Запускайте своих ботов POPOPX на сервере, который принадлежит вам",
       "th": "รันบอท POPOPX ของคุณบนเซิร์ฟเวอร์ที่คุณควบคุม",
       "tr": "POPOPX botlarınızı size ait bir sunucuda çalıştırın",
@@ -471,6 +513,7 @@
       "zh-Hant": "在你自己的伺服器上執行 POPOPX Bot"
     },
     "site_title": {
+      "ar": "POPOPX Bot Studio",
       "bg": "POPOPX Bot Studio",
       "cs": "POPOPX Bot Studio",
       "de": "POPOPX Bot Studio",
@@ -481,8 +524,10 @@
       "hu": "POPOPX Bot Studio",
       "it": "POPOPX Bot Studio",
       "ja": "POPOPX Bot Studio",
+      "ko": "POPOPX Bot Studio",
       "nl": "POPOPX Bot Studio",
       "pl": "POPOPX Bot Studio",
+      "pt-BR": "POPOPX Bot Studio",
       "ru": "POPOPX Bot Studio",
       "th": "POPOPX Bot Studio",
       "tr": "POPOPX Bot Studio",
@@ -491,6 +536,7 @@
       "zh-Hant": "POPOPX Bot Studio"
     },
     "step_1": {
+      "ar": "ثبّت popopx-cli من الإصدارات الرسمية (بعد التحقق من checksum) ثم شغّل الاستوديو.",
       "bg": "Инсталирайте popopx-cli от официалните издания (с проверка на контролната сума) и стартирайте студиото.",
       "cs": "Nainstalujte popopx-cli z oficiálních release (s ověřením kontrolního součtu) a spusťte studio.",
       "de": "popopx-cli aus den offiziellen Releases installieren (Prüfsumme verifiziert) und das Studio starten.",
@@ -501,8 +547,10 @@
       "hu": "Telepítsd a popopx-cli-t a hivatalos kiadásokból (lekérő ellenőrzéssel), majd indítsd el a stúdiót.",
       "it": "Installa popopx-cli dalle release ufficiali (con checksum verificato) e avvia lo studio.",
       "ja": "公式リリースから popopx-cli をインストール（SHA-256 検証）し、Studio を起動します。",
+      "ko": "공식 릴리스에서 popopx-cli를 설치하고(체크섬 검증) 스튜디오를 시작하세요.",
       "nl": "Installeer popopx-cli uit de officiële releases (controlesom geverifieerd) en start de studio.",
       "pl": "Zainstaluj popopx-cli z oficjalnych wydań (ze sprawdzoną sumą kontrolną) i uruchom studio.",
+      "pt-BR": "Instale o popopx-cli pelas versões oficiais (checksum verificado) e inicie o studio.",
       "ru": "Установите popopx-cli из официальных релизов (с проверкой контрольной суммы) и запустите студию.",
       "th": "ติดตั้ง popopx-cli จากรีลีสทางการ (ตรวจ checksum) แล้วเปิดใช้งานสตูดิโอ",
       "tr": "popopx-cli'yi resmî sürümlerden kurun (sağlama toplamı doğrulanır) ve stüdyoyu başlatın.",
@@ -511,6 +559,7 @@
       "zh-Hant": "從官方 Release 安裝 popopx-cli（驗證 SHA-256），然後啟動 Studio。"
     },
     "step_2": {
+      "ar": "أنشئ بوتًا في وحدة التحكم واختر خوادم SMP واقرأ العنوان الدائم أو رمز QR.",
       "bg": "Създайте бот в конзолата, изберете SMP сървъри и прочетете постоянния адрес или QR кода.",
       "cs": "Vytvořte bota v konzoli, zvolte SMP servery a přečtěte trvalou adresu nebo QR kód.",
       "de": "In der Konsole einen Bot anlegen, SMP-Server wählen und dauerhafte Adresse oder QR-Code ablesen.",
@@ -521,8 +570,10 @@
       "hu": "Hozz létre botot a konzolban, válaszd ki az SMP szervereit, és olvasd le az állandó címet vagy a QR-kódot.",
       "it": "Crea un bot nella console, scegli i suoi server SMP e leggi l’indirizzo permanente o il codice QR.",
       "ja": "コンソールでボットを作り、SMP サーバーを選んで永久アドレスと QR コードを確認します。",
+      "ko": "콘솔에서 봇을 만들고 SMP 서버를 고른 뒤 영구 주소나 QR 코드를 확인하세요.",
       "nl": "Maak een bot aan in de console, kies zijn SMP-servers en lees het vaste adres of de QR-code.",
       "pl": "Utwórz bota w konsoli, wybierz jego serwery SMP i odczytaj stały adres albo kod QR.",
+      "pt-BR": "Crie um bot no console, escolha os servidores SMP e leia o endereço permanente ou o código QR.",
       "ru": "Создайте бота в консоли, выберите его SMP-серверы и прочитайте постоянный адрес или QR-код.",
       "th": "สร้างบอทในเครื่องมือ เลือกเซิร์ฟเวอร์ SMP แล้วอ่านที่อยู่ถาวรหรือรหัส QR",
       "tr": "Konsolda bot oluşturun, SMP sunucularını seçin, kalıcı adresi veya QR kodunu okuyun.",
@@ -531,6 +582,7 @@
       "zh-Hant": "在控制台建立 Bot，指定 SMP 伺服器，讀取永久聯絡位址或 QR Code。"
     },
     "step_3": {
+      "ar": "صف مسار الدعم لديك: أضف قواعد رد وقاعدة توجيه تستهدف المجموعة.",
       "bg": "Опишете си потока за поддръжка: добавете правила за отговор и правило за маршрутизиране към групата.",
       "cs": "Popište svůj proces podpory: přidejte pravidla odpovědí a pravidlo směrování na skupinu.",
       "de": "Support-Ablauf beschreiben: Antwortregeln und eine Routing-Regel auf die Gruppe hinzufügen.",
@@ -541,8 +593,10 @@
       "hu": "Írd le a kiszolgálási folyamatot: adj hozzá válaszszabályokat és a csoportra mutató átirányítási szabályt.",
       "it": "Descrivi il flusso di supporto: aggiungi regole di risposta e una regola di instradamento verso il gruppo.",
       "ja": "サポートの流れを描きます。応答ルールと、グループを狙うルーティングルールを追加します。",
+      "ko": "지원 흐름을 설명하세요: 응답 규칙과 그룹을 대상으로 하는 라우팅 규칙을 추가합니다.",
       "nl": "Beschrijf je supportproces: voeg antwoordregels en een routeringsregel naar de groep toe.",
       "pl": "Opisz swój proces wsparcia: dodaj reguły odpowiedzi i regułę przekazującą do grupy.",
+      "pt-BR": "Descreva seu fluxo de atendimento: adicione regras de resposta e uma regra de roteamento para o grupo.",
       "ru": "Опишите ваш процесс поддержки: добавьте правила ответов и правило маршрутизации в группу.",
       "th": "อธิบายงานผู้ให้บริการของคุณ: เพิ่มกติกาตอบกลับและกติกาส่งต่อไปยังกลุ่ม",
       "tr": "Destek akışınızı tarif edin: yanıt kuralları ve grubu hedef alan bir yönlendirme kuralı ekleyin.",
@@ -551,6 +605,7 @@
       "zh-Hant": "描述你的客服流程：加入自動回覆規則，以及一條指向客服群的路由規則。"
     },
     "step_4": {
+      "ar": "استدعِ API المفتوحة برمز البوت أو دع إضافة تتولى المحادثة.",
       "bg": "Извикайте Open API с токена на бота или оставете приставка да поеме разговора.",
       "cs": "Voljte Open API s tokenem bota, nebo nechte rozhovor převzít zásuvný modul.",
       "de": "Open API mit dem Bot-Token aufrufen – oder ein Plugin den Gesprächsstrom übernehmen lassen.",
@@ -561,8 +616,10 @@
       "hu": "Hívd meg az Open API-t a bot tokennel, vagy engedd, hogy egy bővítmény vegye át a beszélgetést.",
       "it": "Chiama la Open API con il token del bot, oppure lascia che un’estensione prenda in carico la conversazione.",
       "ja": "ボットトークン付きで Open API を呼ぶか、プラグインに会話を引き継がせます。",
+      "ko": "봇 토큰으로 오픈 API를 호출하거나 플러그인이 대화를 이어받게 하세요.",
       "nl": "Roep de Open API aan met de bot-token, of laat een plug-in het gesprek overnemen.",
       "pl": "Wywołaj Open API z tokenem bota albo pozwól wtyczce przejąć rozmowę.",
+      "pt-BR": "Chame a API aberta com o token do bot ou deixe um plugin assumir a conversa.",
       "ru": "Вызывайте Open API с токеном бота — или пусть плагин возьмёт разговор на себя.",
       "th": "เรียก Open API พร้อมโทเคนของบอท หรือให้ส่วนเสริมรับช่วงบทสนทนา",
       "tr": "Open API'yi bot anahtarınızla çağırın ya da konuşmayı bir eklentiye bırakın.",
@@ -573,6 +630,7 @@
   },
   "source": {
     "aliases": {
+      "pt": "pt-BR",
       "zh": "zh-Hans",
       "zh-cn": "zh-Hans",
       "zh-hans-cn": "zh-Hans",
@@ -586,6 +644,7 @@
     },
     "file": "studio/app/i18n.py",
     "labels": {
+      "ar": "العربية",
       "bg": "Български",
       "cs": "Čeština",
       "de": "Deutsch",
@@ -596,8 +655,10 @@
       "hu": "Magyar",
       "it": "Italiano",
       "ja": "日本語",
+      "ko": "한국어",
       "nl": "Nederlands",
       "pl": "Polski",
+      "pt-BR": "Português (Brasil)",
       "ru": "Русский",
       "th": "ไทย",
       "tr": "Türkçe",
@@ -610,6 +671,7 @@
       "zh-Hans",
       "zh-Hant",
       "ja",
+      "ar",
       "bg",
       "cs",
       "de",
@@ -618,14 +680,19 @@
       "fr",
       "hu",
       "it",
+      "ko",
       "nl",
       "pl",
+      "pt-BR",
       "ru",
       "th",
       "tr",
       "uk"
     ],
     "repo": "https://github.com/popopx-chat/popopx-bot-studio",
-    "sha256": "b3b16ccafd0802902ab16794c0d3e1298aa8ce79bc4250d631b98c537a307051"
+    "rtl": [
+      "ar"
+    ],
+    "sha256": "4f0fe13eae4b99923c98db2974ad1ba6d788d8828888f946466324aa971beacd"
   }
 }

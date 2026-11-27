@@ -103,8 +103,48 @@
     if (og) { og.setAttribute("content", locale); }
 
     doc.documentElement.setAttribute("lang", locale);
+    doc.documentElement.setAttribute("dir", P.rtl.indexOf(locale) >= 0 ? "rtl" : "ltr");
+    isolateTechnical(isolateRoot());
     applyTitle(locale);
     fitHead();
+  }
+
+  /* Localhost addresses, port ranges, API paths, env names and tool ids read
+     left to right even in an Arabic sentence; without a bidi island the colon
+     and the slashes jump around. Runs after every render because render()
+     replaces textContent. */
+  var TECH = /(https?:\/\/[^\s)]+|\b\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?\b|\b\d{4}[–-]\d{4}\b|\/(?:api|book|orch)(?:[/{][\w$.*{}-]*)*|\bvar\/studio\b|\.env\b|\bX-[A-Za-z][\w-]*|\b[A-Z][A-Z0-9_]{2,}\b|\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b|\b[\w-]+\.(?:cact|db|json|py|sh|mjs)\b|--[a-z0-9][\w-]*)/g;
+  var LTR_ONLY = P.rtl;
+
+  function isolateRoot() {
+    return doc.querySelector("main") || doc.body;
+  }
+
+  function isolateTechnical(root) {
+    if (!root || LTR_ONLY.indexOf(localeNow) < 0) { return; }
+    var nodes = root.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.children.length) { continue; }
+      var text = el.textContent;
+      TECH.lastIndex = 0;
+      if (!TECH.test(text)) { continue; }
+      TECH.lastIndex = 0;
+      var frag = doc.createDocumentFragment();
+      var last = 0;
+      var m;
+      while ((m = TECH.exec(text))) {
+        if (m.index > last) { frag.appendChild(doc.createTextNode(text.slice(last, m.index))); }
+        var b = doc.createElement("bdi");
+        b.setAttribute("dir", "ltr");
+        b.textContent = m[0];
+        frag.appendChild(b);
+        last = m.index + m[0].length;
+      }
+      if (last < text.length) { frag.appendChild(doc.createTextNode(text.slice(last))); }
+      el.textContent = "";
+      el.appendChild(frag);
+    }
   }
 
   /* Seven nowrap labels beside the brand and the language control do not fit in

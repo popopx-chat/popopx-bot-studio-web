@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>POPOPX Bot Studio — Build AI Agents. Connect Tools. Get Work Done.</title>
-<meta name="description" content="Self-hosted agent workbench for the identity-less POPOPX messenger: configure the role, rules and system prompt of each bot, attach any OpenAI-compatible model endpoint, connect tools through signed webhooks and a Telegram-shaped Open API, and keep the keys and the ledger on your own loopback server." data-i18n-meta="meta_description">
+<meta name="description" content="Self-hosted agent workbench for the identity-less POPOPX messenger: configure each bot's role, rules and system prompt, attach any OpenAI-compatible model endpoint, run a 24/7 personal agent that only proposes, orchestrate read-only capabilities across bots with default-deny grants, and keep the keys, the SQLite v6 ledger and the audit trail on your own loopback server." data-i18n-meta="meta_description">
 <meta name="theme-color" content="#04060c">
 <meta name="author" content="POPOPX">
 <link rel="canonical" href="https://bot.popopx.chat/">
@@ -12,6 +12,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://bot.popopx.chat/?lang=zh-Hans">
 <link rel="alternate" hreflang="zh-Hant" href="https://bot.popopx.chat/?lang=zh-Hant">
 <link rel="alternate" hreflang="ja" href="https://bot.popopx.chat/?lang=ja">
+<link rel="alternate" hreflang="ar" href="https://bot.popopx.chat/?lang=ar">
 <link rel="alternate" hreflang="bg" href="https://bot.popopx.chat/?lang=bg">
 <link rel="alternate" hreflang="cs" href="https://bot.popopx.chat/?lang=cs">
 <link rel="alternate" hreflang="de" href="https://bot.popopx.chat/?lang=de">
@@ -20,8 +21,10 @@
 <link rel="alternate" hreflang="fr" href="https://bot.popopx.chat/?lang=fr">
 <link rel="alternate" hreflang="hu" href="https://bot.popopx.chat/?lang=hu">
 <link rel="alternate" hreflang="it" href="https://bot.popopx.chat/?lang=it">
+<link rel="alternate" hreflang="ko" href="https://bot.popopx.chat/?lang=ko">
 <link rel="alternate" hreflang="nl" href="https://bot.popopx.chat/?lang=nl">
 <link rel="alternate" hreflang="pl" href="https://bot.popopx.chat/?lang=pl">
+<link rel="alternate" hreflang="pt-BR" href="https://bot.popopx.chat/?lang=pt-BR">
 <link rel="alternate" hreflang="ru" href="https://bot.popopx.chat/?lang=ru">
 <link rel="alternate" hreflang="th" href="https://bot.popopx.chat/?lang=th">
 <link rel="alternate" hreflang="tr" href="https://bot.popopx.chat/?lang=tr">
@@ -67,6 +70,7 @@
     <nav class="primary-nav" aria-label="Primary">
       <a href="#home" data-i18n="nav_overview">Overview</a>
       <a href="#features" data-i18n="nav_capabilities">Capabilities</a>
+      <a href="#agents" data-i18n="nav_agents">Agents</a>
       <a href="#use-cases" data-i18n="nav_use_cases">Use cases</a>
       <a href="#integrations" data-i18n="nav_integrations">Integrations</a>
       <a href="#tutorial" data-i18n="nav_docs">Docs</a>
@@ -105,7 +109,7 @@
     <div class="hero-copy">
       <p class="eyebrow">AGPL-3.0-only · <span data-i18n="nav_admin">Open console</span></p>
       <h1 data-i18n="hero_headline">Build AI Agents. Connect Tools. Get Work Done.</h1>
-      <p class="lead" data-i18n="hero_lead">Give every agent its role, its rules and its system prompt in a console that only listens on 127.0.0.1. Attach any OpenAI-compatible model endpoint, connect tools through signed webhooks and a Telegram-shaped HTTP API, then hand out a permanent POPOPX address and put it back into the chat.</p>
+      <p class="lead" data-i18n="hero_lead">Give every agent its role, its rules and its system prompt in a console that only listens on 127.0.0.1. Attach any OpenAI-compatible model endpoint, let the built-in 24/7 agent read intent and propose meetings, and let one bot borrow a read-only capability from another inside the same process. Keys, ledger and audit stay on your disk, and every permanent POPOPX address points back to you.</p>
 
       <ul class="tags" role="list">
         <li data-i18n="hero_tag_1">Zero metadata</li>
@@ -140,24 +144,27 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
       </div>
       <div class="console-body">
         <p><span class="pr">popopx-bot-studio</span> --self-test</p>
-        <p class="ok">✓ loopback_only &nbsp;127.0.0.1:8090</p>
+        <p class="ok">✓ loopback_only 127.0.0.1:8090</p>
         <p class="ok">✓ data_dir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0700 var/studio</p>
-        <p class="ok">✓ ledger &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var/studio/studio.db</p>
+        <p class="ok">✓ ledger &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var/studio/studio.db · v6</p>
         <p class="ok">✓ bundle &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AES-GCM · scrypt</p>
         <p class="ok">✓ sandbox &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 bots · 3 cli-data dirs</p>
-        <p class="ok">✓ plugins &nbsp;&nbsp;&nbsp;&nbsp;auto_reply msg_router llm_bridge webhook_relay</p>
-        <p class="dim">15 groups · 1,884 assertions · 0 failures · 0 telemetry</p>
-        <p><span class="pr">$</span> POST /bot&lt;token&gt;/sendMessage <span class="ok">200</span><span class="caret"></span></p>
+        <p class="ok">✓ agents &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;needle 3 · 5 read-only tools</p>
+        <p class="ok">✓ orch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default-deny · 3 hops · 32 tasks</p>
+        <p class="ok">✓ plugins &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto_reply · msg_router</p>
+        <p class="ok">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;llm_bridge · webhook_relay · personal_agent</p>
+        <p class="dim">26 groups · 8,287 assertions · 0 failures · 0 telemetry</p>
+        <p><span class="pr">$</span> POST /api/v1/bot&lt;token&gt;/sendMessage <span class="ok">200</span><span class="caret"></span></p>
       </div>
-      <p class="console-cap" data-i18n="hero_console_caption">What the engine prints on boot: every invariant it refuses to break.</p>
+      <p class="console-cap" data-i18n="hero_console_caption">A boot log in brief: the invariants the engine refuses to break.</p>
     </aside>
   </div>
 
   <dl class="specs">
-    <div><dt data-i18n="stat_locales">Languages</dt><dd>18 <span data-i18n="stat_locales_note">built in</span></dd></div>
-    <div><dt data-i18n="stat_plugins">Plugins</dt><dd>4 <span data-i18n="stat_plugins_note">on one bus</span></dd></div>
+    <div><dt data-i18n="stat_locales">Languages</dt><dd>21 <span data-i18n="stat_locales_note">built in</span></dd></div>
+    <div><dt data-i18n="stat_plugins">Plugins</dt><dd>5 <span data-i18n="stat_plugins_note">on one bus</span></dd></div>
     <div><dt data-i18n="stat_loopback">Listening</dt><dd>127.0.0.1 <span data-i18n="stat_loopback_note">only</span></dd></div>
-    <div><dt data-i18n="stat_ledger">Ledger</dt><dd>SQLite <span data-i18n="stat_ledger_note">0600 on disk</span></dd></div>
+    <div><dt data-i18n="stat_ledger">Ledger</dt><dd>SQLite v6 <span data-i18n="stat_ledger_note">0600 on disk</span></dd></div>
   </dl>
 </section>
 
@@ -165,7 +172,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
   <div class="sec-head">
     <p class="marker">01 / CAPABILITIES</p>
     <h2 data-i18n="cap_headline">An agent workbench, checked against the engine source</h2>
-    <p class="sec-sub" data-i18n="capabilities_sub">The five blocks people ask about first, each labelled with what is actually built behind the name today. Every claim here was read against the engine repository before it was published.</p>
+    <p class="sec-sub" data-i18n="capabilities_sub">The blocks people ask about first, each labelled with what is actually built behind the name today. Every claim here was read against the engine repository before it was published.</p>
   </div>
 
   <div class="legend">
@@ -200,7 +207,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
         <span class="rail-n" aria-hidden="true">3</span>
         <div class="rail-body">
           <h3 data-i18n="wf_3_t">Connect controlled tools</h3>
-          <p data-i18n="wf_3_d">An inbound webhook turns an external alert into a bot message; the relay turns a reply back into a signed call to your own endpoint. What is not here is the model deciding to call a tool by itself.</p>
+          <p data-i18n="wf_3_d">An inbound webhook turns an external alert into a bot message; the relay turns a reply back into a signed call to your own endpoint. Needle 3 also extracts one of five read-only tool intents from a sentence, but nothing executes a tool on the model's behalf.</p>
           <span class="badge is-beta" data-i18n="st_beta">In beta</span>
         </div>
       </li>
@@ -216,7 +223,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
         <span class="rail-n" aria-hidden="true">5</span>
         <div class="rail-body">
           <h3 data-i18n="wf_5_t">Publish and connect to Chat</h3>
-          <p data-i18n="wf_5_d">Provisioning hands back the permanent contact address and a QR code you can put anywhere. There is no separate publish button and no staged rollout: the address exists once the bot exists.</p>
+          <p data-i18n="wf_5_d">Provisioning hands back the permanent contact address and a QR code you can put anywhere. If an address fits the codec but exceeds the 1,663 bytes a version-40 QR can carry, the console says so with a 409 and a diagnostic drawer instead of drawing a broken image.</p>
           <span class="badge is-released" data-i18n="st_released">Released</span>
         </div>
       </li>
@@ -237,22 +244,22 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
     <article class="card cap-card" data-status="beta">
       <span class="badge is-beta" data-i18n="st_beta">In beta</span>
       <h3 data-i18n="capp_t">System prompt and role orchestration</h3>
-      <p data-i18n="capp_d">Each bot has one editable system prompt, injected as the system message of every model call. Multi-role orchestration, one persona per channel or per stage of a conversation, is not implemented.</p>
+      <p data-i18n="capp_d">Each bot has one editable system prompt, injected as the system message of every model call. The process-local orchestrator can lend a read-only capability to a sibling bot, but one persona per channel or per stage of a conversation is still not implemented.</p>
     </article>
-    <article class="card cap-card" data-status="planned">
-      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+    <article class="card cap-card" data-status="beta">
+      <span class="badge is-beta" data-i18n="st_beta">In beta</span>
       <h3 data-i18n="capt_t">Tool calling with permission isolation</h3>
-      <p data-i18n="capt_d">Not implemented. The engine has no tool-calling path and no enforced permission model: the scope a plugin declares is metadata, and the dispatcher orders plugins by priority alone.</p>
+      <p data-i18n="capt_d">Partly implemented. Needle 3 extracts one of five read-only tool intents (calendar availability, propose create/reschedule/cancel, workspace summarize) and never executes a write; a grant table governs which bot may borrow which read-only capability. Model-initiated execution with a per-tool scope check in the dispatcher is still missing.</p>
     </article>
     <article class="card cap-card" data-status="beta">
       <span class="badge is-beta" data-i18n="st_beta">In beta</span>
       <h3 data-i18n="capr_t">Run logs and replay monitoring</h3>
-      <p data-i18n="capr_d">The message ledger, the per-bot log view and the live updates ring are released and readable in the console. Replay, stepping a conversation back through a run, is not.</p>
+      <p data-i18n="capr_d">The message ledger, the per-bot log view and the live updates ring are released, and orch/replay returns a whole dispatch chain by correlation id. Stepping a chat conversation back through a run is still not implemented.</p>
     </article>
     <article class="card cap-card" data-status="released">
       <span class="badge is-released" data-i18n="st_released">Released</span>
       <h3 data-i18n="cap_sandbox_t">Multi-bot sandbox factory</h3>
-      <p data-i18n="cap_sandbox_d">Every bot gets its own popopx-cli process, its own cli-data directory, its own control port and its own SQLite files, started and stopped from one screen.</p>
+      <p data-i18n="cap_sandbox_d">Every bot gets its own popopx-cli process, its own cli-data directory, its own control port from 5230 to 5299 and its own SQLite files, started and stopped from one screen.</p>
       <ul class="chips" role="list">
         <li>run-cli.sh</li><li>cli.pid</li><li>cli-data/</li><li>ports 5230+</li>
       </ul>
@@ -285,9 +292,59 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
   </div>
 </section>
 
+<section class="agents" id="agents">
+  <div class="sec-head">
+    <p class="marker">02 / AGENTS</p>
+    <h2 data-i18n="ag_headline">One process, a team of agents</h2>
+    <p class="sec-sub" data-i18n="ag_sub">Each bot keeps its own rules, model key, timezone and calendar cache inside one studio process; a default-deny orchestrator lets one agent borrow what a sibling knows without handing over a single write.</p>
+  </div>
+
+  <div class="stateflow" aria-hidden="true">
+    <span class="sf-node">queued</span>
+    <span class="sf-arrow">→</span>
+    <span class="sf-node">running</span>
+    <span class="sf-arrow">→</span>
+    <span class="sf-node is-ok">succeeded</span>
+    <span class="sf-or">or</span>
+    <span class="sf-node is-warn">failed</span>
+    <span class="sf-node is-warn">timeout</span>
+    <span class="sf-node is-stop">refused</span>
+    <span class="sf-node is-stop">cancelled</span>
+  </div>
+  <p class="stateflow-cap" data-i18n="ag_flow_cap">The orchestration state machine: a refused row is written before any work starts, and a succeeded task never moves again.</p>
+
+  <div class="cards">
+    <article class="card span2" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="ag_agent_t">A 24/7 personal agent that only proposes</h3>
+      <p data-i18n="ag_agent_d">Needle 3 is a 33.7 MiB weight file shipped with the repository. It extracts one of five calendar or workspace intents in milliseconds, and a deterministic extractor takes over when the native runtime is missing. Working hours, buffers, blocked periods and keywords per bot decide what counts as free, and every rejected slot keeps a readable reason in the audit log. The calendar is never written until the owner confirms the card.</p>
+      <ul class="chips" role="list"><li>needle3.cact</li><li>33.7 MiB</li><li>5 intents</li><li>confirm first</li></ul>
+    </article>
+    <article class="card span2" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="ag_orch_t">Process-local multi-agent orchestration</h3>
+      <p data-i18n="ag_orch_d">One bot borrows a read-only capability from a sibling — compose a reply, plan a route, mask availability, summarize a workspace or profile the ledger — inside the same studio process. There is no new port, no direct SMP call and no write to another bot's rules. Hops are capped at 3, concurrency at 32, each task times out between 0.5 and 300 seconds, and fan-out is capped at 8 targets.</p>
+      <ul class="chips" role="list"><li>5 read-only tools</li><li>hops ≤ 3</li><li>32 concurrent</li><li>fan-out ≤ 8</li></ul>
+    </article>
+    <article class="card span2" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="ag_grant_t">Grants are denied by default</h3>
+      <p data-i18n="ag_grant_d">A dispatch needs an explicit (origin, target, capability) row in agent_task_grants; the wildcard target must be created on purpose, and every row can be toggled or deleted. Each task lands in SQLite schema v6 as queued, running, succeeded, failed, timeout, refused or cancelled, with a correlation id, duration, result summary and a stable reason code that orch/replay can reconstruct.</p>
+      <ul class="chips" role="list"><li>agent_task_grants</li><li>default deny</li><li>schema v6</li><li>correlation_id</li></ul>
+    </article>
+    <article class="card span2" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="ag_a2a_t">Masked A2A negotiation and zero-install booking</h3>
+      <p data-i18n="ag_a2a_d">Two paired personal agents exchange only start, end, tz, free and ref over their existing SMP session key, signed and replay-protected; titles, attendees and notes cannot leave. A guest books through a one-time /book/{token} HMAC link with no session, no cookie and no script, in all 21 languages, and the .ics invitation exists only after the owner approves.</p>
+      <ul class="chips" role="list"><li>start · end · tz</li><li>free · ref</li><li>/book/{token}</li><li>21 languages</li></ul>
+    </article>
+  </div>
+  <p class="eco-note" data-i18n="ag_note">Every path above stays on 127.0.0.1. The only outbound calls are to your own model endpoint, a paired agent's SMP queue, or the Mac Node bridge on http://127.0.0.1:18920.</p>
+</section>
+
 <section class="use-cases" id="use-cases">
   <div class="sec-head">
-    <p class="marker">02 / USE CASES</p>
+    <p class="marker">03 / USE CASES</p>
     <h2 data-i18n="uc_headline">Four flows that already run</h2>
     <p class="sec-sub" data-i18n="uc_sub">Each of these is the engine's own behaviour on the day you install it, not a plan: what you can build in the console before the first restart.</p>
   </div>
@@ -318,7 +375,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
 
 <section class="integrations" id="integrations">
   <div class="sec-head">
-    <p class="marker">03 / INTEGRATIONS</p>
+    <p class="marker">04 / INTEGRATIONS</p>
     <h2 data-i18n="int_headline">What plugs in, and how</h2>
     <p class="sec-sub" data-i18n="int_sub">Five surfaces the engine exposes today, the plugins that sit on them, and the one integration everybody asks for that is still missing.</p>
   </div>
@@ -337,17 +394,17 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
     <article class="card" data-status="released">
       <span class="badge is-released" data-i18n="st_released">Released</span>
       <h3 data-i18n="int_3_t">Telegram-shaped Open API</h3>
-      <p data-i18n="int_3_d">getMe, sendMessage, setWebhook and getUpdates on the same loopback port as the console, addressed by bot token.</p>
+      <p data-i18n="int_3_d">getMe, sendMessage, setWebhook and getUpdates under /api/v1 on the same loopback port as the console, addressed by bot token.</p>
     </article>
     <article class="card" data-status="released">
       <span class="badge is-released" data-i18n="st_released">Released</span>
       <h3 data-i18n="int_4_t">Plugin bus</h3>
-      <p data-i18n="int_4_d">Four built-in plugins on one priority chain, with room for your own module that replies, forwards or stays silent.</p>
+      <p data-i18n="int_4_d">Five built-in plugins on one priority chain, the 24/7 personal agent included, with room for your own module that replies, forwards or stays silent.</p>
     </article>
     <article class="card" data-status="planned">
       <span class="badge is-planned" data-i18n="st_planned">Planned</span>
       <h3 data-i18n="int_5_t">Model-initiated tool calling</h3>
-      <p data-i18n="int_5_d">Not implemented: nothing lets the model call a tool by itself. Today a tool runs because a rule, a plugin or your own code invokes it.</p>
+      <p data-i18n="int_5_d">Not implemented: Needle 3 can extract one of five read-only tool intents from a sentence, but nothing executes a tool on the model's own authority. A tool runs because a rule, a plugin or your own code invokes it.</p>
     </article>
   </div>
 
@@ -435,7 +492,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
 
 <section class="tutorial" id="tutorial">
   <div class="sec-head">
-    <p class="marker">04 / DOCS</p>
+    <p class="marker">05 / DOCS</p>
     <h2 data-i18n="tut_title">Install and first run</h2>
     <p class="sec-sub" data-i18n="tut_sub">Four paths, the same engine: a production Linux box, a Mac you keep running, a development checkout, or the three clicks inside the console.</p>
   </div>
@@ -444,7 +501,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
     <button class="tab is-on" role="tab" type="button" id="tab-ubuntu" aria-controls="pane-ubuntu" aria-selected="true" data-i18n="tab_ubuntu">Ubuntu 22.04</button>
     <button class="tab" role="tab" type="button" id="tab-macos" aria-controls="pane-macos" aria-selected="false" tabindex="-1" data-i18n="tab_macos">macOS</button>
     <button class="tab" role="tab" type="button" id="tab-dev" aria-controls="pane-dev" aria-selected="false" tabindex="-1" data-i18n="tab_dev">Local development</button>
-    <button class="tab" role="tab" type="button" id="tab-quick" aria-controls="pane-quick" aria-selected="false" tabindex="-1" data-i18n="tab_quick">First bot in 3 steps</button>
+    <button class="tab" role="tab" type="button" id="tab-quick" aria-controls="pane-quick" aria-selected="false" tabindex="-1" data-i18n="tab_quick">First bot in 4 steps</button>
   </div>
 
   <div class="panes">
@@ -500,13 +557,13 @@ BOT_WS_PORT_BASE=5230 BOT_WS_PORT_MAX=5299 \
 python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
       </div>
       <ul class="pane-n" role="list">
-        <li data-i18n="tut_dev_n1">The engine ships an offline self-test of 1,884 assertions in 15 groups; it needs no network and no real contacts.</li>
+        <li data-i18n="tut_dev_n1">The engine ships an offline self-test of 8,287 assertions in 26 groups; it needs no network and no real contacts.</li>
         <li data-i18n="tut_dev_n2">Without STUDIO_ADMIN_TOKEN every admin route answers 401, so an unconfigured checkout cannot be driven by accident.</li>
       </ul>
     </section>
 
     <section class="pane" id="pane-quick" role="tabpanel" aria-labelledby="tab-quick" tabindex="0" hidden>
-      <p class="pane-i" data-i18n="tut_quick_i">Three moves in the console, then the Open API is yours.</p>
+      <p class="pane-i" data-i18n="tut_quick_i">Four moves in the console, then the Open API is yours.</p>
       <ol class="steps" role="list">
         <li><span class="step-n">1</span><p data-i18n="step_1">Install popopx-cli from the official releases (checksum verified) and start the studio.</p></li>
         <li><span class="step-n">2</span><p data-i18n="step_2">Create a bot in the console, pick its SMP servers and read the permanent address or QR code.</p></li>
@@ -522,7 +579,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="api" id="api">
   <div class="sec-head">
-    <p class="marker">05 / OPEN API</p>
+    <p class="marker">06 / OPEN API</p>
     <h2 data-i18n="api_title">A Telegram-shaped API on an isolated network</h2>
     <p class="sec-sub" data-i18n="api_sub">Call sendMessage with the bot token, register a webhook, or poll getUpdates. The admin console and the API share one engine and one loopback port.</p>
   </div>
@@ -549,7 +606,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
           <rect x="8" y="222" width="288" height="88" rx="6"></rect>
           <text x="24" y="246">Plugin Bus</text>
           <text x="24" y="266" class="sub">auto_reply · msg_router</text>
-          <text x="24" y="286" class="sub">llm_bridge · webhook_relay</text>
+          <text x="24" y="286" class="sub">llm_bridge · webhook_relay · personal_agent</text>
         </g>
         <g class="topo-box iso">
           <rect x="312" y="222" width="284" height="88" rx="6"></rect>
@@ -567,9 +624,9 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
         <p data-i18n="api_send_d">Reply to any contact or group the bot already reaches.</p>
         <div class="code" data-copy-source>
           <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
-          <pre><code>curl -X POST http://127.0.0.1:8090/bot$BOT_TOKEN/sendMessage \
+          <pre><code>curl -X POST http://127.0.0.1:8090/api/v1/bot$BOT_TOKEN/sendMessage \
   -H "content-type: application/json" \
-  -d '{"chat_ref":"&lt;contact&gt;","text":"Deploy finished."}'</code></pre>
+  -d '{"chat_ref":"@7","text":"Deploy finished."}'</code></pre>
         </div>
       </article>
       <article class="ep">
@@ -577,7 +634,8 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
         <p data-i18n="api_hook_d">Push inbound events to your own endpoint instead of polling.</p>
         <div class="code" data-copy-source>
           <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
-          <pre><code>curl -X POST http://127.0.0.1:8090/bot$BOT_TOKEN/setWebhook \
+          <pre><code>curl -X POST http://127.0.0.1:8090/api/v1/bot$BOT_TOKEN/setWebhook \
+  -H "content-type: application/json" \
   -d '{"url":"https://intranet.local/hooks/popopx"}'</code></pre>
         </div>
       </article>
@@ -586,7 +644,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
         <p data-i18n="api_upd_d">Read the ring buffer behind the gateway, newest last.</p>
         <div class="code" data-copy-source>
           <button class="copy code-copy" type="button" data-copy><span class="copy-text" data-i18n="action_copy">Copy</span></button>
-          <pre><code>curl "http://127.0.0.1:8090/bot$BOT_TOKEN/getUpdates?limit=50"</code></pre>
+          <pre><code>curl "http://127.0.0.1:8090/api/v1/bot$BOT_TOKEN/getUpdates?limit=50"</code></pre>
         </div>
       </article>
       <p class="api-note" data-i18n="api_token_note">Tokens and admin credentials are read from .env on your host; the site never sends anything anywhere.</p>
@@ -596,7 +654,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="security" id="security">
   <div class="sec-head">
-    <p class="marker">06 / SECURITY</p>
+    <p class="marker">07 / SECURITY</p>
     <h2 data-i18n="sec_title">What stays on your machine</h2>
     <p class="sec-sub" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</p>
   </div>
@@ -654,27 +712,27 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
       <h3 data-i18n="sg_1_t">Where the keys live</h3>
       <p data-i18n="sg_1_d">STUDIO_ADMIN_TOKEN is read from the environment or .env and compared in constant time. Bot tokens and the model API key stay in the SQLite ledger on your disk and are masked in every API response. At rest the ledger is not encrypted: the 0600 file mode, the 0700 data directory and the loopback bind are what protect it. Only cold-backup bundles are encrypted, with AES-GCM under a key derived by scrypt.</p>
     </article>
-    <article class="card" data-status="planned">
-      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+    <article class="card" data-status="beta">
+      <span class="badge is-beta" data-i18n="st_beta">In beta</span>
       <h3 data-i18n="sg_2_t">Capability tokens</h3>
-      <p data-i18n="sg_2_d">Not implemented. A plugin declares a scope field today, but the dispatcher never checks it and orders plugins by priority alone: there is no grant, no expiry and no per-tool permission decision.</p>
+      <p data-i18n="sg_2_d">Partly implemented. agent_task_grants decides which bot may borrow which read-only capability: default-deny, wildcard target only on purpose, with hop and concurrency caps. What is missing is a per-tool scope in the plugin dispatcher, which still runs plugins by priority and checks no scope field.</p>
     </article>
     <article class="card" data-status="beta">
       <span class="badge is-beta" data-i18n="st_beta">In beta</span>
       <h3 data-i18n="sg_3_t">Audit trail</h3>
-      <p data-i18n="sg_3_d">Messages, rule hits, plugin errors and webhook changes are written to the ledger and readable in the console. Admin actions do not yet have their own audit table, and there is no export format for an auditor.</p>
+      <p data-i18n="sg_3_d">Messages, rule hits, plugin errors, webhook changes, orchestrator tasks and A2A or guest actions are written to the ledger and readable in the console. Admin actions do not yet have their own audit table, and there is no export format for an auditor.</p>
     </article>
-    <article class="card span2" data-status="planned">
-      <span class="badge is-planned" data-i18n="st_planned">Planned</span>
+    <article class="card span2" data-status="beta">
+      <span class="badge is-beta" data-i18n="st_beta">In beta</span>
       <h3 data-i18n="sg_4_t">Revoking access</h3>
-      <p data-i18n="sg_4_d">Today you revoke by editing .env and restarting, or by clearing a bot's webhook target in the console. A self-service revoke or rotate endpoint, and the grant list that would go with it, are not implemented.</p>
+      <p data-i18n="sg_4_d">Orchestrator grants can be toggled off or deleted from the console, and a webhook target can be cleared there. Admin and bot tokens still rotate by editing .env and restarting; there is no self-service rotate or revoke endpoint.</p>
     </article>
   </div>
 </section>
 
 <section class="faq" id="faq">
   <div class="sec-head">
-    <p class="marker">07 / FAQ</p>
+    <p class="marker">08 / FAQ</p>
     <h2 data-i18n="faq_title">Questions before the first install</h2>
     <p class="sec-sub" data-i18n="faq_sub">Licence, agents, migration and the difference to a commercial service account.</p>
   </div>
@@ -702,7 +760,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
     </details>
     <details>
       <summary data-i18n="faq_q6">Does the download of popopx-cli leak anything?</summary>
-      <p data-i18n="faq_a6">No binary is committed to the repository, because the AGPL licence and the download both point at the official releases. The installer fetches the archive for your operating system and architecture, verifies the SHA-256 checksum, then unpacks it into the data directory. Nothing about your bots is part of that request.</p>
+      <p data-i18n="faq_a6">The CLI is not committed: the installer fetches the archive for your operating system and architecture from the official releases, verifies the SHA-256 checksum, then unpacks it into the data directory. The repository does ship the Needle 3 weight file (33.7 MiB) so the agent works without a download; it contains no personal data, and nothing about your bots is part of any request.</p>
     </details>
   </div>
   <p class="faq-cta"><span data-i18n="faq_cta">Something wrong or missing?</span> <a href="https://github.com/popopx-chat/popopx-bot-studio/issues" rel="noopener noreferrer">popopx-bot-studio · issues</a></p>
@@ -710,7 +768,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="roadmap" id="roadmap">
   <div class="sec-head">
-    <p class="marker">08 / ROADMAP</p>
+    <p class="marker">09 / ROADMAP</p>
     <h2 data-i18n="rm_headline">What is not built yet</h2>
     <p class="sec-sub" data-i18n="rm_sub">The gaps this page had to mark as planned, written down in one place so nothing is implied by a picture.</p>
   </div>
@@ -719,12 +777,12 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
     <article class="card" data-status="planned">
       <span class="badge is-planned" data-i18n="st_planned">Planned</span>
       <h3 data-i18n="rm_1_t">Tool calling with per-tool scopes</h3>
-      <p data-i18n="rm_1_d">The model would call declared tools, with a scope check enforced in the dispatcher instead of the priority-only ordering that exists now.</p>
+      <p data-i18n="rm_1_d">The model would call declared tools, with a scope check enforced in the dispatcher instead of the priority-only ordering that exists now. Needle 3 today extracts the intent but never executes it.</p>
     </article>
     <article class="card" data-status="planned">
       <span class="badge is-planned" data-i18n="st_planned">Planned</span>
       <h3 data-i18n="rm_2_t">Capability tokens and revocation</h3>
-      <p data-i18n="rm_2_d">Short-lived grants per bot and per tool, with an explicit revoke endpoint that replaces editing .env by hand and restarting.</p>
+      <p data-i18n="rm_2_d">Short-lived grants per bot and per tool with expiry, plus a revoke endpoint for admin and bot tokens that replaces editing .env by hand and restarting.</p>
     </article>
     <article class="card" data-status="planned">
       <span class="badge is-planned" data-i18n="st_planned">Planned</span>
@@ -777,7 +835,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
     </div>
     <p class="foot-note" data-i18n="foot_host">A static site with no build step, no CDN, no webfont request and no analytics: hosting it is a directory copy.</p>
   </div>
-  <p class="foot-bar" data-i18n="footer">AGPL-3.0-only · no bundled binaries · loopback only</p>
+  <p class="foot-bar" data-i18n="foot_bar">AGPL-3.0-only · zero telemetry · loopback only</p>
 </footer>
 
 <noscript>

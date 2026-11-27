@@ -208,7 +208,7 @@ if (SELF_TEST) {
     '<link rel="alternate" hreflang="zh-Hans" href="https://bot.popopx.chat/?lang=zh-Hans">',
     '<a href="https://github.com/popopx-chat/popopx-bot-studio">Source on GitHub</a>',
     '<a href="https://node.popopx.chat" target="_blank" rel="noopener noreferrer">node.popopx.chat</a>',
-    '<code>curl -X POST http://127.0.0.1:8090/bot$BOT_TOKEN/sendMessage -H "content-type: application/json" -d \'{"chat_ref":"&lt;contact&gt;","text":"Deploy finished."}\'</code>',
+    '<code>curl -X POST http://127.0.0.1:8090/api/v1/bot$BOT_TOKEN/sendMessage -H "content-type: application/json" -d \'{"chat_ref":"&lt;contact&gt;","text":"Deploy finished."}\'</code>',
     '<pre><code>export STUDIO_ADMIN_TOKEN="$(openssl rand -hex 16)"</code></pre>',
     '<img src="assets/img/mark.svg" alt="POPOPX">',
     'new URL("https://example.com/feature-test")',

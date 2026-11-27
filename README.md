@@ -1,7 +1,7 @@
 # POPOPX Bot Studio 官方网站：AI Agent 工作台产品门户
 
 零构建静态站点：`index.html` + `assets/css/style.css` + `assets/js/i18n.js` + `assets/js/app.js`，
-一整套 18 语种文案，无框架、无打包器、无 CDN、无 Web 字体请求、无统计脚本。
+一整套 21 语种文案（含阿拉伯语 RTL），无框架、无打包器、无 CDN、无 Web 字体请求、无统计脚本。
 
 - 门户域名：<https://bot.popopx.chat>（本仓库即该域名的站点根目录）；顶级域 `popopx.chat` 归主站，本站不再声明它
 - 引擎仓库：<https://github.com/popopx-chat/popopx-bot-studio>（AGPL-3.0-only）
@@ -15,7 +15,8 @@
 | 锚点 | 内容 |
 | --- | --- |
 | `#home` | 概览：Agent 工作台首屏、零元数据 / 100% 自托管 / 跨平台一键部署 / 7×24 机器人与人工坐席 / 零代码规则与插件标签，一键复制安装命令 + 双行动按钮 + 引擎启动自检面板 + 规格条 |
-| `#features` | 核心能力：状态图例 + 五步闭环导轨（创建 → 配置 → 连工具 → 沙箱测试 → 接入 Chat）+ 五张重点能力卡 + BotFather 级多 Bot 沙箱工厂、永久联系地址、零代码规则、路由与工单、私钥本地主权、插件总线（`auto_reply` / `msg_router` / `llm_bridge` / `webhook_relay`） |
+| `#features` | 核心能力：状态图例 + 五步闭环导轨（创建 → 配置 → 连工具 → 沙箱测试 → 接入 Chat）+ 五张重点能力卡 + BotFather 级多 Bot 沙箱工厂、永久联系地址、零代码规则、路由与工单、私钥本地主权、插件总线（`auto_reply` / `msg_router` / `llm_bridge` / `webhook_relay` / `personal_agent`） |
+| `#agents` | 多 Agent 协作：单进程多 `popopx-cli` 隔离托管、进程内任务编排（`queued → running → succeeded` 八态状态机，跳数与并发上限）、`agent_task_grants` 默认拒绝授权与 SQLite v6 审计、A2A 协商与零安装访客预约门户 |
 | `#use-cases` | 使用场景：工单客服台、值班告警转发、同机脚本自动化、永不变更的联系地址 —— 四条全部有代码支撑 |
 | `#integrations` | 工具集成：OpenAI 兼容模型端点、签名 webhook 进出、Telegram 风格 Open API、插件总线、模型自主调用工具（规划中）；`#ecosystem` 生态拓扑图 + 四大门户导航 |
 | `#tutorial` | 文档与快速开始（Tab 切换）：Ubuntu 22.04 systemd、macOS launchd、本地开发调试、三步实战上手 |
@@ -34,22 +35,37 @@
 | `内测中` | 主体已可用，但标题承诺的另一半还没有代码 |
 | `规划中` | 零代码，只在路线图出现，正文必须明写「尚未实现」 |
 
-Tool Calling、Capability Token、Agent 版本管理/回滚、运行回放、生态调用链（Chat → Studio → Service Suite / Mac Node）
-目前在引擎仓库里都查无代码，一律标 `规划中`；`#roadmap` 就是这些缺口的清单。改任何能力文案前先照这一步重新量一遍源码。
+当前 38 块能力卡里 21 块 `已发布`、9 块 `内测中`、8 块 `规划中`。`规划中` 的只有：逐工具作用域的
+Tool Calling、Agent 版本管理与回滚、模型供应商注册表、运行回放与管理员审计表、生态调用链
+（Chat → Studio → Service Suite / Mac Node）以及令牌撤销端点，`#roadmap` 就是这份缺口清单。
+Capability Token 与撤销授权标 `内测中`：`agent_task_grants` 默认拒绝、通配目标、扣减与并发上限已经落地，
+缺的是插件调度器里的逐工具作用域，以及替代手改 `.env` 的重启式轮换端点。
+改任何能力文案前先照这一步重新量一遍源码。
 
-## 18 语种
+## 21 语种
 
-`en`（基准）、`zh-Hans`、`zh-Hant`、`ja`、`bg`、`cs`、`de`、`es`、`fi`、`fr`、`hu`、`it`、`nl`、`pl`、
-`ru`、`th`、`tr`、`uk` —— 与 POPOPX iOS App 及引擎 `studio/app/i18n.py` 的 `LOCALES` 逐一对齐。
+`en`（基准）、`zh-Hans`、`zh-Hant`、`ja`、`ar`、`bg`、`cs`、`de`、`es`、`fi`、`fr`、`hu`、`it`、`ko`、
+`nl`、`pl`、`pt-BR`、`ru`、`th`、`tr`、`uk` —— 与 POPOPX iOS App 及引擎 `studio/app/i18n.py` 的
+`LOCALES` 逐一对齐；`pt` 等旧标签经 `ALIASES` 归一到 `pt-BR`。
+
+阿拉伯语是唯一的 RTL 语种：切到 `ar` 时 `app.js` 给 `<html>` 写 `dir="rtl"`，其余 20 个语种一律
+`dir="ltr"`。正文渲染完成后，`127.0.0.1:8090`、`5230–5299`、`/api/…`、环境变量名与 CLI 命令会被包进
+`bdi[dir="ltr"]`（阿拉伯语页实测 64 处），代码块、启动日志与拓扑图另有 CSS 级 `unicode-bidi: isolate`；
+模板与样式全部改用逻辑属性（`inset-inline`、`padding-inline`、`border-inline`），导航、能力卡、状态
+流与表格在 RTL 下整体镜像。`--head-h` 仍按实测表头高度写入。
 
 检测优先级：**URL 参数 `?lang=…` → `localStorage` → `navigator.languages` → `en`**，
 右上角下拉切换无刷新，切换后用 `history.replaceState` 把语种写回地址栏（`en` 为基准，不带参数）。
 切换语种后表头按**实测宽度**两级让位（`app.js` 的 `fitHead()`）：先收域名门牌与 GitHub 文字，仍溢出才把 7 项导航收进汉堡，
 同时把实测到的表头高度写进 `--head-h`，锚点跳转的 `scroll-padding-top` 因此不会被表头压住；
-18 语种 × 1440/1280/1180/1024 共 72 例实测 0 溢出；退到汉堡的只有 1180 的 `pl` 和 1024 的 `fi fr hu it pl`。
+21 语种 × 13 档宽度（1440/1366/1280/1180/1024/900/768/600/480/414/390/360/320）共 273 例实测 0 溢出；
+320px 下 21 个语种 × 全部 10 个 section + 展开的汉堡菜单同样 0 溢出，且每个 section 自身的 `scrollWidth` 也不超宽。
+表头两步让位的实测落点：1440/1366/1280 只有 `pl` 收汉堡，其余 16 个语种先收门牌与 GitHub 文字，
+`zh-Hans`/`zh-Hant`/`ja`/`ar`/`ko` 完整保留；1180 收汉堡的是 `fr`/`pl`；1024 有 11 个语种收汉堡
+（`bg es fi fr hu it nl pl pt-BR ru tr`）；960 及以下由 CSS 断点统一交给汉堡菜单，无 JS 也是同样结果。
 
-SEO：单一 URL + 18 条 `hreflang` 备用链接 + `x-default`，`canonical` 指向 `https://bot.popopx.chat/`，
-Open Graph / Twitter 标签随语种更新，`sitemap.xml` 内联全部语种的 `xhtml:link`，`CNAME` 为 `bot.popopx.chat`。
+SEO：单一 URL + 21 条 `hreflang` 备用链接 + `x-default`（共 22 条），`canonical` 指向 `https://bot.popopx.chat/`，
+Open Graph / Twitter 标签随语种更新，`sitemap.xml` 内联全部 21 个语种的 `xhtml:link`，`CNAME` 为 `bot.popopx.chat`。
 
 ## 本地预览
 
@@ -66,8 +82,10 @@ open http://127.0.0.1:8080/?lang=zh-Hans
 
 | 来源 | 键数 | 说明 |
 | --- | --- | --- |
-| `tools/shared-catalog.json` | 27 | 与引擎 `_SITE` / `_ADMIN` 共用的键，逐字节拷贝，保证官网与控制台用词一致 |
-| `tools/site-strings.json` | 203 | 官网专有文案；其中 `en` 节点由 `index.html` 的标签内文本派生 |
+| `tools/shared-catalog.json` | 26 | 与引擎 `_SITE` / `_ADMIN` 共用的键，逐字节拷贝，保证官网与控制台用词一致 |
+| `tools/site-strings.json` | 217 | 官网专有文案（含仅由 JS 读取的 `ui_copied`）；其中 `en` 节点由 `index.html` 的标签内文本派生 |
+
+两者合计 243 键 × 21 语种；`i18n.js` 是生成物。
 
 ```bash
 python3 tools/sync_i18n.py            # 重新生成 assets/js/i18n.js
@@ -158,12 +176,14 @@ Nginx/Caddy 部署时，别忘了把 `CNAME`、`robots.txt`、`sitemap.xml`、`L
 
 ## 自检门禁
 
-`node tools/verify.mjs` 覆盖：18 语种键名与 `en` 100% 一致（多键/漏键都算失败）、无空值、
-无“整句留着英文”的未翻译残留（技术专名白名单除外）、目标语种确实使用自己的文字、
+`node tools/verify.mjs` 共 42 道门禁，覆盖：21 语种键名与 `en` 100% 一致（多键/漏键都算失败）、无空值、
+无“整句留着英文”的未翻译残留（技术专名白名单 + 逐条复核的同形词例外）、目标语种确实使用自己的文字、
 `index.html` 的每个 `data-i18n*` 键都存在且其默认文本与 `en` 逐字节相等、HTML 标签栈闭合、
 `id` 唯一、锚点可达、`node --check` 通过、CSS 括号与自定义属性闭合、canonical/hreflang/OG、
 CNAME/robots/sitemap、AGPL `LICENSE` 仍在根目录、`i18n.js` 与两份 JSON 源不漂移。
-信息架构与合规部分另外断言：导航恰好覆盖 7 个板块锚点、每一块能力卡都带 `data-status` 且有对应徽章样式、
+RTL 专项断言：只有 `ar` 进 `rtl` 列表、切换语种会写 `dir` 并把技术片段包进 `bdi[dir=ltr]`、
+样式表不含 `text-align: left` 且带 `[dir="rtl"]` 覆盖与 `unicode-bidi: isolate`、sitemap 恰为 21 + `x-default`。
+信息架构与合规部分另外断言：导航恰好覆盖 8 个板块锚点、每一块能力卡都带 `data-status` 且有对应徽章样式、
 外链主机白名单（四个 `popopx.chat` 子域 + `github.com`）、兄弟站点链接一律 `target="_blank"` +
 `rel="noopener noreferrer"` 且页头页脚各三条、以及 `tools/scan-compliance.mjs` 的阳性对照与实扫全绿。
 
@@ -172,11 +192,12 @@ CNAME/robots/sitemap、AGPL `LICENSE` 仍在根目录、`i18n.js` 与两份 JSON
 零私钥与明文凭证形态（PEM 头、`AKIA…`、`ghp_`、`xox…`、`AIza…`、`sk-*`、`TOKEN = "<40+ 位>"`）、
 零本机路径泄漏、零受限品类词。`--self-test` 会拿一组“必须被抓到”的脏样本和一组
 “必须放行”的干净样本（回环 `curl` 示例、GitHub 导航链接、`反向代理` / `launchd 代理` 措辞）喂给同一套规则，
-这样“0”才不是“规则没匹配上”。
+这样“0”才不是“规则没匹配上”——自测样本现为 14 条必抓、10 条必放行。
 
 ## 许可
 
-AGPL-3.0-only。引擎不打包任何二进制，`popopx-cli` 由安装脚本在运行时按操作系统与架构从官方
-Releases 下载并校验 SHA-256。
+AGPL-3.0-only。本仓库不打包任何二进制；引擎仓库也不提交 `popopx-cli`，由安装脚本在运行时按操作系统
+与架构从官方 Releases 下载并校验 SHA-256（引擎随仓库携带的 Needle 3 语义模型 `needle3.cact` 约 33.7 MiB，
+不在这份下载里）。
 
 英文文档见 [README.en.md](README.en.md)。需求原文归档在 [docs/](docs/)。

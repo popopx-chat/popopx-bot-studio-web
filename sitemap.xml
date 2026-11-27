@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- POPOPX Bot Studio — one page, 18 languages, all served from the same URL with ?lang=... -->
+<!-- POPOPX Bot Studio — one page, 21 languages, all served from the same URL with ?lang=... -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://bot.popopx.chat/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://bot.popopx.chat/?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://bot.popopx.chat/?lang=zh-Hant"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://bot.popopx.chat/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://bot.popopx.chat/?lang=ar"/>
     <xhtml:link rel="alternate" hreflang="bg" href="https://bot.popopx.chat/?lang=bg"/>
     <xhtml:link rel="alternate" hreflang="cs" href="https://bot.popopx.chat/?lang=cs"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://bot.popopx.chat/?lang=de"/>
@@ -18,8 +19,10 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://bot.popopx.chat/?lang=fr"/>
     <xhtml:link rel="alternate" hreflang="hu" href="https://bot.popopx.chat/?lang=hu"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://bot.popopx.chat/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bot.popopx.chat/?lang=ko"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://bot.popopx.chat/?lang=nl"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://bot.popopx.chat/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://bot.popopx.chat/?lang=pt-BR"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://bot.popopx.chat/?lang=ru"/>
     <xhtml:link rel="alternate" hreflang="th" href="https://bot.popopx.chat/?lang=th"/>
     <xhtml:link rel="alternate" hreflang="tr" href="https://bot.popopx.chat/?lang=tr"/>

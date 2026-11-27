@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* POPOPX Bot Studio — self-check gate for the 18-locale site.
+/* POPOPX Bot Studio — self-check gate for the 21-locale site.
    Run: node tools/verify.mjs        (exit 0 = every gate green)
    No dependencies, no network: every assertion is measured against files in this repo. */
 
@@ -12,13 +12,15 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), "utf8");
 const exists = (rel) => fs.existsSync(path.join(ROOT, rel));
 
-const EXPECTED = ["en", "zh-Hans", "zh-Hant", "ja", "bg", "cs", "de", "es", "fi", "fr",
-  "hu", "it", "nl", "pl", "ru", "th", "tr", "uk"];
+const EXPECTED = ["en", "zh-Hans", "zh-Hant", "ja", "ar", "bg", "cs", "de", "es", "fi",
+  "fr", "hu", "it", "ko", "nl", "pl", "pt-BR", "ru", "th", "tr", "uk"];
 
 const SCRIPT = {
   "zh-Hans": [/[\u4e00-\u9fff]/, "Han (simplified)"],
   "zh-Hant": [/[\u4e00-\u9fff]/, "Han (traditional)"],
   ja: [/[\u3040-\u30ff\u4e00-\u9fff]/, "kana or Han"],
+  ar: [/[\u0600-\u06ff]/, "Arabic"],
+  ko: [/[\uac00-\ud7af]/, "Hangul"],
   th: [/[\u0e00-\u0e7f]/, "Thai"],
   ru: [/[\u0400-\u04ff]/, "Cyrillic"],
   uk: [/[\u0400-\u04ff]/, "Cyrillic"],
@@ -53,6 +55,10 @@ function technicalOnly(value) {
 // against its neighbours to confirm the locale really was translated.
 const COGNATE_OK = {
   cs: ["foot_license"],
+  // "Agents" is the French plural; "Plugins" is the engine's own pt-BR value for
+  // the shared nav key, copied byte for byte so the site and console agree.
+  fr: ["nav_agents"],
+  "pt-BR": ["nav_plugins"],
 };
 
 const results = [];
@@ -80,8 +86,8 @@ try {
 
 if (catalog) {
   const codes = catalog.locales;
-  gate("18 locales, iOS-aligned order", {
-    status: codes.length === 18 && JSON.stringify(codes) === JSON.stringify(EXPECTED) ? "PASS" : "FAIL",
+  gate("21 locales, engine-aligned order", {
+    status: codes.length === 21 && JSON.stringify(codes) === JSON.stringify(EXPECTED) ? "PASS" : "FAIL",
     detail: `${codes.length} locales: ${codes.join(",")}`,
   });
 
@@ -278,6 +284,32 @@ gate("palette matches the brief", {
   detail: "cyber cyan 00F0FF + emerald 10B981 present",
 });
 
+/* ------------------------------------------------------------ rtl + bidi io */
+
+if (catalog) {
+  const rtl = catalog.rtl || [];
+  gate("only Arabic is wired for RTL", {
+    status: rtl.length === 1 && rtl[0] === "ar" && catalog.dict.ar && catalog.dict.ar.nav_agents ? "PASS" : "FAIL",
+    detail: `rtl=[${rtl.join(",")}] · ar dictionary ${catalog.dict.ar ? "present" : "missing"}`,
+  });
+}
+
+const appSrc = read("assets/js/app.js");
+gate("locale switch flips dir and isolates technical runs", {
+  status: /setAttribute\("dir"/.test(appSrc) && appSrc.includes('"bdi"') && appSrc.includes("isolateTechnical") ? "PASS" : "FAIL",
+  detail: "documentElement.dir + bdi[dir=ltr] wrapper for localhost, /api paths, env names and ids",
+});
+gate("stylesheet uses logical properties and an RTL block", {
+  status: !/text-align:\s*left/.test(css) && css.includes("inset-inline-start") && css.includes('html[dir="rtl"]') && css.includes("unicode-bidi: isolate") ? "PASS" : "FAIL",
+  detail: "no text-align:left · inset-inline-* · [dir=rtl] overrides · bidi isolation",
+});
+const sitemapLangs = exists("sitemap.xml") ? [...read("sitemap.xml").matchAll(/hreflang="([^"]+)"/g)].map((m) => m[1]) : [];
+const sitemapMissing = EXPECTED.filter((c) => !sitemapLangs.includes(c));
+gate("sitemap lists all 21 locales + x-default", {
+  status: sitemapLangs.length === EXPECTED.length + 1 && !sitemapMissing.length && sitemapLangs.includes("x-default") ? "PASS" : "FAIL",
+  detail: sitemapMissing.length ? `missing ${sitemapMissing}` : `${sitemapLangs.length} hreflang entries`,
+});
+
 /* ------------------------------------------------------------------- seo io */
 
 const head = html.slice(0, html.indexOf("</head>"));
@@ -287,7 +319,7 @@ gate("canonical + og + twitter", {
 });
 const hreflangs = [...head.matchAll(/hreflang="([^"]+)"/g)].map((m) => m[1]);
 const missingLang = EXPECTED.filter((c) => !hreflangs.includes(c));
-gate("hreflang covers 18 locales + x-default", {
+gate("hreflang covers 21 locales + x-default", {
   status: !missingLang.length && hreflangs.includes("x-default") ? "PASS" : "FAIL",
   detail: missingLang.length ? `missing ${missingLang}` : `${hreflangs.length} alternates`,
 });
@@ -330,10 +362,10 @@ if (exists("LICENSE")) {
 
 /* --------------------------------------------------------- portal structure */
 
-const SECTIONS = ["home", "features", "use-cases", "integrations", "tutorial", "security", "roadmap"];
+const SECTIONS = ["home", "features", "agents", "use-cases", "integrations", "tutorial", "security", "roadmap"];
 const navBlock = /<nav class="primary-nav"[^>]*>([\s\S]*?)<\/nav>/.exec(html);
 const navHrefs = navBlock ? [...navBlock[1].matchAll(/href="#([a-z-]+)"/g)].map((m) => m[1]) : [];
-gate("navigation covers the seven portal sections", {
+gate("navigation covers the eight portal sections", {
   status: navHrefs.length === SECTIONS.length && navHrefs.every((s, i) => s === SECTIONS[i]) ? "PASS" : "FAIL",
   detail: navHrefs.join(" → ") || "no primary-nav block",
 });
@@ -396,8 +428,8 @@ for (const file of ["README.md", "README.en.md"]) {
   const doc = read(file);
   const hosts = ["GitHub Pages", "Cloudflare", "Vercel", "Nginx", "Caddy"];
   const missed = hosts.filter((h) => !doc.includes(h));
-  gate(`${file} documents hosting + 18 locales`, {
-    status: missed.length === 0 && doc.includes("18") && doc.includes("sync_i18n.py") ? "PASS" : "FAIL",
+  gate(`${file} documents hosting + 21 locales`, {
+    status: missed.length === 0 && doc.includes("21") && doc.includes("sync_i18n.py") ? "PASS" : "FAIL",
     detail: missed.length ? `no ${missed.join("/")}` : `${hosts.length} hosts, locale count and generator named`,
   });
 }
