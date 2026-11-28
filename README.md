@@ -16,7 +16,8 @@
 | --- | --- |
 | `#home` | 概览：Agent 工作台首屏、零元数据 / 100% 自托管 / 跨平台一键部署 / 7×24 机器人与人工坐席 / 零代码规则与插件标签，一键复制安装命令 + 双行动按钮 + 引擎启动自检面板 + 规格条 |
 | `#features` | 核心能力：状态图例 + 五步闭环导轨（创建 → 配置 → 连工具 → 沙箱测试 → 接入 Chat）+ 五张重点能力卡 + BotFather 级多 Bot 沙箱工厂、永久联系地址、零代码规则、路由与工单、私钥本地主权、插件总线（`auto_reply` / `msg_router` / `llm_bridge` / `webhook_relay` / `personal_agent`） |
-| `#agents` | 多 Agent 协作：单进程多 `popopx-cli` 隔离托管、进程内任务编排（`queued → running → succeeded` 八态状态机，跳数与并发上限）、`agent_task_grants` 默认拒绝授权与 SQLite v6 审计、A2A 协商与零安装访客预约门户 |
+| `#agents` | 多 Agent 协作：单进程多 `popopx-cli` 隔离托管、进程内任务编排（SQLite schema v7 的十一态状态机，看板画成八步加一个终态分支的九个阶段，跳数与并发上限）、`agent_task_grants` 默认拒绝授权与无正文审计、A2A 协商与零安装访客预约门户 |
+| `#workbench` | 算力与任务工作台：已配对 Mac Node 的 20 秒心跳、算力占用、Worker 状态与一键终止/清理（擦除前对文件清单出 HMAC-SHA256 回执，最近 64 条入账本），外加九阶段任务时间线、审批卡片回调、三种留存模式与 ZDR 徽章、无正文审计示例 |
 | `#use-cases` | 使用场景：工单客服台、值班告警转发、同机脚本自动化、永不变更的联系地址 —— 四条全部有代码支撑 |
 | `#integrations` | 工具集成：OpenAI 兼容模型端点、签名 webhook 进出、Telegram 风格 Open API、插件总线、模型自主调用工具（规划中）；`#ecosystem` 生态拓扑图 + 四大门户导航 |
 | `#tutorial` | 文档与快速开始（Tab 切换）：Ubuntu 22.04 systemd、macOS launchd、本地开发调试、三步实战上手 |
@@ -59,7 +60,7 @@ Capability Token 与撤销授权标 `内测中`：`agent_task_grants` 默认拒�
 切换语种后表头按**实测宽度**两级让位（`app.js` 的 `fitHead()`）：先收域名门牌与 GitHub 文字，仍溢出才把 7 项导航收进汉堡，
 同时把实测到的表头高度写进 `--head-h`，锚点跳转的 `scroll-padding-top` 因此不会被表头压住；
 21 语种 × 13 档宽度（1440/1366/1280/1180/1024/900/768/600/480/414/390/360/320）共 273 例实测 0 溢出；
-320px 下 21 个语种 × 全部 10 个 section + 展开的汉堡菜单同样 0 溢出，且每个 section 自身的 `scrollWidth` 也不超宽。
+320px 下 21 个语种 × 全部 11 个 section + 展开的汉堡菜单同样 0 溢出，且每个 section 自身的 `scrollWidth` 也不超宽。
 表头两步让位的实测落点：1440/1366/1280 只有 `pl` 收汉堡，其余 16 个语种先收门牌与 GitHub 文字，
 `zh-Hans`/`zh-Hant`/`ja`/`ar`/`ko` 完整保留；1180 收汉堡的是 `fr`/`pl`；1024 有 11 个语种收汉堡
 （`bg es fi fr hu it nl pl pt-BR ru tr`）；960 及以下由 CSS 断点统一交给汉堡菜单，无 JS 也是同样结果。

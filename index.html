@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>POPOPX Bot Studio — Build AI Agents. Connect Tools. Get Work Done.</title>
-<meta name="description" content="Self-hosted agent workbench for the identity-less POPOPX messenger: configure each bot's role, rules and system prompt, attach any OpenAI-compatible model endpoint, run a 24/7 personal agent that only proposes, orchestrate read-only capabilities across bots with default-deny grants, and keep the keys, the SQLite v6 ledger and the audit trail on your own loopback server." data-i18n-meta="meta_description">
+<meta name="description" content="Self-hosted agent workbench for the identity-less POPOPX messenger: configure each bot's role, rules and system prompt, attach any OpenAI-compatible model endpoint, run a 24/7 personal agent that only proposes, orchestrate read-only capabilities across bots with default-deny grants, and keep the keys, the SQLite v7 ledger and the audit trail on your own loopback server." data-i18n-meta="meta_description">
 <meta name="theme-color" content="#04060c">
 <meta name="author" content="POPOPX">
 <link rel="canonical" href="https://bot.popopx.chat/">
@@ -146,14 +146,14 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
         <p><span class="pr">popopx-bot-studio</span> --self-test</p>
         <p class="ok">✓ loopback_only 127.0.0.1:8090</p>
         <p class="ok">✓ data_dir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0700 var/studio</p>
-        <p class="ok">✓ ledger &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var/studio/studio.db · v6</p>
+        <p class="ok">✓ ledger &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var/studio/studio.db · v7</p>
         <p class="ok">✓ bundle &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AES-GCM · scrypt</p>
         <p class="ok">✓ sandbox &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 bots · 3 cli-data dirs</p>
         <p class="ok">✓ agents &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;needle 3 · 5 read-only tools</p>
         <p class="ok">✓ orch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default-deny · 3 hops · 32 tasks</p>
         <p class="ok">✓ plugins &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto_reply · msg_router</p>
         <p class="ok">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;llm_bridge · webhook_relay · personal_agent</p>
-        <p class="dim">26 groups · 8,287 assertions · 0 failures · 0 telemetry</p>
+        <p class="dim">26 groups · 10,572 assertions · 0 failures · 0 telemetry</p>
         <p><span class="pr">$</span> POST /api/v1/bot&lt;token&gt;/sendMessage <span class="ok">200</span><span class="caret"></span></p>
       </div>
       <p class="console-cap" data-i18n="hero_console_caption">A boot log in brief: the invariants the engine refuses to break.</p>
@@ -164,7 +164,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
     <div><dt data-i18n="stat_locales">Languages</dt><dd>21 <span data-i18n="stat_locales_note">built in</span></dd></div>
     <div><dt data-i18n="stat_plugins">Plugins</dt><dd>5 <span data-i18n="stat_plugins_note">on one bus</span></dd></div>
     <div><dt data-i18n="stat_loopback">Listening</dt><dd>127.0.0.1 <span data-i18n="stat_loopback_note">only</span></dd></div>
-    <div><dt data-i18n="stat_ledger">Ledger</dt><dd>SQLite v6 <span data-i18n="stat_ledger_note">0600 on disk</span></dd></div>
+    <div><dt data-i18n="stat_ledger">Ledger</dt><dd>SQLite v7 <span data-i18n="stat_ledger_note">0600 on disk</span></dd></div>
   </dl>
 </section>
 
@@ -300,18 +300,27 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
   </div>
 
   <div class="stateflow" aria-hidden="true">
-    <span class="sf-node">queued</span>
+    <span class="sf-node">created</span>
+    <span class="sf-arrow">→</span>
+    <span class="sf-node">authorized</span>
+    <span class="sf-arrow">→</span>
+    <span class="sf-node">scheduled</span>
+    <span class="sf-arrow">→</span>
+    <span class="sf-node">allocated</span>
     <span class="sf-arrow">→</span>
     <span class="sf-node">running</span>
     <span class="sf-arrow">→</span>
-    <span class="sf-node is-ok">succeeded</span>
+    <span class="sf-node is-warn">awaiting_user</span>
+    <span class="sf-arrow">→</span>
+    <span class="sf-node is-ok">completed</span>
+    <span class="sf-arrow">→</span>
+    <span class="sf-node is-ok">workspace_cleanup</span>
     <span class="sf-or">or</span>
-    <span class="sf-node is-warn">failed</span>
-    <span class="sf-node is-warn">timeout</span>
-    <span class="sf-node is-stop">refused</span>
+    <span class="sf-node is-stop">failed</span>
     <span class="sf-node is-stop">cancelled</span>
+    <span class="sf-node is-stop">refused</span>
   </div>
-  <p class="stateflow-cap" data-i18n="ag_flow_cap">The orchestration state machine: a refused row is written before any work starts, and a succeeded task never moves again.</p>
+  <p class="stateflow-cap" data-i18n="ag_flow_cap">The orchestration state machine in schema v7: eight stages from created to workspace_cleanup, and one terminal branch for failed, cancelled and refused.</p>
 
   <div class="cards">
     <article class="card span2" data-status="released">
@@ -329,8 +338,8 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
     <article class="card span2" data-status="released">
       <span class="badge is-released" data-i18n="st_released">Released</span>
       <h3 data-i18n="ag_grant_t">Grants are denied by default</h3>
-      <p data-i18n="ag_grant_d">A dispatch needs an explicit (origin, target, capability) row in agent_task_grants; the wildcard target must be created on purpose, and every row can be toggled or deleted. Each task lands in SQLite schema v6 as queued, running, succeeded, failed, timeout, refused or cancelled, with a correlation id, duration, result summary and a stable reason code that orch/replay can reconstruct.</p>
-      <ul class="chips" role="list"><li>agent_task_grants</li><li>default deny</li><li>schema v6</li><li>correlation_id</li></ul>
+      <p data-i18n="ag_grant_d">A dispatch needs an explicit (origin, target, capability) row in agent_task_grants; the wildcard target must be created on purpose, and every row can be toggled or deleted. Each task lands in SQLite schema v7 with a correlation id, duration, result summary and a stable reason code that orch/replay can reconstruct; the eleven stored statuses run from created to workspace_cleanup, with failed, cancelled and refused as terminal branches.</p>
+      <ul class="chips" role="list"><li>agent_task_grants</li><li>default deny</li><li>schema v7</li><li>correlation_id</li></ul>
     </article>
     <article class="card span2" data-status="released">
       <span class="badge is-released" data-i18n="st_released">Released</span>
@@ -340,11 +349,146 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
     </article>
   </div>
   <p class="eco-note" data-i18n="ag_note">Every path above stays on 127.0.0.1. The only outbound calls are to your own model endpoint, a paired agent's SMP queue, or the Mac Node bridge on http://127.0.0.1:18920.</p>
+  <div class="cta-row">
+    <a class="line-btn" href="#workbench" data-i18n="wb_jump">See the compute board</a>
+  </div>
+</section>
+
+<section class="workbench" id="workbench">
+  <div class="sec-head">
+    <p class="marker">03 / WORKBENCH</p>
+    <h2 data-i18n="wb_headline">The compute board and the task timeline</h2>
+    <p class="sec-sub" data-i18n="wb_sub">Two panels behind one loopback console: what the paired Mac Node is doing with your compute, and where every agent task stands — without reading a single message body.</p>
+  </div>
+
+  <div class="wb-grid">
+    <article class="card wb-node" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="wb_node_t">Paired Mac Node</h3>
+      <p data-i18n="wb_node_d">The console re-reads the node's snapshot over loopback with the session token and beats a heartbeat every 20 seconds. Workers, jobs and erasure receipts come from the same snapshot the phone sees.</p>
+      <dl class="wb-rows">
+        <div>
+          <dt data-i18n="wb_node_bridge">Bridge</dt>
+          <dd><code>GET /api/snapshot</code> <span class="wb-pill is-ok">loopback</span></dd>
+        </div>
+        <div>
+          <dt data-i18n="wb_node_heartbeat">Heartbeat</dt>
+          <dd><span data-i18n="wb_node_heartbeat_v">20 s cadence, set by the node</span></dd>
+        </div>
+        <div>
+          <dt data-i18n="wb_node_profile">Profile</dt>
+          <dd><code>personal_node</code> · 2 concurrent · 512 MiB · 5,000 files · 64 MiB per file · 15 min</dd>
+        </div>
+      </dl>
+      <div class="wb-meter">
+        <div class="wb-meter-head">
+          <span data-i18n="wb_node_load">Compute load</span>
+          <code>1 / 2 slots · 1 queued</code>
+        </div>
+        <div class="wb-bar" aria-hidden="true"><span></span></div>
+      </div>
+      <p class="wb-label" data-i18n="wb_node_workers">Workers</p>
+      <ul class="wb-workers" role="list">
+        <li><code>file_task</code><span class="wb-pill is-ok">ready</span></li>
+        <li><code>local_model</code><span class="wb-pill is-warn">lightweight</span></li>
+        <li><code>automation</code><span class="wb-pill is-ok">ready</span></li>
+      </ul>
+      <p class="wb-label" data-i18n="wb_node_jobs">Jobs</p>
+      <div class="wb-job">
+        <code>7f3a · file_task</code>
+        <span class="wb-pill is-run" id="wb-job-status">running</span>
+        <span class="wb-age">00:04:12</span>
+      </div>
+      <div class="wb-actions">
+        <button class="wb-btn is-danger" type="button" id="wb-terminate" data-i18n="wb_node_terminate">Terminate job</button>
+        <button class="wb-btn" type="button" id="wb-purge" data-i18n="wb_node_purge">Purge workspace</button>
+      </div>
+      <p class="wb-hint" data-i18n="wb_node_actions_d">Terminate cancels one job and runs its cleanup; purge sweeps every active or retained workspace. Each cleanup mints an HMAC-SHA256 receipt over the file manifest before erasure, and the last 64 stay in the compute ledger.</p>
+      <p class="wb-hint" data-i18n="wb_node_sample">Sample rows: these buttons replay the node's own controls on this page only.</p>
+      <p class="wb-toast" id="wb-toast" role="status" aria-live="polite"></p>
+    </article>
+
+    <article class="card wb-thread" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="wb_task_t">Nine stages over eleven stored statuses</h3>
+      <p data-i18n="wb_task_d">The engine writes eleven statuses to SQLite schema v7. The board draws them as nine stages: the eight steps a dispatch walks, plus one terminal branch that collects failed, cancelled and refused.</p>
+      <ol class="wb-flow" role="list">
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">1</span>
+          <div><code>created</code><p data-i18n="wb_st_created_d">The row is written first, with its correlation id, isolation profile and retention mode. Nothing has run yet.</p></div>
+        </li>
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">2</span>
+          <div><code>authorized</code><p data-i18n="wb_st_authorized_d">The grant for origin, target and capability is found and enabled. A policy refusal lands as its own refused row before this point, never as an error code alone.</p></div>
+        </li>
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">3</span>
+          <div><code>scheduled</code><p data-i18n="wb_st_scheduled_d">The timeout is fixed here, between 0.5 and 300 seconds: the tighter of the grant and the profile wins.</p></div>
+        </li>
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">4</span>
+          <div><code>allocated</code><p data-i18n="wb_st_allocated_d">Isolation is attached: a separate process or the target bot's own sandbox, with 32 concurrent tasks across the engine.</p></div>
+        </li>
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">5</span>
+          <div><code>running</code><p data-i18n="wb_st_running_d">The capability executes in the target's sandbox. A fan-out beyond 8 targets is refused with the fanout_limit reason code.</p></div>
+        </li>
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">6</span>
+          <div><code>awaiting_user</code><p data-i18n="wb_st_awaiting_d">If the grant or the profile requires approval, the task parks here and posts a task card. The owner's callback resumes it, and approval never skips the grant check that already passed.</p></div>
+        </li>
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">7</span>
+          <div><code>completed</code><p data-i18n="wb_st_completed_d">The result summary and latency are written. Under zero retention the body is replaced before this row exists.</p></div>
+        </li>
+        <li class="wb-stage">
+          <span class="wb-n" aria-hidden="true">8</span>
+          <div><code>workspace_cleanup</code><p data-i18n="wb_st_cleanup_d">The workspace is erased, an ephemeral result is cleared with result_purged, and the task ends in workspace_cleanup.</p></div>
+        </li>
+        <li class="wb-stage is-branch">
+          <span class="wb-n" aria-hidden="true">9</span>
+          <div><code>failed · cancelled · refused</code><p data-i18n="wb_st_terminal_d">Failed, cancelled and refused share one branch because none of them proceeds. The row keeps a stable reason code, and the audit keeps no text.</p></div>
+        </li>
+      </ol>
+    </article>
+
+    <article class="card wb-appr" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <h3 data-i18n="wb_appr_t">Approval cards gate every write</h3>
+      <p data-i18n="wb_appr_d">A task that needs a write parks in awaiting_user and posts a task card to the chat. An ok callback resumes it, a no callback writes cancelled with the declined reason, and an alt callback only records the choice.</p>
+      <ul class="wb-tokens" role="list">
+        <li><code>popopx.agent.task.v1</code></li>
+        <li><code>::CB::ppxok_</code></li>
+        <li><code>::CB::ppxno_</code></li>
+        <li><code>::CB::ppxalt_</code></li>
+      </ul>
+    </article>
+
+    <article class="card wb-zdr" data-status="released">
+      <span class="badge is-released" data-i18n="st_released">Released</span>
+      <p class="wb-zdr-badge">ZDR</p>
+      <h3 data-i18n="wb_zdr_t">Zero retention, per task</h3>
+      <p data-i18n="wb_zdr_d">Zero retention is a switch on the task, not a promise about the model call: whatever the model returned, the stored result is the redaction marker.</p>
+      <p class="wb-label" data-i18n="wb_ret_t">Retention modes</p>
+      <ul class="wb-ret" role="list">
+        <li><code>zero_retention</code><p data-i18n="wb_ret_zero_d">The result body is replaced by a redaction marker before it is stored, so the ledger keeps that the task ran and nothing it produced.</p><code class="wb-marker">{"redacted": true, "retention_mode": "zero_retention"}</code></li>
+        <li><code>ephemeral</code><p data-i18n="wb_ret_eph_d">The result is stored for the length of the task, then cleared at workspace_cleanup; the cleanup detail records result_purged.</p></li>
+        <li><code>user_owned</code><p data-i18n="wb_ret_owned_d">The default. The result stays in the workspace you own until you delete it.</p></li>
+      </ul>
+      <p class="wb-label" data-i18n="wb_audit_t">Audit rows carry ids, counters and reason codes</p>
+      <p class="wb-hint" data-i18n="wb_audit_d">Each transition records the task id, origin, target, capability, hops, latency and a stable reason code. Prompts, results and message text never reach the audit table.</p>
+      <pre class="wb-audit"><code>orchestrator completed bot=billing target=ops cap=workspace.summarize task=tk_7f3a hops=1 latency_ms=1840 detail=ok
+orchestrator declined  bot=billing target=ops cap=reply.compose        task=tk_9d22 hops=1 latency_ms=0    detail=declined
+orchestrator refused   bot=desk    target=ops cap=reply.compose        task=tk_c410 hops=1 latency_ms=0    detail=no_grant</code></pre>
+    </article>
+  </div>
+
+  <p class="footnote" data-i18n="wb_note">Both panels follow the engine at SQLite schema v7 and the Mac Node's two compute profiles; the limits shown are policy ceilings, not a benchmark.</p>
 </section>
 
 <section class="use-cases" id="use-cases">
   <div class="sec-head">
-    <p class="marker">03 / USE CASES</p>
+    <p class="marker">04 / USE CASES</p>
     <h2 data-i18n="uc_headline">Four flows that already run</h2>
     <p class="sec-sub" data-i18n="uc_sub">Each of these is the engine's own behaviour on the day you install it, not a plan: what you can build in the console before the first restart.</p>
   </div>
@@ -375,7 +519,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
 
 <section class="integrations" id="integrations">
   <div class="sec-head">
-    <p class="marker">04 / INTEGRATIONS</p>
+    <p class="marker">05 / INTEGRATIONS</p>
     <h2 data-i18n="int_headline">What plugs in, and how</h2>
     <p class="sec-sub" data-i18n="int_sub">Five surfaces the engine exposes today, the plugins that sit on them, and the one integration everybody asks for that is still missing.</p>
   </div>
@@ -492,7 +636,7 @@ cd popopx-bot-studio &amp;&amp; ./install_ubuntu22.sh --check</code></pre>
 
 <section class="tutorial" id="tutorial">
   <div class="sec-head">
-    <p class="marker">05 / DOCS</p>
+    <p class="marker">06 / DOCS</p>
     <h2 data-i18n="tut_title">Install and first run</h2>
     <p class="sec-sub" data-i18n="tut_sub">Four paths, the same engine: a production Linux box, a Mac you keep running, a development checkout, or the three clicks inside the console.</p>
   </div>
@@ -557,7 +701,7 @@ BOT_WS_PORT_BASE=5230 BOT_WS_PORT_MAX=5299 \
 python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
       </div>
       <ul class="pane-n" role="list">
-        <li data-i18n="tut_dev_n1">The engine ships an offline self-test of 8,287 assertions in 26 groups; it needs no network and no real contacts.</li>
+        <li data-i18n="tut_dev_n1">The engine ships an offline self-test of 10,572 assertions in 26 groups; it needs no network and no real contacts.</li>
         <li data-i18n="tut_dev_n2">Without STUDIO_ADMIN_TOKEN every admin route answers 401, so an unconfigured checkout cannot be driven by accident.</li>
       </ul>
     </section>
@@ -579,7 +723,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="api" id="api">
   <div class="sec-head">
-    <p class="marker">06 / OPEN API</p>
+    <p class="marker">07 / OPEN API</p>
     <h2 data-i18n="api_title">A Telegram-shaped API on an isolated network</h2>
     <p class="sec-sub" data-i18n="api_sub">Call sendMessage with the bot token, register a webhook, or poll getUpdates. The admin console and the API share one engine and one loopback port.</p>
   </div>
@@ -654,7 +798,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="security" id="security">
   <div class="sec-head">
-    <p class="marker">07 / SECURITY</p>
+    <p class="marker">08 / SECURITY</p>
     <h2 data-i18n="sec_title">What stays on your machine</h2>
     <p class="sec-sub" data-i18n="sec_sub">A hosted bot platform holds your identity, your contacts and your message history. A self-hosted studio holds the same files for you instead.</p>
   </div>
@@ -732,7 +876,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="faq" id="faq">
   <div class="sec-head">
-    <p class="marker">08 / FAQ</p>
+    <p class="marker">09 / FAQ</p>
     <h2 data-i18n="faq_title">Questions before the first install</h2>
     <p class="sec-sub" data-i18n="faq_sub">Licence, agents, migration and the difference to a commercial service account.</p>
   </div>
@@ -768,7 +912,7 @@ python3 -m uvicorn studio.app.main:app --port 8090</code></pre>
 
 <section class="roadmap" id="roadmap">
   <div class="sec-head">
-    <p class="marker">09 / ROADMAP</p>
+    <p class="marker">10 / ROADMAP</p>
     <h2 data-i18n="rm_headline">What is not built yet</h2>
     <p class="sec-sub" data-i18n="rm_sub">The gaps this page had to mark as planned, written down in one place so nothing is implied by a picture.</p>
   </div>

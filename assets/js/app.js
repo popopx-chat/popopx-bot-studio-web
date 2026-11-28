@@ -113,7 +113,7 @@
      left to right even in an Arabic sentence; without a bidi island the colon
      and the slashes jump around. Runs after every render because render()
      replaces textContent. */
-  var TECH = /(https?:\/\/[^\s)]+|\b\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?\b|\b\d{4}[–-]\d{4}\b|\/(?:api|book|orch)(?:[/{][\w$.*{}-]*)*|\bvar\/studio\b|\.env\b|\bX-[A-Za-z][\w-]*|\b[A-Z][A-Z0-9_]{2,}\b|\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b|\b[\w-]+\.(?:cact|db|json|py|sh|mjs)\b|--[a-z0-9][\w-]*)/g;
+  var TECH = /(https?:\/\/[^\s)]+|\b\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?\b|\b\d{4}[–-]\d{4}\b|\/(?:api|book|orch)(?:[/{][\w$.*{}-]*)*|\bvar\/studio\b|\.env\b|\bX-[A-Za-z][\w-]*|\b[A-Z][A-Z0-9_]{2,}\b|\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b|\b[\w-]+\.(?:cact|db|json|py|sh|mjs)\b|\bephemeral\b|--[a-z0-9][\w-]*)/g;
   var LTR_ONLY = P.rtl;
 
   function isolateRoot() {
@@ -321,6 +321,37 @@
     fitHead();
   }
 
+  /* -------------------------------------------------------------- workbench */
+
+  /* Sample rows: the buttons mirror the node's terminate and purge verbs on the
+     demo row in this page. Nothing is sent anywhere. */
+  function initWorkbench() {
+    var term = doc.getElementById("wb-terminate");
+    var purge = doc.getElementById("wb-purge");
+    var state = doc.getElementById("wb-job-status");
+    var toast = doc.getElementById("wb-toast");
+    if (!term || !purge || !state || !toast) { return; }
+    var timer = 0;
+    function say(key) {
+      toast.textContent = entry(currentLocale(), key) || "";
+      window.clearTimeout(timer);
+      timer = window.setTimeout(function () { toast.textContent = ""; }, 4200);
+    }
+    term.addEventListener("click", function () {
+      state.textContent = "cancelled";
+      state.classList.remove("is-run");
+      state.classList.add("is-stop");
+      term.disabled = true;
+      say("wb_toast_term");
+    });
+    purge.addEventListener("click", function () {
+      state.textContent = "purged";
+      state.classList.add("is-stop");
+      purge.disabled = true;
+      say("wb_toast_purge");
+    });
+  }
+
   function initReveal() {
     var targets = [].slice.call(doc.querySelectorAll(".card, .rail-step, .plugin-list li, .matrix tr, .steps li, .ep, details, .specs > div, .topo, .cmd, .footnote, .eco-note"));
     if (!("IntersectionObserver" in window)) { return; }
@@ -349,6 +380,7 @@
     initTabs();
     initCopy();
     initMenu();
+    initWorkbench();
     initReveal();
   }
 

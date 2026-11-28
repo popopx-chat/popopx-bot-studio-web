@@ -17,7 +17,8 @@ with the full 21-language copy (Arabic included, RTL). No framework, no bundler,
 | --- | --- |
 | `#home` | Overview: agent-workbench hero — zero metadata, 100% self-hosted, one-command cross-platform deploy, 24/7 bot plus human agents, no-code rules and plugin tags; copy-to-clipboard install command, two CTAs, the engine boot checklist and the spec strip |
 | `#features` | Core capabilities: status legend, the five-step loop (create → configure → connect tools → sandbox test → ship into Chat), five headline capability cards, plus the BotFather-grade multi-bot sandbox factory, permanent address, no-code rules, routing and tickets, local key sovereignty, plugin bus (`auto_reply` / `msg_router` / `llm_bridge` / `webhook_relay` / `personal_agent`) |
-| `#agents` | Multi-agent work: single-process isolated hosting for many `popopx-cli` bots, process-local task orchestration (eight-state `queued → running → succeeded` machine with hop and concurrency caps), `agent_task_grants` default-deny authorization over the SQLite v6 ledger, A2A negotiation and the zero-install guest booking portal |
+| `#agents` | Multi-agent work: single-process isolated hosting for many `popopx-cli` bots, process-local task orchestration (an eleven-status machine in SQLite schema v7, drawn as eight steps plus one terminal branch, with hop and concurrency caps), `agent_task_grants` default-deny authorization over a body-free audit ledger, A2A negotiation and the zero-install guest booking portal |
+| `#workbench` | Compute and task workbench: the paired Mac Node's 20-second heartbeat, compute load, worker states and one-click terminate/purge (an HMAC-SHA256 manifest receipt before erasure, the last 64 kept in the ledger), plus the nine-stage task timeline, approval-card callbacks, three retention modes with the ZDR badge and a body-free audit sample |
 | `#use-cases` | Use cases: ticket desk, on-call alert relay, same-machine script automation, an address that never changes — all four backed by code |
 | `#integrations` | Tool integration: OpenAI-compatible model endpoint, signed webhook in and out, Telegram-shaped Open API, plugin bus, model-driven tool calling (planned); `#ecosystem` topology figure plus the four-portal navigation |
 | `#tutorial` | Docs and quick start (tabs): Ubuntu 22.04 systemd, macOS launchd, local development, first bot in 3 steps |
@@ -64,7 +65,7 @@ After a switch the header yields in two measured steps (`fitHead()` in `app.js`)
 GitHub caption, and only if the row still overflows does the hamburger take the eight nav items. The same function
 publishes the measured header height as `--head-h`, so `scroll-padding-top` keeps anchor targets below the header.
 Measured across 21 locales at 13 widths (1440/1366/1280/1180/1024/900/768/600/480/414/390/360/320) — 273 cases,
-0 overflow; at 320px every locale passes with all ten sections plus the opened hamburger menu, and each section's
+0 overflow; at 320px every locale passes with all eleven sections plus the opened hamburger menu, and each section's
 own `scrollWidth` stays inside the viewport. Where the two steps land: at 1440/1366/1280 only `pl` takes the
 hamburger while 16 locales drop the chip and the GitHub caption and `zh-Hans`/`zh-Hant`/`ja`/`ar`/`ko` keep both;
 at 1180 `fr` and `pl` take the hamburger; at 1024 eleven locales do (`bg es fi fr hu it nl pl pt-BR ru tr`); at

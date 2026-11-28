@@ -900,6 +900,67 @@ bdi[dir="ltr"] { direction: ltr; unicode-bidi: isolate; }
 html[dir="rtl"] .sf-arrow { transform: rotate(180deg); }
 .stateflow-cap { margin: 0 0 30px; color: var(--ink-faint); font-size: 13px; max-width: 88ch; }
 
+/* ---------- workbench ---------- */
+.wb-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.wb-grid > .card { grid-column: auto; }
+.wb-rows { display: grid; gap: 1px; margin: 18px 0 0; padding: 0; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.wb-rows > div { display: grid; grid-template-columns: minmax(92px, 0.3fr) minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 11px 14px; background: rgba(8, 13, 24, 0.88); }
+.wb-rows dt { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+.wb-rows dd { margin: 0; font-size: 13.5px; color: var(--ink-dim); overflow-wrap: anywhere; }
+.wb-rows code { color: #b6d7e6; font-size: 12px; }
+.wb-pill { display: inline-block; padding: 1px 7px; border: 1px solid var(--line-strong); border-radius: 999px; font-family: var(--font-display); font-size: 10px; letter-spacing: 0.08em; color: var(--ink-faint); }
+.wb-pill.is-ok { color: #7fe3bd; border-color: rgba(16, 185, 129, 0.55); }
+.wb-pill.is-warn { color: #ffd081; border-color: rgba(255, 176, 32, 0.5); }
+.wb-pill.is-run { color: var(--cyan); border-color: rgba(0, 240, 255, 0.5); }
+.wb-pill.is-stop { color: var(--ink-faint); border-style: dashed; }
+.wb-meter { margin-top: 18px; }
+.wb-meter-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-family: var(--font-display); font-size: 11px; color: var(--ink-faint); }
+.wb-meter-head code { color: var(--ink-dim); font-size: 11px; }
+.wb-bar { margin-top: 8px; height: 6px; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; background: rgba(0, 240, 255, 0.04); }
+.wb-bar span { display: block; width: 50%; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--emerald)); }
+p.wb-label { margin-top: 20px; font-family: var(--font-display); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); }
+.wb-workers { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.wb-workers li { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; border: 1px solid var(--line); border-radius: var(--r); background: rgba(8, 13, 24, 0.72); }
+.wb-workers code { font-size: 11.5px; color: var(--ink-dim); }
+.wb-job { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: var(--r); background: rgba(7, 11, 22, 0.9); }
+.wb-job code { color: #b6d7e6; font-size: 12px; }
+.wb-age { margin-inline-start: auto; font-family: var(--font-display); font-size: 11px; color: var(--ink-faint); }
+.wb-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.wb-btn { padding: 9px 14px; border: 1px solid var(--line-strong); border-radius: var(--r); background: transparent; color: var(--ink); font-family: var(--font-display); font-size: 12px; letter-spacing: 0.04em; cursor: pointer; }
+.wb-btn:hover:enabled { border-color: var(--cyan); color: var(--cyan); }
+.wb-btn.is-danger:hover:enabled { border-color: var(--danger); color: var(--danger); }
+.wb-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.wb-grid .wb-hint { margin-top: 10px; font-size: 13px; color: var(--ink-faint); max-width: 72ch; }
+p.wb-toast { min-height: 20px; margin-top: 8px; font-family: var(--font-display); font-size: 12px; color: #7fe3bd; }
+.wb-flow { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin: 18px 0 0; padding: 0; list-style: none; background: var(--line); border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; }
+.wb-stage { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; min-width: 0; background: rgba(8, 13, 24, 0.9); }
+.wb-n { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 50%; font-family: var(--font-display); font-size: 11px; color: var(--ink-dim); }
+.wb-stage code { display: block; color: var(--cyan); font-size: 12px; }
+.wb-stage p { margin-top: 4px; font-size: 13.5px; color: var(--ink-dim); }
+.wb-stage.is-branch code { color: #ffd081; }
+.wb-stage.is-branch .wb-n { border-style: dashed; }
+.wb-tokens { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 0; padding: 0; list-style: none; }
+.wb-tokens li { padding: 4px 9px; border: 1px solid var(--line-strong); border-radius: 2px; background: rgba(8, 13, 24, 0.72); }
+.wb-tokens code { font-size: 11.5px; color: var(--ink-dim); }
+p.wb-zdr-badge { display: inline-block; margin: 0 0 10px; padding: 3px 9px; border: 1px solid rgba(16, 185, 129, 0.6); border-radius: 999px; color: #7fe3bd; background: rgba(16, 185, 129, 0.09); font-family: var(--font-display); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+.wb-ret { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin: 10px 0 0; padding: 0; list-style: none; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.wb-ret li { min-width: 0; padding: 12px 14px; background: rgba(8, 13, 24, 0.88); }
+.wb-ret code { color: var(--cyan); font-size: 12px; }
+.wb-ret p { margin-top: 5px; font-size: 13.5px; color: var(--ink-dim); }
+.wb-marker { display: block; margin-top: 8px; padding: 8px 10px; border: 1px dashed var(--line-strong); border-radius: 2px; color: var(--ink-faint); font-size: 11.5px; overflow-x: auto; }
+.wb-audit { margin: 10px 0 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: rgba(7, 11, 22, 0.9); color: #9fc3d4; font-size: 11.5px; line-height: 1.8; overflow-x: auto; }
+.wb-audit code { white-space: pre; color: inherit; }
+
+/* These must follow the block above: it is declared after the page's main
+   responsive blocks, so same-specificity overrides only win from here down. */
+@media (max-width: 1080px) {
+  .wb-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .wb-rows > div { grid-template-columns: minmax(0, 1fr); gap: 3px; }
+  .wb-job .wb-age { margin-inline-start: 0; }
+}
+
 /* ---------- RTL ---------- */
 html[dir="rtl"] .lang select { background-position: 14px 55%, 9px 55%; }
 html[dir="rtl"] .card::before { transform-origin: right; background: linear-gradient(270deg, var(--cyan), transparent 55%); }
@@ -919,7 +980,8 @@ html[lang="ar"] figcaption, html[lang="ar"] label {
 }
 html[lang="ar"] code, html[lang="ar"] pre, html[lang="ar"] .console,
 html[lang="ar"] .endpoint, html[lang="ar"] .brand,
-html[lang="ar"] .sf-node, html[lang="ar"] bdi[dir="ltr"] {
+html[lang="ar"] .sf-node, html[lang="ar"] bdi[dir="ltr"],
+html[lang="ar"] .wb-pill, html[lang="ar"] .wb-age, html[lang="ar"] .wb-zdr-badge {
   font-family: var(--font-display);
   letter-spacing: 0.02em;
 }
